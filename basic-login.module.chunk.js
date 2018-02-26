@@ -246,6 +246,10 @@ var LoginService = (function () {
         return this.http.post(this.urlService.baseUrl + "User/login", body, options)
             .map(function (res) { return res.json(); });
     };
+    LoginService.prototype.forgotPassword = function (Email) {
+        return this.http.get(this.urlService.baseUrl + "User/forgotPassword?email=" + Email)
+            .map(function (res) { return res.json(); });
+    };
     LoginService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])

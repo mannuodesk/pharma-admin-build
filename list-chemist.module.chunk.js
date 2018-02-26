@@ -46,7 +46,7 @@ var ListChemistRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/chemist/list-chemist/list-chemist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"list\" class=\"page-body\">\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <app-card [title]=\"'Pharmacies'\" [classHeader]=\"true\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <label class=\"dt-cust-search f-right\">\n              <div class=\"form-group\">\n                <label>Search: </label>\n                <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter($event)' />\n              </div>\n            </label>\n          </div>\n        </div>\n        <ngx-datatable #table class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\n          [footerHeight]=\"50\" [rowHeight]=\"50\" [limit]=\"10\" [rows]='rowsFilter' (activate)=\"onActivate($event)\"\n          (select)='onSelect($event)'>\n          <ngx-datatable-column name=\"Name\" sortable=\"false\" prop=\"PharmacyName\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Address\" sortable=\"false\" prop=\"Address\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"City\" sortable=\"false\" prop=\"City\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value.Name}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Commission\" sortable=\"false\" prop=\"PharmaCommission\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Rating\" sortable=\"false\" prop=\"RatingCount\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Actions\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n\n              <button class=\"view-btn\" (click)=\"view(value)\">\n                <i class=\"fa fa-eye\"></i>\n              </button>\n\n              <button class=\"delete-btn\" (click)=\"delete(value)\">\n                <i class=\"fa fa-trash-o\"></i>\n              </button>\n\n            </ng-template>\n          </ngx-datatable-column>\n        </ngx-datatable>\n\n      </app-card>\n    </div>\n  </div>\n</div>\n<div id=\"detail\" class=\"page-body\">\n  <div class=\"row\">\n    <div class=\"col-sm-6\">\n      <!-- Basic Inputs Validation start -->\n      <app-card [title]=\"'View and Edit Pharmacist'\" [cardOptionBlock]=\"true\">\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Full Name</label>\n          <div class=\"col-sm-8\">\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"FullName\" id=\"name\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"full_name_id_error\">Name can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Address</label>\n          <div class=\"col-sm-8\">\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"Address\" id=\"address\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"address_id_error\">Address can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Pharma Commission</label>\n          <div class=\"col-sm-8\">\n            <input type=\"number\" class=\"form-control\" [(ngModel)]=\"PharmaCommission\" id=\"pharmaCommission\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"pharma_commission_id_error\">Commission can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">City</label>\n          <div class=\"col-sm-8\">\n            <select name=\"select\" [(ngModel)]=\"City\" (change)=\"getCityAreas()\" class=\"form-control form-control-default\">\n              <option *ngFor=\"let city of cities_array\" value=\"{{city.Id}}\">{{city.Name}}</option>\n            </select>\n            <div class=\"messages text-danger\" id=\"city_id_error\">City can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Area</label>\n          <div class=\"col-sm-8\">\n            <select name=\"select\" [(ngModel)]=\"Area\" class=\"form-control form-control-default\">\n              <option *ngFor=\"let area of areas_array\" value=\"{{area.Id}}\">{{area.Name}}</option>\n            </select>\n            <div class=\"messages text-danger\" id=\"area_id_error\">Area can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Latitude</label>\n          <div class=\"col-sm-8\">\n            <input type=\"text\" [(ngModel)]=\"Latitude\" class=\"form-control\" id=\"latitude\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"latitude_id_error\">Latitude can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Longitude</label>\n          <div class=\"col-sm-8\">\n            <input type=\"text\" [(ngModel)]=\"Longitude\" class=\"form-control\" id=\"longitude\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"longitude_id_error\">Longitude can't be blank</div>\n          </div>\n        </div>\n        <div class=\"preloader3 loader-block\" id=\"loader\">\n          <div class=\"circ1\"></div>\n          <div class=\"circ2\"></div>\n          <div class=\"circ3\"></div>\n          <div class=\"circ4\"></div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4\"></label>\n          <div class=\"col-sm-8\">\n            <button type=\"submit\" class=\"btn btn-primary m-b-0\" (click)=\"addChemist()\">Submit</button>\n          </div>\n        </div>\n  \n      </app-card>\n    </div>\n    <div class=\"col-sm-6\">\n      <div class=\"col-xs-12 col-md-12 col-lg-12\">\n        <div class=\"valuesAddress\">\n          <input class=\"form-control\" id=\"us7-radius\" name=\"Radius\" type=\"number\" placeholder=\"Enter Radius\">\n          <input class=\"form-control\" id=\"us7-address\" name=\"Address\" type=\"text\" placeholder=\"Enter Address\">\n        </div>\n        <div id=\"somecomponent\" style=\"margin-top:15px;width: 100%; height: 400px;\">\n  \n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div id=\"list\" class=\"page-body\">\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <app-card [title]=\"'Pharmacies'\" [classHeader]=\"true\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <label class=\"dt-cust-search f-right\">\n              <div class=\"form-group\">\n                <label>Search: </label>\n                <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter($event)' />\n              </div>\n            </label>\n          </div>\n        </div>\n        <ngx-datatable #table class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\n          [footerHeight]=\"50\" [rowHeight]=\"50\" [limit]=\"10\" [rows]='rowsFilter' (activate)=\"onActivate($event)\" (select)='onSelect($event)'>\n          <ngx-datatable-column name=\"Name\" sortable=\"false\" prop=\"PharmacyName\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Address\" sortable=\"false\" prop=\"Address\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"City\" sortable=\"false\" prop=\"City\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value.Name}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Commission\" sortable=\"false\" prop=\"PharmaCommission\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Rating\" sortable=\"false\" prop=\"RatingCount\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Actions\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n\n              <button class=\"view-btn\" (click)=\"view(value)\">\n                <i class=\"fa fa-eye\"></i>\n              </button>\n\n              <button class=\"delete-btn\" (click)=\"blockUnBlock(value)\">\n                <i class=\"fa fa-trash-o\"></i>\n              </button>\n\n            </ng-template>\n          </ngx-datatable-column>\n        </ngx-datatable>\n\n      </app-card>\n    </div>\n  </div>\n</div>\n<div id=\"detail\" class=\"page-body\">\n  <div class=\"row\">\n    <a style=\"cursor: pointer;\" (click)=\"backToList()\">Back to List</a>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-sm-6\">\n      <!-- Basic Inputs Validation start -->\n      <app-card [title]=\"'View and Edit Pharmacist'\" [cardOptionBlock]=\"true\">\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Pharmacy Name</label>\n          <div class=\"col-sm-8\">\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"FullName\" id=\"name\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"full_name_id_error\">Name can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Address</label>\n          <div class=\"col-sm-8\">\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"Address\" id=\"address\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"address_id_error\">Address can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Pharma Commission</label>\n          <div class=\"col-sm-8\">\n            <input type=\"number\" class=\"form-control\" [(ngModel)]=\"PharmaCommission\" id=\"pharmaCommission\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"pharma_commission_id_error\">Commission can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">City</label>\n          <div class=\"col-sm-8\">\n            <select name=\"select\" [(ngModel)]=\"City\" (change)=\"getCityAreas()\" class=\"form-control form-control-default\">\n              <option *ngFor=\"let city of cities_array\" value=\"{{city.Id}}\">{{city.Name}}</option>\n            </select>\n            <div class=\"messages text-danger\" id=\"city_id_error\">City can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Area</label>\n          <div class=\"col-sm-8\">\n            <select name=\"select\" [(ngModel)]=\"Area\" class=\"form-control form-control-default\">\n              <option *ngFor=\"let area of areas_array\" value=\"{{area.Id}}\">{{area.Name}}</option>\n            </select>\n            <div class=\"messages text-danger\" id=\"area_id_error\">Area can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Latitude</label>\n          <div class=\"col-sm-8\">\n            <input type=\"text\" [(ngModel)]=\"Latitude\" class=\"form-control\" id=\"latitude\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"latitude_id_error\">Latitude can't be blank</div>\n          </div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4 col-form-label\">Longitude</label>\n          <div class=\"col-sm-8\">\n            <input type=\"text\" [(ngModel)]=\"Longitude\" class=\"form-control\" id=\"longitude\" placeholder=\"\">\n            <div class=\"messages text-danger\" id=\"longitude_id_error\">Longitude can't be blank</div>\n          </div>\n        </div>\n        <div class=\"preloader3 loader-block\" id=\"loader\">\n          <div class=\"circ1\"></div>\n          <div class=\"circ2\"></div>\n          <div class=\"circ3\"></div>\n          <div class=\"circ4\"></div>\n        </div>\n        <div id=\"update-message\" class=\"form-group row fetcher\">\n          <div class=\"messages text-success\" id=\"fetching_categories_message\">Pharmacy Updated Successfully ...</div>\n        </div>\n        <div class=\"form-group row\">\n          <label class=\"col-sm-4\"></label>\n          <div class=\"col-sm-8\">\n            <button type=\"submit\" class=\"btn btn-primary m-b-0\" (click)=\"updateChemist()\">Submit</button>\n          </div>\n        </div>\n\n      </app-card>\n    </div>\n    <div class=\"col-sm-6\">\n      <div class=\"col-xs-12 col-md-12 col-lg-12\">\n        <div class=\"valuesAddress\">\n          <input class=\"form-control\" id=\"us7-radius\" name=\"Radius\" type=\"number\" placeholder=\"Enter Radius\">\n          <input class=\"form-control\" id=\"us7-address\" name=\"Address\" type=\"text\" placeholder=\"Enter Address\">\n        </div>\n        <div id=\"somecomponent\" style=\"margin-top:15px;width: 100%; height: 400px;\">\n\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -58,7 +58,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".datatable-scroll {\n  width: 100% !important; }\n\n.view-btn {\n  border-radius: 50px;\n  cursor: pointer;\n  border: none; }\n\n.delete-btn {\n  border-radius: 50px;\n  cursor: pointer;\n  border: none; }\n\n#detail {\n  display: none; }\n\n.text-danger {\n  display: none; }\n\n.preloader3 {\n  height: 50px !important;\n  display: none; }\n", ""]);
+exports.push([module.i, ".datatable-scroll {\n  width: 100% !important; }\n\n.view-btn {\n  border-radius: 50px;\n  cursor: pointer;\n  border: none; }\n\n.delete-btn {\n  border-radius: 50px;\n  cursor: pointer;\n  border: none; }\n\n#detail {\n  display: none; }\n\n.text-danger {\n  display: none; }\n\n.preloader3 {\n  height: 50px !important;\n  display: none; }\n\n.fetcher {\n  padding-left: 5%;\n  display: none; }\n", ""]);
 
 // exports
 
@@ -79,6 +79,10 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_GetPopularChemistService__ = __webpack_require__("../../../../../src/app/theme/services/GetPopularChemistService.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_GetChemistDataService__ = __webpack_require__("../../../../../src/app/theme/services/GetChemistDataService.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_AddAreaService__ = __webpack_require__("../../../../../src/app/theme/services/AddAreaService.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_AddChemistService__ = __webpack_require__("../../../../../src/app/theme/services/AddChemistService.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_validation_class__ = __webpack_require__("../../../../../src/app/theme/models/validation.class.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_sweetalert2__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -93,11 +97,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 var ListChemistComponent = (function () {
-    function ListChemistComponent(_getPopularChemistService, _getChemistDataService, _AddAreaNameService) {
+    function ListChemistComponent(_getPopularChemistService, _getChemistDataService, _AddAreaNameService, _AddChemistService) {
         this._getPopularChemistService = _getPopularChemistService;
         this._getChemistDataService = _getChemistDataService;
         this._AddAreaNameService = _AddAreaNameService;
+        this._AddChemistService = _AddChemistService;
         this.rowsBasic = [];
         this.fullScreenRow = [];
         this.loadingIndicator = true;
@@ -131,6 +139,7 @@ var ListChemistComponent = (function () {
         this.Password = "";
         this.Latitude = 0;
         this.Longitude = 0;
+        this.runner = false;
         this.getChemists();
         this.getAllCities();
     }
@@ -139,6 +148,10 @@ var ListChemistComponent = (function () {
         console.log(selected);
     };
     ListChemistComponent.prototype.onActivate = function (event) { };
+    ListChemistComponent.prototype.backToList = function () {
+        jQuery('#detail').hide();
+        jQuery('#list').show();
+    };
     ListChemistComponent.prototype.getChemists = function () {
         var _this = this;
         this._getChemistDataService.getRegisteredChemistService().subscribe(function (response) {
@@ -161,6 +174,65 @@ var ListChemistComponent = (function () {
             _this.areas_array = response.data;
         });
     }; // End of Get Areas of City
+    ListChemistComponent.prototype.updateChemist = function () {
+        var _this = this;
+        if (this.runner == false) {
+            $('#loader').show();
+            $('.text-danger').hide();
+            this.runner = true;
+            if (__WEBPACK_IMPORTED_MODULE_6__models_validation_class__["a" /* ValidationModel */].validateString(this.FullName)) {
+                this.runner = false;
+                $('#loader').hide();
+                $('#full_name_id_error').show();
+                return;
+            }
+            if (__WEBPACK_IMPORTED_MODULE_6__models_validation_class__["a" /* ValidationModel */].validateString(this.Address)) {
+                this.runner = false;
+                $('#loader').hide();
+                $('#address_id_error').show();
+                return;
+            }
+            if (__WEBPACK_IMPORTED_MODULE_6__models_validation_class__["a" /* ValidationModel */].validateNumber(this.PharmaCommission)) {
+                this.runner = false;
+                $('#loader').hide();
+                $('#pharma_commission_id_error').show();
+                return;
+            }
+            if (__WEBPACK_IMPORTED_MODULE_6__models_validation_class__["a" /* ValidationModel */].validateNumber(this.City)) {
+                this.runner = false;
+                $('#loader').hide();
+                $('#city_id_error').show();
+                return;
+            }
+            if (__WEBPACK_IMPORTED_MODULE_6__models_validation_class__["a" /* ValidationModel */].validateNumber(this.Area)) {
+                this.runner = false;
+                $('#loader').hide();
+                $('#area_id_error').show();
+                return;
+            }
+            if (__WEBPACK_IMPORTED_MODULE_6__models_validation_class__["a" /* ValidationModel */].validateNumber(this.Latitude)) {
+                this.runner = false;
+                $('#loader').hide();
+                $('#latitude_id_error').show();
+                return;
+            }
+            if (__WEBPACK_IMPORTED_MODULE_6__models_validation_class__["a" /* ValidationModel */].validateNumber(this.Longitude)) {
+                this.runner = false;
+                $('#loader').hide();
+                $('#longitude_id_error').show();
+                return;
+            }
+        }
+        this._AddChemistService.updateChemist(this.Area, this.PharmaCommission, this.City, this.FullName, this.Longitude, this.Latitude, this.PharmacistId, this.Address).subscribe(function (response) {
+            $('#loader').hide();
+            _this.runner = false;
+            console.log(response.data);
+            $('#update-message').show();
+            setTimeout(function () {
+                $('#update-message').hide();
+            }, 5000);
+        });
+    };
     ListChemistComponent.prototype.view = function (Id) {
         jQuery('#detail').show();
         jQuery('#list').hide();
@@ -196,8 +268,28 @@ var ListChemistComponent = (function () {
             autosize: true
         });
     };
-    ListChemistComponent.prototype.delete = function (Id) {
-        console.log(Id);
+    //Delete Services
+    ListChemistComponent.prototype.blockUnBlock = function (i) {
+        console.log(i);
+        var self = this;
+        __WEBPACK_IMPORTED_MODULE_7_sweetalert2___default()({
+            title: 'Are you sure?',
+            text: 'You wont be able to revert',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Update it!'
+        }).then(function (result) {
+            if (result.value == true) {
+                self._AddChemistService.blockUnBlockChemist(i).subscribe(function (response) {
+                    console.log(response);
+                    __WEBPACK_IMPORTED_MODULE_7_sweetalert2___default()('Deleted!', 'Pharmacy Status has been Updated.', 'success');
+                });
+            }
+            else {
+            }
+        }).catch(__WEBPACK_IMPORTED_MODULE_7_sweetalert2___default.a.noop);
     };
     ListChemistComponent.prototype.ngOnInit = function () {
         var self = this;
@@ -255,11 +347,12 @@ var ListChemistComponent = (function () {
             selector: 'list-chemist',
             template: __webpack_require__("../../../../../src/app/theme/chemist/list-chemist/list-chemist.component.html"),
             styles: [__webpack_require__("../../../../../src/app/theme/chemist/list-chemist/list-chemist.component.scss"), __webpack_require__("../../../../../src/assets/icon/icofont/css/icofont.scss")],
-            providers: [__WEBPACK_IMPORTED_MODULE_2__services_GetPopularChemistService__["a" /* GetPopularChemistService */], __WEBPACK_IMPORTED_MODULE_3__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_4__services_AddAreaService__["a" /* AddAreaService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_2__services_GetPopularChemistService__["a" /* GetPopularChemistService */], __WEBPACK_IMPORTED_MODULE_3__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_4__services_AddAreaService__["a" /* AddAreaService */], __WEBPACK_IMPORTED_MODULE_5__services_AddChemistService__["a" /* AddchemistService */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_GetPopularChemistService__["a" /* GetPopularChemistService */],
             __WEBPACK_IMPORTED_MODULE_3__services_GetChemistDataService__["a" /* GetChemistDataService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_AddAreaService__["a" /* AddAreaService */]])
+            __WEBPACK_IMPORTED_MODULE_4__services_AddAreaService__["a" /* AddAreaService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_AddChemistService__["a" /* AddchemistService */]])
     ], ListChemistComponent);
     return ListChemistComponent;
 }());

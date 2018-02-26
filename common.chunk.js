@@ -178,6 +178,28 @@ var AddCategoryService = (function () {
         return this.http.post(this.urlService.baseUrl + "Chemist/addSubCategory", body, options)
             .map(function (res) { return res.json(); });
     };
+    AddCategoryService.prototype.updateCategory = function (Id, CategoryName) {
+        var body = JSON.stringify({ Id: Id, CategoryName: CategoryName });
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
+        return this.http.post(this.urlService.baseUrl + "Chemist/eidtCategoryById", body, options)
+            .map(function (res) { return res.json(); });
+    };
+    AddCategoryService.prototype.updateSubCategory = function (Id, SubCategoryName) {
+        var body = JSON.stringify({ Id: Id, CategoryName: SubCategoryName });
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
+        return this.http.post(this.urlService.baseUrl + "Chemist/eidtSubCategoryById", body, options)
+            .map(function (res) { return res.json(); });
+    };
+    AddCategoryService.prototype.deleteCategory = function (Id) {
+        return this.http.get(this.urlService.baseUrl + "Chemist/deleteCategoryById?categoryId=" + Id)
+            .map(function (res) { return res.json(); });
+    };
+    AddCategoryService.prototype.deleteSubCategory = function (Id) {
+        return this.http.get(this.urlService.baseUrl + "Chemist/deleteSubCategoryById?subCategoryId=" + Id)
+            .map(function (res) { return res.json(); });
+    };
     AddCategoryService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
@@ -222,6 +244,18 @@ var AddchemistService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
         return this.http.post(this.urlService.baseUrl + "User/addChemistDetail", body, options)
+            .map(function (res) { return res.json(); });
+    };
+    AddchemistService.prototype.updateChemist = function (getArea_Id, PharmaCommission, CityId, ChemistName, Longitude, latitide, ChemistId, Address) {
+        var body = JSON.stringify({ PharmaCommission: PharmaCommission, AreaId: getArea_Id, CityId: CityId, PharmacyName: ChemistName, Longitude: Longitude, Latitude: latitide, ChemistId: ChemistId, Address: Address });
+        console.log(body);
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
+        return this.http.post(this.urlService.baseUrl + "User/updateChemist", body, options)
+            .map(function (res) { return res.json(); });
+    };
+    AddchemistService.prototype.blockUnBlockChemist = function (userId) {
+        return this.http.get(this.urlService.baseUrl + "User/changeBlockStatusByUserId?userId = " + userId)
             .map(function (res) { return res.json(); });
     };
     AddchemistService = __decorate([

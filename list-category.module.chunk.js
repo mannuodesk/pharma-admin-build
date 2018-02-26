@@ -46,7 +46,7 @@ var ListCategoryRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/category/list-category/list-category.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" *ngIf = \"showAttr == true\">\n  <div class=\"col-sm-6\">\n    <!-- Basic Inputs Validation start -->\n    <app-card [title]=\"'Select Pharmacist'\" [cardOptionBlock]=\"true\">\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Pharmacist ID</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"chemist_id\" (change)=\"getCategoriesOfChemists()\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let chemist of chemists_array\" value=\"{{chemist.Id}}\">{{chemist.PharmacyName}} {{chemist.Address}}</option>\n          </select>\n        </div>\n      </div>\n      <div id=\"categories-fetcher\" class=\"form-group row fetcher\">\n        <div class=\"messages text-success\" id=\"fetching_categories_message\">Fetching Categories of Pharmacy ...</div>\n      </div>\n    </app-card>\n  </div>\n</div>\n\n<div id=\"list\" class=\"page-body\" style=\"display:none\">\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <app-card [title]=\"'Category List'\" [classHeader]=\"true\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <label class=\"dt-cust-search f-right\">\n              <div class=\"form-group\">\n                <label>Search: </label>\n                <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter($event)' />\n              </div>\n            </label>\n          </div>\n        </div>\n        <ngx-datatable #table class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\n          [footerHeight]=\"50\" [rowHeight]=\"60\" [limit]=\"10\" [rows]='rowsFilter' (select)='onSelect($event)'>\n          <ngx-datatable-column name=\"Category Name\" sortable=\"false\" prop=\"CategoryName\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"View Sub Categories\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button type=\"button\" class=\"btn btn-out-dashed btn-primary btn-square\" (click)=\"viewSubCategories(value)\">View</button>\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Update\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button type=\"button\" class=\"btn btn-out-dashed btn-warning btn-square\" (click)=\"openUpdateCategory(value);modalSmall.show()\">Edit</button>\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Delete\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button class=\"btn btn-out-dashed btn-danger btn-square\" (click)=\"deleteCategoryServices(value)\">Delete</button>\n            </ng-template>\n          </ngx-datatable-column>\n        </ngx-datatable>\n\n      </app-card>\n    </div>\n  </div>\n</div>\n\n<div id=\"sub-cateories-list\" class=\"page-body\" style=\"display:none\">\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <app-card [title]=\"'Sub Category List '\" [classHeader]=\"true\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <label class=\"dt-cust-search f-right\">\n              <div class=\"form-group\">\n                <label>Search: </label>\n                <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter2($event)' />\n              </div>\n            </label>\n          </div>\n        </div>\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n              <div class=\"form-group\">\n                <label>{{category_name}}</label>\n              </div>\n          </div>\n        </div>\n        <ngx-datatable #table2 class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\n          [footerHeight]=\"50\" [rowHeight]=\"60\" [limit]=\"10\" [rows]='rowsFilter2' (select)='onSelect($event)'>\n          <ngx-datatable-column name=\"Category Name\" sortable=\"false\" prop=\"CategoryName\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Update\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button type=\"button\" class=\"btn btn-out-dashed btn-warning btn-square\" (click)=\"openUpdateSubCategory(value);modalSmall.show()\">Edit</button>\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Delete\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button class=\"btn btn-out-dashed btn-danger btn-square\" (click)=\"deleteCategoryServices(value)\">Delete</button>\n            </ng-template>\n          </ngx-datatable-column>\n        </ngx-datatable>\n\n      </app-card>\n    </div>\n  </div>\n</div>\n\n<app-modal-basic #modalSmall [dialogClass]=\"'modal-lg'\">\n  <div class=\"app-modal-header\">\n    <h4 class=\"modal-title\">Update {{type}}</h4>\n    <button type=\"button\" class=\"close basic-close\" (click)=\"modalSmall.hide()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"app-modal-body\">\n    <form #EditForm=\"ngForm\">\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">{{type}} Name</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"updateformname\" name=\"packaging-name\" id=\"name\"\n            placeholder=\"\" required>\n          <!-- <div class=\"messages text-danger\">Packaging Name can't be blank</div> -->\n          <small id=\"error-message\" style=\"display:none\" class=\"text-danger \">\n            {{type}} Name can't be blank\n          </small>\n        </div>\n      </div>\n      \n      <div class=\"form-group row\">\n        <label class=\"col-sm-4\"></label>\n        <div class=\"col-sm-8\">\n          <button [disabled]=\"!EditForm.form.valid\" type=\"submit\" class=\"btn btn-primary m-b-0\">Update</button>\n        </div>\n      </div>\n    </form>\n  </div>\n  <div class=\"app-modal-footer\">\n    <button type=\"button\" class=\"btn btn-default waves-effect\" (click)=\"update();modalSmall.hide()\">Close</button>\n  </div>\n</app-modal-basic>"
+module.exports = "<div class=\"row\" *ngIf = \"showAttr == true\">\n  <div class=\"col-sm-6\">\n    <!-- Basic Inputs Validation start -->\n    <app-card [title]=\"'Select Pharmacist'\" [cardOptionBlock]=\"true\">\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Pharmacist ID</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"chemist_id\" (change)=\"getCategoriesOfChemists()\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let chemist of chemists_array\" value=\"{{chemist.Id}}\">{{chemist.PharmacyName}} {{chemist.Address}}</option>\n          </select>\n        </div>\n      </div>\n      <div id=\"categories-fetcher\" class=\"form-group row fetcher\">\n        <div class=\"messages text-success\" id=\"fetching_categories_message\">Fetching Categories of Pharmacy ...</div>\n      </div>\n    </app-card>\n  </div>\n</div>\n\n<div id=\"list\" class=\"page-body\" style=\"display:none\">\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <app-card [title]=\"'Category List'\" [classHeader]=\"true\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <label class=\"dt-cust-search f-right\">\n              <div class=\"form-group\">\n                <label>Search: </label>\n                <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter($event)' />\n              </div>\n            </label>\n          </div>\n        </div>\n        <ngx-datatable #table class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\n          [footerHeight]=\"50\" [rowHeight]=\"60\" [limit]=\"10\" [rows]='rowsFilter' (select)='onSelect($event)'>\n          <ngx-datatable-column name=\"Category Name\" sortable=\"false\" prop=\"CategoryName\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"View Sub Categories\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button type=\"button\" class=\"btn btn-out-dashed btn-primary btn-square\" (click)=\"viewSubCategories(value)\">View</button>\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Update\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button type=\"button\" class=\"btn btn-out-dashed btn-warning btn-square\" (click)=\"openUpdateCategory(value);modalSmall.show()\">Edit</button>\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Delete\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button class=\"btn btn-out-dashed btn-danger btn-square\" (click)=\"deleteCategoryServices(1, value)\">Delete</button>\n            </ng-template>\n          </ngx-datatable-column>\n        </ngx-datatable>\n\n      </app-card>\n    </div>\n  </div>\n</div>\n\n<div id=\"sub-cateories-list\" class=\"page-body\" style=\"display:none\">\n  <div class=\"row\">\n    <div class=\"col-sm-12\">\n      <app-card [title]=\"'Sub Category List '\" [classHeader]=\"true\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <label class=\"dt-cust-search f-right\">\n              <div class=\"form-group\">\n                <label>Search: </label>\n                <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter2($event)' />\n              </div>\n            </label>\n          </div>\n        </div>\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n              <div class=\"form-group\">\n                <label>{{category_name}}</label>\n              </div>\n          </div>\n        </div>\n        <ngx-datatable #table2 class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\n          [footerHeight]=\"50\" [rowHeight]=\"60\" [limit]=\"10\" [rows]='rowsFilter2' (select)='onSelect($event)'>\n          <ngx-datatable-column name=\"Category Name\" sortable=\"false\" prop=\"CategoryName\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              {{value}}\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Update\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button type=\"button\" class=\"btn btn-out-dashed btn-warning btn-square\" (click)=\"openUpdateSubCategory(value);modalSmall.show()\">Edit</button>\n            </ng-template>\n          </ngx-datatable-column>\n          <ngx-datatable-column name=\"Delete\" sortable=\"false\" prop=\"Id\">\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n              <button class=\"btn btn-out-dashed btn-danger btn-square\" (click)=\"deleteCategoryServices(2, value)\">Delete</button>\n            </ng-template>\n          </ngx-datatable-column>\n        </ngx-datatable>\n\n      </app-card>\n    </div>\n  </div>\n</div>\n\n<app-modal-basic #modalSmall [dialogClass]=\"'modal-lg'\">\n  <div class=\"app-modal-header\">\n    <h4 class=\"modal-title\">Update {{type}}</h4>\n    <button type=\"button\" class=\"close basic-close\" (click)=\"modalSmall.hide()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"app-modal-body\">\n    <form #EditForm=\"ngForm\">\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">{{type}} Name</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"updateformname\" name=\"packaging-name\" id=\"name\"\n            placeholder=\"\" required>\n          <!-- <div class=\"messages text-danger\">Packaging Name can't be blank</div> -->\n          <small id=\"error-message\" style=\"display:none\" class=\"text-danger \">\n            {{type}} Name can't be blank\n          </small>\n        </div>\n      </div>\n      \n      <div class=\"form-group row\">\n        <label class=\"col-sm-4\"></label>\n        <div class=\"col-sm-8\">\n          <button [disabled]=\"!EditForm.form.valid\" type=\"submit\" (click)=\"update()\" class=\"btn btn-primary m-b-0\">Update</button>\n        </div>\n      </div>\n    </form>\n  </div>\n  <div class=\"app-modal-footer\">\n    <button id=\"close-btn\" type=\"button\" class=\"btn btn-default waves-effect\" (click)=\"modalSmall.hide()\">Close</button>\n  </div>\n</app-modal-basic>"
 
 /***/ }),
 
@@ -118,6 +118,8 @@ var ListCategoryComponent = (function () {
         this.category_name = "";
         this.type = "";
         this.showAttr = false;
+        this.category_update_id = 0;
+        this.sub_category_update_id = 0;
         var session_obj = JSON.parse(localStorage.getItem('session_obj'));
         if (session_obj.UserRole == 1) {
             this.getChemists();
@@ -168,22 +170,39 @@ var ListCategoryComponent = (function () {
         this.type = "Category";
         var category_obj = this.chemists_categories.find(function (x) { return x.Id == Id; });
         this.updateformname = category_obj.CategoryName;
+        this.category_update_id = Id;
     }; // Update Category End
     ListCategoryComponent.prototype.openUpdateSubCategory = function (Id) {
         this.type = "Sub Category";
         var category_obj = this.chemists_sub_categories.find(function (x) { return x.Id == Id; });
         this.updateformname = category_obj.CategoryName;
+        this.sub_category_update_id = Id;
     }; // Update Sub Category End
     ListCategoryComponent.prototype.update = function () {
+        var _this = this;
         $('.text-danger').hide();
         if (this.updateformname === undefined || this.updateformname == "" || this.updateformname == null) {
             $('#error-message').show();
             return;
         }
         if (this.type == "Category") {
+            var index_number = this.chemists_categories.findIndex(function (x) { return x.Id == _this.category_update_id; });
+            this.chemists_categories[index_number].CategoryName = this.updateformname;
+            this._addCategoryService.updateCategory(this.category_update_id, this.updateformname).subscribe(function (response) { });
+            this.rowsFilter = this.chemists_categories;
+            this.tempFilter = this.chemists_categories;
+            $('#close-btn').click();
         }
         else {
             //Sub Category
+            var index_number = this.chemists_sub_categories.findIndex(function (x) { return x.Id == _this.sub_category_update_id; });
+            this.chemists_sub_categories[index_number].CategoryName = this.updateformname;
+            this._addCategoryService.updateCategory(this.sub_category_update_id, this.updateformname).subscribe(function (response) {
+                console.log(response);
+            });
+            this.rowsFilter2 = this.chemists_sub_categories;
+            this.tempFilter2 = this.chemists_sub_categories;
+            $('#close-btn').click();
         }
     }; // End of Update
     ListCategoryComponent.prototype.updateFilter2 = function (event) {
@@ -209,9 +228,10 @@ var ListCategoryComponent = (function () {
         this.table.offset = 0;
     };
     //Delete Services
-    ListCategoryComponent.prototype.deleteCategoryServices = function (i) {
+    ListCategoryComponent.prototype.deleteCategoryServices = function (type, i) {
         // this.measurement.splice(i, 1);
         console.log(i);
+        var self = this;
         __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()({
             title: 'Are you sure?',
             text: 'You wont be able to revert',
@@ -222,7 +242,26 @@ var ListCategoryComponent = (function () {
             confirmButtonText: 'Yes, delete it!'
         }).then(function (result) {
             if (result.value == true) {
-                __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Deleted!', 'Package has been deleted.', 'success');
+                if (type == 1) {
+                    //Category Delete
+                    self._addCategoryService.deleteCategory(i).subscribe(function (response) {
+                        var index_number = self.chemists_categories.findIndex(function (x) { return x.Id == i; });
+                        self.chemists_categories.splice(index_number, 1);
+                        self.rowsFilter = self.chemists_categories;
+                        self.tempFilter = self.chemists_categories;
+                        __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Deleted!', 'Category has been deleted.', 'success');
+                    });
+                }
+                else {
+                    //Sub Category Delete
+                    self._addCategoryService.deleteSubCategory(i).subscribe(function (response) {
+                        var index_number = self.chemists_sub_categories.findIndex(function (x) { return x.Id == i; });
+                        self.chemists_sub_categories.splice(index_number, 1);
+                        self.rowsFilter2 = self.chemists_sub_categories;
+                        self.tempFilter2 = self.chemists_sub_categories;
+                        __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default()('Deleted!', ' Sub Category has been deleted.', 'success');
+                    });
+                }
             }
             else {
                 // alert('No deletion');

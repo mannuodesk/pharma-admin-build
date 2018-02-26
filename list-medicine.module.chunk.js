@@ -123,6 +123,52 @@ var ListMedicineComponent = (function () {
         this.chemists_array = [];
         this.medicines_array = [];
         this.PharmacistId = 0;
+        this.MedicineName = "";
+        this.Address = "";
+        this.ManufacturerName = "";
+        this.PharmaCommission = 0;
+        this.City = 0;
+        this.Area = 0;
+        this.SubCategoryId = 0;
+        this.CategoryId = 0;
+        this.ImageUrl = "";
+        this.DosageId = 0;
+        this.DosageSizeId = 0;
+        this.MeasurementId = 0;
+        this.DosageValueId = 0;
+        this.ProductPrice = 0;
+        this.ProductQuantity = 0;
+        this.Username = "";
+        this.Password = "";
+        this.Latitude = 0;
+        this.Longitude = 0;
+        this.cities_array = [];
+        this.areas_array = [];
+        this.chemists_categories = [];
+        this.chemists_sub_categories = [];
+        this.measurements_array = [];
+        this.dosages_array = [];
+        this.dosages_sizes_array = [];
+        this.MeasurementListId = 0;
+        this.measurement_final_ids = [];
+        this.variation_array = [];
+        this.variation_model = {
+            Id: 0,
+            measurement_id: 0,
+            measurement_name: "",
+            dosage_id: 0,
+            dosage_name: "",
+            dosage_value_id: 0,
+            dosage_value_name: "",
+            quantity: 0,
+            price: 0
+        };
+        this.measurement_model = {
+            Id: 0,
+            measurement_id: 0,
+            measurement_name: "",
+        };
+        this.runner = false;
         this.showAttr = false;
         var session_obj = JSON.parse(localStorage.getItem('session_obj'));
         if (session_obj.UserRole == 1) {
@@ -159,6 +205,8 @@ var ListMedicineComponent = (function () {
         });
     };
     ListMedicineComponent.prototype.view = function (Id) {
+        jQuery('#detail').show();
+        jQuery('#list').hide();
     };
     ListMedicineComponent.prototype.delete = function (Id) {
         console.log(Id);
