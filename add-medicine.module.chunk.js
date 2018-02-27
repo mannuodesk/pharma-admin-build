@@ -558,11 +558,11 @@ var AddMedicineService = (function () {
         return this.http.get(this.urlService.baseUrl + "Chemist/getCategoriesByChemistId?chemistId=" + categoryId, options)
             .map(function (res) { return res.json(); });
     };
-    AddMedicineService.prototype.getAllSubCategoryValues = function () {
+    AddMedicineService.prototype.getAllSubCategoryValues = function (chemistId, categoryId) {
         var body = JSON.stringify({});
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'get', headers: headers });
-        return this.http.get(this.urlService.baseUrl + "Chemist/getAllCategoriesAndSubCategories", options)
+        return this.http.get(this.urlService.baseUrl + "Chemist/getSubCategoriesByChemistIdByCategoryId?chemistId=" + chemistId + "&categoryId=" + categoryId, options)
             .map(function (res) { return res.json(); });
     };
     AddMedicineService.prototype.getAllDosageValues = function () {

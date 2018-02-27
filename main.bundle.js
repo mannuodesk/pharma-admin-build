@@ -302,6 +302,7 @@ var map = {
 	],
 	"./theme/auth/forgot/forgot.module": [
 		"../../../../../src/app/theme/auth/forgot/forgot.module.ts",
+		"common",
 		"forgot.module"
 	],
 	"./theme/auth/login/basic-login/basic-login.module": [

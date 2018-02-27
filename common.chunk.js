@@ -161,7 +161,8 @@ var AddCategoryService = (function () {
         var body = JSON.stringify({ ChemistId: ChemistId, ParentId: CategoryId });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'get', headers: headers });
-        return this.http.get(this.urlService.baseUrl + "Chemist/getAllCategoriesAndSubCategories", options)
+        console.log(this.urlService.baseUrl + "Chemist/getSubCategoriesByChemistIdByCategoryId?chemistId=" + ChemistId + "&categoryId=");
+        return this.http.get(this.urlService.baseUrl + "Chemist/getSubCategoriesByChemistIdByCategoryId?chemistId=" + ChemistId + "&categoryId=" + CategoryId, options)
             .map(function (res) { return res.json(); });
     };
     AddCategoryService.prototype.getCateogry = function (chemistId) {
@@ -255,7 +256,7 @@ var AddchemistService = (function () {
             .map(function (res) { return res.json(); });
     };
     AddchemistService.prototype.blockUnBlockChemist = function (userId) {
-        return this.http.get(this.urlService.baseUrl + "User/changeBlockStatusByUserId?userId = " + userId)
+        return this.http.get(this.urlService.baseUrl + "User/changeBlockStatusByUserId?userId=" + userId)
             .map(function (res) { return res.json(); });
     };
     AddchemistService = __decorate([
@@ -400,6 +401,62 @@ var GetPopularChemistService = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], GetPopularChemistService);
     return GetPopularChemistService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/theme/services/LoginService.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ServiceUrl__ = __webpack_require__("../../../../../src/app/theme/services/ServiceUrl.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var LoginService = (function () {
+    function LoginService(http) {
+        this.http = http;
+        this.urlService = new __WEBPACK_IMPORTED_MODULE_3__ServiceUrl__["a" /* ServiceUrl */]();
+    }
+    LoginService.prototype.login = function (userName, password) {
+        var body = JSON.stringify({ UserName: userName, Password: password });
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
+        return this.http.post(this.urlService.baseUrl + "User/login", body, options)
+            .map(function (res) { return res.json(); });
+    };
+    LoginService.prototype.chemistloginService = function (Chemistusername, Chemistpassword) {
+        var body = JSON.stringify({ UserName: Chemistusername, Password: Chemistpassword });
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
+        return this.http.post(this.urlService.baseUrl + "User/login", body, options)
+            .map(function (res) { return res.json(); });
+    };
+    LoginService.prototype.forgotPassword = function (Email) {
+        return this.http.get(this.urlService.baseUrl + "User/forgotPassword?email=" + Email)
+            .map(function (res) { return res.json(); });
+    };
+    LoginService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+    ], LoginService);
+    return LoginService;
 }());
 
 

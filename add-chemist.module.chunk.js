@@ -160,9 +160,11 @@ var AddChemistComponent = (function () {
     }; // End of Get Areas of City
     AddChemistComponent.prototype.getChemists = function () {
         var _this = this;
-        this._getChemistDataService.getRegisteredChemistService().subscribe(function (response) {
+        this._getChemistDataService.getChemistService().subscribe(function (response) {
             console.log(response);
-            _this.chemists_array = response.data;
+            for (var i = 0; i < response.data.length; i++) {
+                _this.chemists_array.push(response.data[i].Chemist);
+            }
         });
     }; // End of Get Chemists
     AddChemistComponent.prototype.addChemist = function () {
