@@ -80,6 +80,8 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_GetChemistDataService__ = __webpack_require__("../../../../../src/app/theme/services/GetChemistDataService.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_AddAreaService__ = __webpack_require__("../../../../../src/app/theme/services/AddAreaService.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_ProductService__ = __webpack_require__("../../../../../src/app/theme/services/ProductService.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_MeasurementAndDosageSizesService__ = __webpack_require__("../../../../../src/app/theme/services/MeasurementAndDosageSizesService.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_AddCategoryService__ = __webpack_require__("../../../../../src/app/theme/services/AddCategoryService.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -95,12 +97,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var ListMedicineComponent = (function () {
-    function ListMedicineComponent(_getPopularChemistService, _getChemistDataService, _AddAreaNameService, _productService) {
+    function ListMedicineComponent(_getPopularChemistService, _getChemistDataService, _AddAreaNameService, _productService, _addCategoryService, _addMeasurementServices) {
         this._getPopularChemistService = _getPopularChemistService;
         this._getChemistDataService = _getChemistDataService;
         this._AddAreaNameService = _AddAreaNameService;
         this._productService = _productService;
+        this._addCategoryService = _addCategoryService;
+        this._addMeasurementServices = _addMeasurementServices;
         this.rowsBasic = [];
         this.fullScreenRow = [];
         this.loadingIndicator = true;
@@ -189,6 +195,44 @@ var ListMedicineComponent = (function () {
         var selected = _a.selected;
         console.log(selected);
     };
+    ListMedicineComponent.prototype.getCategories = function (Id) {
+        var _this = this;
+        this._addCategoryService.getCateogry(this.PharmacistId).subscribe(function (response) {
+            _this.chemists_categories = response.data;
+            _this.CategoryId = Id;
+        });
+    }; // End of Get Categories
+    ListMedicineComponent.prototype.getSubCategoriesPOP = function (CategoryId, SubCategoryId) {
+        var _this = this;
+        this._addCategoryService.getAllSubCategoryValues(this.PharmacistId, CategoryId).subscribe(function (response) {
+            _this.chemists_sub_categories = response.data;
+            _this.SubCategoryId = SubCategoryId;
+        });
+    }; // End of Get Sub Categories
+    ListMedicineComponent.prototype.getDosages = function () {
+        var _this = this;
+        this._addMeasurementServices.getDosage().subscribe(function (response) {
+            if (response.code == 200) {
+                _this.dosages_array = response.data;
+            }
+        });
+    }; // Get Dosages End
+    ListMedicineComponent.prototype.getDosageValues = function () {
+        var _this = this;
+        this._addMeasurementServices.getDosageSizes(this.DosageId).subscribe(function (response) {
+            if (response.code == 200) {
+                _this.dosages_sizes_array = response.data;
+            }
+        });
+    }; // Get Dosages End
+    ListMedicineComponent.prototype.getMeasurements = function () {
+        var _this = this;
+        this._addMeasurementServices.getMeasurements().subscribe(function (response) {
+            if (response.code == 200) {
+                _this.measurements_array = response.data;
+            }
+        });
+    }; // Get Measurements End
     ListMedicineComponent.prototype.onActivate = function (event) { };
     ListMedicineComponent.prototype.getChemists = function () {
         var _this = this;
@@ -212,6 +256,10 @@ var ListMedicineComponent = (function () {
         console.log(Id);
         var medicine_obj = this.medicines_array.find(function (x) { return x.Id == Id; });
         console.log(medicine_obj);
+        this.getCategories(medicine_obj.ChemistCategory.Id);
+        this.getSubCategoriesPOP(medicine_obj.ChemistCategory.ParentId, medicine_obj.ChemistCategory.Id);
+        this.getMeasurements();
+        this.getDosages();
         for (var i = 0; i < medicine_obj.ProductDosageAndSizeMappings.length; i++) {
             this.variation_model = {
                 Id: 0,
@@ -225,9 +273,9 @@ var ListMedicineComponent = (function () {
                 price: 0
             };
             this.variation_model.Id = medicine_obj.ProductDosageAndSizeMappings[i].Id;
-            this.variation_model.measurement_name = medicine_obj.ProductDosageAndSizeMappings[i].MeasurementName;
-            this.variation_model.dosage_name = medicine_obj.ProductDosageAndSizeMappings[i].DosageName;
-            this.variation_model.dosage_value_name = medicine_obj.ProductDosageAndSizeMappings[i].DosageValue;
+            this.variation_model.measurement_name = medicine_obj.ProductDosageAndSizeMappings[i].Measurements.MeasurementName;
+            this.variation_model.dosage_name = medicine_obj.ProductDosageAndSizeMappings[i].DosageAndSizesValues.DosageAndSizes.UnitName;
+            this.variation_model.dosage_value_name = medicine_obj.ProductDosageAndSizeMappings[i].DosageAndSizesValues.Value;
             this.variation_model.price = medicine_obj.ProductDosageAndSizeMappings[i].Price;
             this.variation_model.quantity = medicine_obj.ProductDosageAndSizeMappings[i].Quantity;
             this.variation_array.push(this.variation_model);
@@ -281,12 +329,14 @@ var ListMedicineComponent = (function () {
             selector: 'list-medicine',
             template: __webpack_require__("../../../../../src/app/theme/medicine/list-medicine/list-medicine.component.html"),
             styles: [__webpack_require__("../../../../../src/app/theme/medicine/list-medicine/list-medicine.component.scss"), __webpack_require__("../../../../../src/assets/icon/icofont/css/icofont.scss")],
-            providers: [__WEBPACK_IMPORTED_MODULE_2__services_GetPopularChemistService__["a" /* GetPopularChemistService */], __WEBPACK_IMPORTED_MODULE_3__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_4__services_AddAreaService__["a" /* AddAreaService */], __WEBPACK_IMPORTED_MODULE_5__services_ProductService__["a" /* ProductService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_2__services_GetPopularChemistService__["a" /* GetPopularChemistService */], __WEBPACK_IMPORTED_MODULE_3__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_4__services_AddAreaService__["a" /* AddAreaService */], __WEBPACK_IMPORTED_MODULE_5__services_ProductService__["a" /* ProductService */], __WEBPACK_IMPORTED_MODULE_7__services_AddCategoryService__["a" /* AddCategoryService */], __WEBPACK_IMPORTED_MODULE_6__services_MeasurementAndDosageSizesService__["a" /* MeasurementAndDosageSizesService */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_GetPopularChemistService__["a" /* GetPopularChemistService */],
             __WEBPACK_IMPORTED_MODULE_3__services_GetChemistDataService__["a" /* GetChemistDataService */],
             __WEBPACK_IMPORTED_MODULE_4__services_AddAreaService__["a" /* AddAreaService */],
-            __WEBPACK_IMPORTED_MODULE_5__services_ProductService__["a" /* ProductService */]])
+            __WEBPACK_IMPORTED_MODULE_5__services_ProductService__["a" /* ProductService */],
+            __WEBPACK_IMPORTED_MODULE_7__services_AddCategoryService__["a" /* AddCategoryService */],
+            __WEBPACK_IMPORTED_MODULE_6__services_MeasurementAndDosageSizesService__["a" /* MeasurementAndDosageSizesService */]])
     ], ListMedicineComponent);
     return ListMedicineComponent;
 }());

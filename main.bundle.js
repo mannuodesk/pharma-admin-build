@@ -823,6 +823,9 @@ var AdminComponent = (function () {
         this.setBackgroundPattern('pattern1');
         this.session_obj = JSON.parse(localStorage.getItem('session_obj'));
         console.info(this.session_obj);
+        if (this.session_obj == null) {
+            window.location.href = '/';
+        }
         this.custom_menu_items = this.menuItems.getAll();
         if (this.session_obj.UserRole == 1) {
             for (var i = 0; i < this.custom_menu_items.length; i++) {

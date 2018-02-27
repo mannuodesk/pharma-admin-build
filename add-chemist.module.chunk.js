@@ -48,7 +48,7 @@ var AddChemistRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/chemist/add-chemist/add-chemist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-sm-6\">\n    <!-- Basic Inputs Validation start -->\n    <app-card [title]=\"'Add Chemist'\" [cardOptionBlock]=\"true\">\n\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Pharmacist ID</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"PharmacistId\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let chemist of chemists_array\" value=\"{{chemist.Id}}\">{{chemist.PharmacyName}} {{chemist.Address}}</option>\n          </select>\n          <div class=\"messages text-danger\" id=\"pharmacist_id_error\">Pharmacist ID can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Full Name</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"FullName\" id=\"name\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"full_name_id_error\">Name can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Address</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"Address\" id=\"address\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"address_id_error\">Address can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Email</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"Email\" id=\"email\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"email_id_error\">Email can't be blank</div>\n          <div class=\"messages text-danger\" id=\"email_invalid_id_error\">Invalid Email</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Pharma Commission</label>\n        <div class=\"col-sm-8\">\n          <input type=\"number\" class=\"form-control\" [(ngModel)]=\"PharmaCommission\" id=\"pharmaCommission\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"pharma_commission_id_error\">Commission can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">City</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"City\" (change)=\"getCityAreas()\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let city of cities_array\" value=\"{{city.Id}}\">{{city.Name}}</option>\n          </select>\n          <div class=\"messages text-danger\" id=\"city_id_error\">City can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Area</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"Area\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let area of areas_array\" value=\"{{area.Id}}\">{{area.Name}}</option>\n          </select>\n          <div class=\"messages text-danger\" id=\"area_id_error\">Area can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Username</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" [(ngModel)]=\"Username\" class=\"form-control\" id=\"username\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"username_id_error\">Username can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Password</label>\n        <div class=\"col-sm-8\">\n          <input type=\"password\" [(ngModel)]=\"Password\" class=\"form-control\" id=\"password\" placeholder=\"\">\n          <div class=\"messages text-danger error\" id=\"password_id_error\">Password can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Latitude</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" [(ngModel)]=\"Latitude\" class=\"form-control\" id=\"latitude\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"latitude_id_error\">Latitude can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Longitude</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" [(ngModel)]=\"Longitude\" class=\"form-control\" id=\"longitude\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"longitude_id_error\">Longitude can't be blank</div>\n        </div>\n      </div>\n      <div class=\"preloader3 loader-block\" id=\"loader\">\n        <div class=\"circ1\"></div>\n        <div class=\"circ2\"></div>\n        <div class=\"circ3\"></div>\n        <div class=\"circ4\"></div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4\"></label>\n        <div class=\"col-sm-8\">\n          <button type=\"submit\" class=\"btn btn-primary m-b-0\" (click)=\"addChemist()\">Submit</button>\n        </div>\n      </div>\n\n    </app-card>\n  </div>\n  <div class=\"col-sm-6\">\n    <div class=\"col-xs-12 col-md-12 col-lg-12\">\n      <div class=\"valuesAddress\">\n        <input class=\"form-control\" id=\"us7-radius\" name=\"Radius\" type=\"number\" placeholder=\"Enter Radius\">\n        <input class=\"form-control\" id=\"us7-address\" name=\"Address\" type=\"text\" placeholder=\"Enter Address\">\n      </div>\n      <div id=\"somecomponent\" style=\"margin-top:15px;width: 100%; height: 400px;\">\n\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\n  <div class=\"col-sm-6\">\n    <!-- Basic Inputs Validation start -->\n    <app-card [title]=\"'Add Chemist'\" [cardOptionBlock]=\"true\">\n\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Pharmacist ID</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"PharmacistId\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let chemist of chemists_array\" value=\"{{chemist.Id}}\">{{chemist.PharmacyName}} ({{chemist.Address}})</option>\n          </select>\n          <div class=\"messages text-danger\" id=\"pharmacist_id_error\">Pharmacist ID can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Full Name</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"FullName\" id=\"name\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"full_name_id_error\">Name can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Address</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"Address\" id=\"address\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"address_id_error\">Address can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Email</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"Email\" id=\"email\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"email_id_error\">Email can't be blank</div>\n          <div class=\"messages text-danger\" id=\"email_invalid_id_error\">Invalid Email</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Pharma Commission</label>\n        <div class=\"col-sm-8\">\n          <input type=\"number\" class=\"form-control\" [(ngModel)]=\"PharmaCommission\" id=\"pharmaCommission\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"pharma_commission_id_error\">Commission can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">City</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"City\" (change)=\"getCityAreas()\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let city of cities_array\" value=\"{{city.Id}}\">{{city.Name}}</option>\n          </select>\n          <div class=\"messages text-danger\" id=\"city_id_error\">City can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Area</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"Area\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let area of areas_array\" value=\"{{area.Id}}\">{{area.Name}}</option>\n          </select>\n          <div class=\"messages text-danger\" id=\"area_id_error\">Area can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Username</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" [(ngModel)]=\"Username\" class=\"form-control\" id=\"username\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"username_id_error\">Username can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Password</label>\n        <div class=\"col-sm-8\">\n          <input type=\"password\" [(ngModel)]=\"Password\" class=\"form-control\" id=\"password\" placeholder=\"\">\n          <div class=\"messages text-danger error\" id=\"password_id_error\">Password can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Latitude</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" [(ngModel)]=\"Latitude\" class=\"form-control\" id=\"latitude\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"latitude_id_error\">Latitude can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Longitude</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" [(ngModel)]=\"Longitude\" class=\"form-control\" id=\"longitude\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"longitude_id_error\">Longitude can't be blank</div>\n        </div>\n      </div>\n      <div class=\"preloader3 loader-block\" id=\"loader\">\n        <div class=\"circ1\"></div>\n        <div class=\"circ2\"></div>\n        <div class=\"circ3\"></div>\n        <div class=\"circ4\"></div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4\"></label>\n        <div class=\"col-sm-8\">\n          <button type=\"submit\" class=\"btn btn-primary m-b-0\" (click)=\"addChemist()\">Submit</button>\n        </div>\n      </div>\n\n    </app-card>\n  </div>\n  <div class=\"col-sm-6\">\n    <div class=\"col-xs-12 col-md-12 col-lg-12\">\n      <div class=\"valuesAddress\">\n        <input class=\"form-control\" id=\"us7-radius\" name=\"Radius\" type=\"number\" placeholder=\"Enter Radius\">\n        <input class=\"form-control\" id=\"us7-address\" name=\"Address\" type=\"text\" placeholder=\"Enter Address\">\n      </div>\n      <div id=\"somecomponent\" style=\"margin-top:15px;width: 100%; height: 400px;\">\n\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -120,31 +120,43 @@ var AddChemistComponent = (function () {
         this.getAllCities();
         this.getChemists();
     }
+    AddChemistComponent.prototype.buildMap = function (lat, lng) {
+        var self = this;
+        jQuery('#somecomponent').locationpicker({
+            location: {
+                latitude: +lat || 25.0700,
+                longitude: +lng || 67.2848
+            },
+            radius: 300,
+            inputBinding: {
+                latitudeInput: self.Latitude,
+                longitudeInput: self.Longitude,
+                radiusInput: jQuery('#us7-radius'),
+                locationNameInput: jQuery('#us7-address'),
+            },
+            onchanged: function (currentLocation, radius, isMarkerDropped) {
+                console.log(currentLocation); //latlon  
+                self.Latitude = currentLocation.latitude;
+                self.Longitude = currentLocation.longitude;
+            },
+            enableAutocomplete: true,
+            resize: true,
+            autosize: true
+        });
+        self.Latitude = lat;
+        self.Longitude = lng;
+    };
     AddChemistComponent.prototype.ngOnInit = function () {
         var self = this;
-        setTimeout(function () {
-            jQuery('#somecomponent').locationpicker({
-                location: {
-                    latitude: 30.3753,
-                    longitude: 69.3451
-                },
-                radius: 300,
-                inputBinding: {
-                    latitudeInput: self.Latitude,
-                    longitudeInput: self.Longitude,
-                    radiusInput: jQuery('#us7-radius'),
-                    locationNameInput: jQuery('#us7-address'),
-                },
-                onchanged: function (currentLocation, radius, isMarkerDropped) {
-                    console.log(currentLocation); //latlon  
-                    self.Latitude = currentLocation.latitude;
-                    self.Longitude = currentLocation.longitude;
-                },
-                enableAutocomplete: true,
-                resize: true,
-                autosize: true
-            });
-        }, 3000);
+        jQuery('#somecomponent').html("Loading Map");
+        navigator.geolocation.getCurrentPosition(showPosition);
+        function showPosition(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            $('.map-lat').val(lat);
+            $('.map-lon').val(lng);
+            self.buildMap(lat, lng);
+        }
     };
     AddChemistComponent.prototype.getAllCities = function () {
         var _this = this;

@@ -190,6 +190,7 @@ var AddMedicineComponent = (function () {
         else if (session_obj.UserRole == 2) {
             this.PharmacistId = session_obj.ChemistId;
             this.showAttr = false;
+            this.getCategories();
         }
         this.getMeasurements();
         this.getDosages();
@@ -550,6 +551,7 @@ var AddMedicineService = (function () {
     function AddMedicineService(http) {
         this.http = http;
         this.urlService = new __WEBPACK_IMPORTED_MODULE_3__ServiceUrl__["a" /* ServiceUrl */]();
+        console.log("Add Measurement Service");
     }
     AddMedicineService.prototype.getAllCategoryValues = function (categoryId) {
         var body = JSON.stringify({});
@@ -602,6 +604,7 @@ var AddMedicineService = (function () {
             .map(function (res) { return res.json(); });
     };
     AddMedicineService.prototype.addMedicine = function (Name, ManufacturedBy, MeasurementIds, AddProductDaosageAndSizeMappingDTO, SubCategoryId, ChemistId, PictureURL) {
+        console.log(Name);
         var body = JSON.stringify({ Name: Name, ManufacturedBy: ManufacturedBy, MeasurementIds: MeasurementIds, AddProductDaosageAndSizeMappingDTO: AddProductDaosageAndSizeMappingDTO, SubCategoryId: SubCategoryId, ChemistId: ChemistId, PictureURL: PictureURL });
         console.log(body);
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });

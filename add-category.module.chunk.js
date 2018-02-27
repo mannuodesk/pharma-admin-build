@@ -142,6 +142,7 @@ var AddCategoryComponent = (function () {
                         $('#categories-add').hide();
                     }, 5000);
                     console.log(response);
+                    _this.chemists_categories.push(response.data);
                     _this.category_name = "";
                     _this.chemist_id = 0;
                     _this.category_runner = false;

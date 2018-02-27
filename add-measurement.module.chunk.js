@@ -194,13 +194,13 @@ var AddMeasurementComponent = (function () {
         return row.height;
     };
     AddMeasurementComponent.prototype.onclick = function () {
-        alert("Hi!!");
+        // alert("Hi!!");
     };
     AddMeasurementComponent.prototype.loadServices = function () {
         var _this = this;
         this._addMeasurementServices.addMeasurementService(this.packaging.name, this.packaging.symbol).subscribe(function (data) {
             _this.addMeasurement = data;
-            _this.measurements_array.push(_this.packaging);
+            _this.measurements_array.push(data.data);
             _this.packaging = {};
         });
     };
@@ -230,6 +230,8 @@ var AddMeasurementComponent = (function () {
                     if (response.code == 200) {
                         var index_number = self.measurements_array.findIndex(function (x) { return x.Id == i; });
                         self.measurements_array.splice(index_number, 1);
+                        self.rowsFilter = self.measurements_array;
+                        self.tempFilter = self.measurements_array;
                         __WEBPACK_IMPORTED_MODULE_3_sweetalert2___default()('Deleted!', 'Package has been deleted.', 'success');
                     }
                 });
