@@ -237,7 +237,10 @@ var AddMedicineComponent = (function () {
         var _this = this;
         this._getChemistDataService.getRegisteredChemistService().subscribe(function (response) {
             console.log(response);
-            _this.chemists_array = response.data;
+            for (var i = 0; i < response.data.length; i++) {
+                _this.chemists_array.push(response.data[i].Chemist);
+            }
+            //this.chemists_array = response.data;
         });
     }; // End of Get Chemists
     AddMedicineComponent.prototype.addMedicine = function () {

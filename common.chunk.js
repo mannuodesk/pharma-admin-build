@@ -301,7 +301,7 @@ var GetChemistDataService = (function () {
         var body = JSON.stringify({});
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'get', headers: headers });
-        return this.http.get(this.urlService.baseUrl + "Chemist/getAllChemists", options)
+        return this.http.get(this.urlService.baseUrl + "Chemist/getAllChemists?webRequest=1", options)
             .map(function (res) {
             console.log(res.json());
             return res.json();
