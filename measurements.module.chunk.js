@@ -36,6 +36,10 @@ var routes = [
             {
                 path: 'dosage-size',
                 loadChildren: './dosage-size/dosage-size.module#DosageSizeModule'
+            },
+            {
+                path: 'add-manufacturing',
+                loadChildren: './add-manufacturing/add-manufacturing.module#AddManufacturingModule'
             }
         ]
     }

@@ -23,6 +23,11 @@ var map = {
 		"common",
 		"add-dosage.module"
 	],
+	"./add-manufacturing/add-manufacturing.module": [
+		"../../../../../src/app/theme/measurements/add-manufacturing/add-manufacturing.module.ts",
+		"common",
+		"add-manufacturing.module"
+	],
 	"./add-measurement/add-measurement.module": [
 		"../../../../../src/app/theme/measurements/add-measurement/add-measurement.module.ts",
 		"common",
@@ -857,6 +862,9 @@ var AdminComponent = (function () {
                     if (this.custom_menu_items[i].main[j].name == 'Packaging') {
                         this.custom_menu_items[i].main[j].show = true;
                     }
+                    if (this.custom_menu_items[i].main[j].name == 'Manufacturer') {
+                        this.custom_menu_items[i].main[j].show = true;
+                    }
                     if (this.custom_menu_items[i].main[j].name == 'Dosage') {
                         this.custom_menu_items[i].main[j].show = true;
                     }
@@ -894,6 +902,9 @@ var AdminComponent = (function () {
                         this.custom_menu_items[i].main[j].show = false;
                     }
                     if (this.custom_menu_items[i].main[j].name == 'Packaging') {
+                        this.custom_menu_items[i].main[j].show = false;
+                    }
+                    if (this.custom_menu_items[i].main[j].name == 'Manufacturer') {
                         this.custom_menu_items[i].main[j].show = false;
                     }
                     if (this.custom_menu_items[i].main[j].name == 'Dosage') {
@@ -2006,6 +2017,15 @@ var MENUITEMS = [
                 state: 'add',
                 short_label: 'P',
                 name: 'Packaging',
+                type: 'link',
+                icon: 'icon-home'
+            },
+            {
+                show: false,
+                main_state: 'measurements',
+                state: 'add-manufacturing',
+                short_label: 'M',
+                name: 'Manufacturer',
                 type: 'link',
                 icon: 'icon-home'
             },

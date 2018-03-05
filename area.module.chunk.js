@@ -180,8 +180,71 @@ var AreaComponent = (function () {
     };
     AreaComponent.prototype.loadServices = function () {
         var _this = this;
+        console.log("packaging service");
         console.log(this.packaging.name);
-        this._addAreaService.addArea(this.city_id, this.packaging.name).subscribe(function (data) {
+        //adding karachi areas
+        if (this.packaging.name == "Gulberg Town") {
+            this.Lat = 24.945129;
+            this.Long = 67.069649;
+        }
+        //karachi areas
+        //adding Pindi areas
+        if (this.packaging.name == "Alama Iqbal Colony") {
+            this.Lat = 33.5884;
+            this.Long = 73.0184;
+        }
+        else if (this.packaging.name == 'Afshan Colony') {
+            this.Lat = 33.5953;
+            this.Long = 73.0236;
+        }
+        else if (this.packaging.name == 'Chishtiabad') {
+            this.Lat = 24.970720;
+            this.Long = 66.973484;
+        }
+        else if (this.packaging.name == 'Defence Colony') {
+            this.Lat = 28.572633;
+            this.Long = 77.232510;
+        }
+        else if (this.packaging.name == 'Dhoke Choudrian, Afshan Colony') {
+            this.Lat = 33.593131;
+            this.Long = 73.028777;
+        }
+        else if (this.packaging.name == 'Dhoke Gujran') {
+            this.Lat = 33.597839;
+            this.Long = 72.988868;
+        }
+        else if (this.packaging.name == 'Ellabad Westrige 3') {
+            this.Lat = 33.613917;
+            this.Long = 73.006582;
+        }
+        else if (this.packaging.name == 'GHQ Family Quattar, R.A Bazar') {
+            this.Lat = 33.613917;
+            this.Long = 73.006582;
+        }
+        else if (this.packaging.name == 'Harlay Street') {
+            this.Lat = 51.519970;
+            this.Long = -0.147406;
+        }
+        else if (this.packaging.name == 'Koinoor Colony') {
+            this.Lat = 18.488354;
+            this.Long = 73.845398;
+        }
+        else if (this.packaging.name == 'R.A Bazar') {
+            this.Lat = 31.503204;
+            this.Long = 74.382939;
+        }
+        else if (this.packaging.name == 'MCS Quatar') {
+            this.Lat = 25.277472;
+            this.Long = 51.552783;
+        }
+        //pindi areas
+        var body = {
+            AreaName: this.packaging.name,
+            Latitude: this.Lat,
+            Longitude: this.Long,
+            CityId: this.city_id
+        };
+        this._addAreaService.addArea(body).subscribe(function (data) {
             _this.addArea = data.data;
             _this.areas_array.push(_this.addArea);
             _this.packaging = {};
@@ -222,7 +285,97 @@ var AreaComponent = (function () {
         }
         this.tempFilter = this.areas_array;
         this.rowsFilter = this.areas_array;
-        this._addAreaService.updateArea(this.AreaId, this.packaging2.name).subscribe(function (response) {
+        //adding karachi areas
+        if (this.packaging2.name == "Gulberg Town") {
+            this.Lat = 24.945129;
+            this.Long = 67.069649;
+        }
+        else if (this.packaging2.name == "Teen Hatti") {
+            this.Lat = 24.892966;
+            this.Long = 67.043753;
+        }
+        else if (this.packaging2.name == "Liaquatabad") {
+            this.Lat = 24.905111;
+            this.Long = 67.043480;
+        }
+        else if (this.packaging2.name == "3 Talwaar") {
+            this.Lat = 40.757229;
+            this.Long = -73.706084;
+        }
+        else if (this.packaging2.name == "2 Talwaar") {
+            this.Lat = 39.008508;
+            this.Long = -76.700226;
+        }
+        else if (this.packaging2.name == "Buffer Zone") {
+            this.Lat = 24.959356;
+            this.Long = 67.067310;
+        }
+        else if (this.packaging2.name == "Kati Pahari") {
+            this.Lat = 24.944265;
+            this.Long = 67.031379;
+        }
+        else if (this.packaging2.name == "Nazimabad") {
+            this.Lat = 24.914380;
+            this.Long = 67.031566;
+        }
+        else if (this.packaging2.name == "Guru Mandir") {
+            this.Lat = 20.479486;
+            this.Long = 77.494904;
+        }
+        else if (this.packaging2.name == "New Karachi") {
+            this.Lat = 24.995264;
+            this.Long = 67.064331;
+        }
+        else if (this.packaging2.name == "People") {
+            this.Lat = 41.892235;
+            this.Long = -87.619834;
+        }
+        else if (this.packaging2.name == "Impress Market") {
+            this.Lat = 29.614138;
+            this.Long = -95.581757;
+        }
+        else if (this.packaging2.name == "Korangi") {
+            this.Lat = 16.810008;
+            this.Long = 82.239315;
+        }
+        else if (this.packaging2.name == "Orangi Town") {
+            this.Lat = 24.950375;
+            this.Long = 67.003269;
+        }
+        else if (this.packaging2.name == "Malir") {
+            this.Lat = 24.893733;
+            this.Long = 67.216262;
+        }
+        else if (this.packaging2.name == "Baloch Colony") {
+            this.Lat = 24.949993;
+            this.Long = 67.018162;
+        }
+        else if (this.packaging2.name == "Gulistan") {
+            this.Lat = 40.491509;
+            this.Long = 68.781077;
+        }
+        else if (this.packaging2.name == "North Nazimabad") {
+            this.Lat = 24.935421;
+            this.Long = 67.040502;
+        }
+        else if (this.packaging2.name == "Buns Road") {
+            this.Lat = 45.854923;
+            this.Long = -69.727040;
+        }
+        //karachi areas
+        //pindi areas
+        if (this.packaging2.name == 'Chaklala Scheme III') {
+            this.Lat = 33.5825;
+            this.Long = 73.0922;
+        }
+        //pindi areas
+        var body = {
+            Id: this.AreaId,
+            Name: this.packaging2.name,
+            Latitude: this.Lat,
+            Longitude: this.Long
+        };
+        this._addAreaService.updateArea(body).subscribe(function (response) {
             console.log(response);
         });
     };

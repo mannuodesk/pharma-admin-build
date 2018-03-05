@@ -67,8 +67,8 @@ var AddAreaService = (function () {
         this.http = http;
         this.urlService = new __WEBPACK_IMPORTED_MODULE_3__ServiceUrl__["a" /* ServiceUrl */]();
     }
-    AddAreaService.prototype.addArea = function (cityId, AreaName) {
-        var body = JSON.stringify({ CityId: cityId, AreaName: AreaName });
+    AddAreaService.prototype.addArea = function (body) {
+        // let body = JSON.stringify({ CityId: cityId, AreaName: AreaName });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
         return this.http.post(this.urlService.baseUrl + "City/addArea", body, options)
@@ -104,8 +104,8 @@ var AddAreaService = (function () {
         return this.http.post(this.urlService.baseUrl + "City/editCity", body, options)
             .map(function (res) { return res.json(); });
     };
-    AddAreaService.prototype.updateArea = function (Id, CityArea) {
-        var body = JSON.stringify({ "Id": Id, "Name": CityArea });
+    AddAreaService.prototype.updateArea = function (body) {
+        // let body = JSON.stringify({ "Id": Id, "Name": CityArea });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'get', headers: headers });
         return this.http.post(this.urlService.baseUrl + "City/editArea", body, options)
@@ -556,6 +556,27 @@ var MeasurementAndDosageSizesService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
         return this.http.post(this.urlService.baseUrl + "Chemist/addUnitValue", body, options)
+            .map(function (res) { return res.json(); });
+    };
+    // manufacturing
+    MeasurementAndDosageSizesService.prototype.addManufacturing = function (body) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
+        return this.http.post(this.urlService.baseUrl + "admin/addManufacturer", body, options)
+            .map(function (res) { return res.json(); });
+    };
+    MeasurementAndDosageSizesService.prototype.getAllManufactures = function () {
+        return this.http.get(this.urlService.baseUrl + "admin/getAllManufacturers")
+            .map(function (res) { return res.json(); });
+    };
+    MeasurementAndDosageSizesService.prototype.updateManufacture = function (body) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
+        return this.http.post(this.urlService.baseUrl + "admin/editManufacturer", body, options)
+            .map(function (res) { return res.json(); });
+    };
+    MeasurementAndDosageSizesService.prototype.DeleteManufacture = function (Id) {
+        return this.http.get(this.urlService.baseUrl + "admin/removeManufacturer?manufacturerId=" + Id)
             .map(function (res) { return res.json(); });
     };
     MeasurementAndDosageSizesService = __decorate([
