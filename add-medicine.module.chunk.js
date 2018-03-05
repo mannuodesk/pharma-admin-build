@@ -333,6 +333,7 @@ var AddMedicineComponent = (function () {
                 _this.CategoryId = 0;
                 _this.SubCategoryId = 0;
                 _this.MeasurementListId = 0;
+                _this.ManufacturerId = 0;
                 _this.MeasurementId = 0;
                 _this.DosageId = 0;
                 _this.DosageValueId = 0;

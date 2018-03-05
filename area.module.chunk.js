@@ -46,7 +46,7 @@ var AreaRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/location/area/area.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n  <div class=\"row\">\n    <div class=\"col-sm-3\">\n\n    </div>\n    <div class=\"col-sm-6\">\n      <!-- Basic Inputs Validation start -->\n      <app-card [title]=\"'Select City'\" [cardOptionBlock]=\"true\">\n\n        <form #f=\"ngForm\">\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label\">City</label>\n            <div class=\"col-sm-8\">\n              <select name=\"select\" [(ngModel)]=\"city_id\" (change)=\"getAreas()\" class=\"form-control form-control-default\">\n                <option *ngFor=\"let city of cities_array\" value=\"{{city.Id}}\">{{city.Name}}</option>\n              </select>\n            </div>\n          </div>\n          <div id=\"categories-fetcher\" class=\"form-group row fetcher\">\n            <div class=\"messages text-success\" id=\"fetching_categories_message\">Fetching Areas ...</div>\n          </div>\n        </form>\n      </app-card>\n    </div>\n  </div>\n</div>\n\n<div id=\"second-div\" style=\"display:none\">\n  <div class=\"row\">\n    <div class=\"col-sm-3\">\n\n    </div>\n    <div class=\"col-sm-6\">\n      <!-- Basic Inputs Validation start -->\n      <app-card [title]=\"'Add Area'\" [cardOptionBlock]=\"true\">\n\n        <form #f=\"ngForm\">\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label\">Area Name</label>\n            <div class=\"col-sm-8\">\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"packaging.name\" #addPackaging=\"ngModel\" name=\"packaging-name\" id=\"name\"\n                placeholder=\"\" required>\n              <!-- <div class=\"messages text-danger\">Packaging Name can't be blank</div> -->\n              <small [hidden]=\"addPackaging.valid || (addPackaging.pristine)\" class=\"text-danger \">\n                Area Name can't be blank\n              </small>\n            </div>\n          </div>\n\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4\"></label>\n            <div class=\"col-sm-8\">\n              <button [disabled]=\"!f.form.valid\" type=\"submit\" (click)=\"loadServices()\" class=\"btn btn-primary m-b-0\">Submit</button>\n\n            </div>\n          </div>\n        </form>\n\n\n      </app-card>\n    </div>\n  </div>\n  <div id=\"list\" class=\"page-body\">\n    <div class=\"row\">\n      <div class=\"col-sm-12\">\n        <app-card [title]=\"'Areas List'\" [classHeader]=\"true\">\n          <div class=\"row\">\n            <div class=\"col-sm-12\">\n              <label class=\"dt-cust-search f-right\">\n                <div class=\"form-group\">\n                  <label>Search: </label>\n                  <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter($event)' />\n                </div>\n              </label>\n            </div>\n          </div>\n          <ngx-datatable #table class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\n            [footerHeight]=\"50\" [rowHeight]=\"60\" [limit]=\"10\" [rows]='rowsFilter' (select)='onSelect($event)'>\n            <ngx-datatable-column name=\"Area Name\" sortable=\"false\" prop=\"Name\">\n              <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n                {{value}}\n              </ng-template>\n            </ngx-datatable-column>\n            <ngx-datatable-column name=\"Update\" sortable=\"false\" prop=\"Id\">\n              <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n                <button type=\"button\" class=\"btn btn-out-dashed btn-warning btn-square\" (click)=\"openMyModal(value);modalSmall.show()\">Edit</button>\n              </ng-template>\n            </ngx-datatable-column>\n            <ngx-datatable-column name=\"Delete\" sortable=\"false\" prop=\"Id\">\n              <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n                <button class=\"btn btn-out-dashed btn-danger btn-square\" (click)=\"deleteAreaServices(value)\">Delete</button>\n              </ng-template>\n            </ngx-datatable-column>\n          </ngx-datatable>\n\n        </app-card>\n      </div>\n    </div>\n  </div>\n</div>\n\n<app-modal-basic #modalSmall [dialogClass]=\"'modal-lg'\">\n  <div class=\"app-modal-header\">\n    <h4 class=\"modal-title\">Update Area</h4>\n    <button type=\"button\" class=\"close basic-close\" (click)=\"modalSmall.hide()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"app-modal-body\">\n    <form #AreaFrom=\"ngForm\">\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Area Name</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"packaging2.name\" #addPackaging=\"ngModel\" name=\"packaging-name\" id=\"name\"\n            placeholder=\"\" required>\n          <!-- <div class=\"messages text-danger\">Packaging Name can't be blank</div> -->\n          <small [hidden]=\"addPackaging.valid || (addPackaging.pristine)\" class=\"text-danger \">\n            Area Name can't be blank\n          </small>\n        </div>\n      </div>\n\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4\"></label>\n        <div class=\"col-sm-8\">\n          <button [disabled]=\"!AreaFrom.form.valid\" type=\"submit\" class=\"btn btn-primary m-b-0\" (click)=\"updateArea();modalSmall.hide()\">Update</button>\n        </div>\n      </div>\n    </form>\n  </div>\n  <div class=\"app-modal-footer\">\n    <button type=\"button\" class=\"btn btn-default waves-effect\" (click)=\"modalSmall.hide()\">Close</button>\n  </div>\n</app-modal-basic>"
+module.exports = "<div>\n  <div class=\"row\">\n    <div class=\"col-sm-3\">\n\n    </div>\n    <div class=\"col-sm-6\">\n      <!-- Basic Inputs Validation start -->\n      <app-card [title]=\"'Select City'\" [cardOptionBlock]=\"true\">\n\n        <form #f=\"ngForm\">\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label\">City</label>\n            <div class=\"col-sm-8\">\n              <select name=\"select\" [(ngModel)]=\"city_id\" (change)=\"getAreas()\" class=\"form-control form-control-default\">\n                <option *ngFor=\"let city of cities_array\" value=\"{{city.Id}}\">{{city.Name}}</option>\n              </select>\n            </div>\n          </div>\n          <div id=\"categories-fetcher\" class=\"form-group row fetcher\">\n            <div class=\"messages text-success\" id=\"fetching_categories_message\">Fetching Areas ...</div>\n          </div>\n        </form>\n      </app-card>\n    </div>\n  </div>\n</div>\n\n<div id=\"second-div\" style=\"display:none\">\n  <div class=\"row\">\n    <div class=\"col-sm-6\">\n      <!-- Basic Inputs Validation start -->\n      <app-card [title]=\"'Add Area'\" [cardOptionBlock]=\"true\">\n\n        <form #f=\"ngForm\">\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label\">Area Name</label>\n            <div class=\"col-sm-8\">\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"packaging.name\" #addPackaging=\"ngModel\" name=\"packaging-name\" id=\"name\"\n                placeholder=\"\" required>\n              <!-- <div class=\"messages text-danger\">Packaging Name can't be blank</div> -->\n              <small class=\"text-danger\" id=\"area-name-error\">\n                Area Name can't be blank\n              </small>\n            </div>\n          </div>\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label\">Area Latitude</label>\n            <div class=\"col-sm-8\">\n              <input type=\"text\" [(ngModel)]=\"AreaLatitude\" class=\"form-control\" name=\"latitude\" id=\"area_latitude\" placeholder=\"\">\n              <small class=\"messages text-danger\" id=\"latitude_id_error\">Latitude can't be blank</small>\n            </div>\n          </div>\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label\">Area Longitude</label>\n            <div class=\"col-sm-8\">\n              <input type=\"text\" [(ngModel)]=\"AreaLongitude\" class=\"form-control\" name=\"longitude\" id=\"area_longitude\" placeholder=\"\">\n              <small class=\"messages text-danger\" id=\"longitude_id_error\">Longitude can't be blank</small>\n              <small class=\"messages text-danger\" id=\"check_area_error\">The specifed area's Lat and Lng or not in the selected City</small>\n            </div>\n          </div>\n\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4\"></label>\n            <div class=\"col-sm-8\">\n              <button [disabled]=\"!f.form.valid\" type=\"submit\" (click)=\"loadServices()\" class=\"btn btn-primary m-b-0\">Submit</button>\n\n            </div>\n          </div>\n        </form>\n\n\n      </app-card>\n    </div>\n    <div class=\"col-sm-6\">\n      <div class=\"col-xs-12 col-md-12 col-lg-12\">\n        <div class=\"valuesAddress\">\n          <input class=\"form-control\" id=\"us7-radius\" name=\"Radius\" type=\"number\" placeholder=\"Enter Radius\">\n          <input class=\"form-control\" id=\"us7-address\" name=\"Address\" type=\"text\" placeholder=\"Enter Address\">\n        </div>\n        <div id=\"somecomponent\" style=\"margin-top:15px;width: 100%; height: 400px;\">\n\n        </div>\n      </div>\n    </div>\n  </div>\n  <div id=\"list\" class=\"page-body\">\n    <div class=\"row\">\n      <div class=\"col-sm-12\">\n        <app-card [title]=\"'Areas List'\" [classHeader]=\"true\">\n          <div class=\"row\">\n            <div class=\"col-sm-12\">\n              <label class=\"dt-cust-search f-right\">\n                <div class=\"form-group\">\n                  <label>Search: </label>\n                  <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter($event)' />\n                </div>\n              </label>\n            </div>\n          </div>\n          <ngx-datatable #table class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\n            [footerHeight]=\"50\" [rowHeight]=\"60\" [limit]=\"10\" [rows]='rowsFilter' (select)='onSelect($event)'>\n            <ngx-datatable-column name=\"Area Name\" sortable=\"false\" prop=\"Name\">\n              <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n                {{value}}\n              </ng-template>\n            </ngx-datatable-column>\n            <ngx-datatable-column name=\"Latitude\" sortable=\"false\" prop=\"Latitude\">\n              <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n                {{value}}\n              </ng-template>\n            </ngx-datatable-column>\n            <ngx-datatable-column name=\"Longitude\" sortable=\"false\" prop=\"Longitude\">\n              <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n                {{value}}\n              </ng-template>\n            </ngx-datatable-column>\n            <ngx-datatable-column name=\"Update\" sortable=\"false\" prop=\"Id\">\n              <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n                <button type=\"button\" class=\"btn btn-out-dashed btn-warning btn-square\" (click)=\"openMyModal(value);modalSmall.show()\">Edit</button>\n              </ng-template>\n            </ngx-datatable-column>\n            <ngx-datatable-column name=\"Delete\" sortable=\"false\" prop=\"Id\">\n              <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\n                <button class=\"btn btn-out-dashed btn-danger btn-square\" (click)=\"deleteAreaServices(value)\">Delete</button>\n              </ng-template>\n            </ngx-datatable-column>\n          </ngx-datatable>\n\n        </app-card>\n      </div>\n    </div>\n  </div>\n</div>\n\n<app-modal-basic #modalSmall [dialogClass]=\"'modal-lg'\">\n  <div class=\"app-modal-header\">\n    <h4 class=\"modal-title\">Update Area</h4>\n    <button type=\"button\" class=\"close basic-close\" (click)=\"modalSmall.hide()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"app-modal-body\">\n    <form #AreaFrom=\"ngForm\">\n      <div class=\"form-group row\">\n        <div class=\"col-sm-6\">\n          <div class=\"col-xs-12 col-md-12 col-lg-12\">\n            <div class=\"valuesAddress\">\n              <input class=\"form-control\" id=\"us7-radius2\" name=\"Radius\" type=\"number\" placeholder=\"Enter Radius\">\n              <input class=\"form-control\" id=\"us7-address2\" name=\"Address\" type=\"text\" placeholder=\"Enter Address\">\n            </div>\n            <div id=\"somecomponent2\" style=\"margin-top:15px;width: 100%; height: 400px;\">\n\n            </div>\n          </div>\n        </div>\n        <div class=\"col-sm-6\">\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label\">Area Name</label>\n            <div class=\"col-sm-8\">\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"packaging2.name\" #addPackaging=\"ngModel\" name=\"packaging-name\" id=\"name\"\n                placeholder=\"\" required>\n              <!-- <div class=\"messages text-danger\">Packaging Name can't be blank</div> -->\n              <small class=\"text-danger\" id=\"update-area-name-error\">\n                Area Name can't be blank\n              </small>\n            </div>\n          </div>\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label\">Area Latitude</label>\n            <div class=\"col-sm-8\">\n              <input type=\"text\" [(ngModel)]=\"UpdateAreaLatitude\" class=\"form-control\" name=\"latitude\" id=\"update_area_latitude2\" placeholder=\"\">\n              <small class=\"messages text-danger\" id=\"update_latitude_id_error\">Latitude can't be blank</small>\n            </div>\n          </div>\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4 col-form-label\">Area Longitude</label>\n            <div class=\"col-sm-8\">\n              <input type=\"text\" [(ngModel)]=\"UpdateAreaLongitude\" class=\"form-control\" name=\"longitude\" id=\"update_area_longitude2\" placeholder=\"\">\n              <small class=\"messages text-danger\" id=\"update_longitude_id_error\">Longitude can't be blank</small>\n              <small class=\"messages text-danger\" id=\"update_check_area_error\">The specifed area's Lat and Lng or not in the selected City</small>\n            </div>\n          </div>\n          <div class=\"form-group row\">\n            <label class=\"col-sm-4\"></label>\n            <div class=\"col-sm-8\">\n              <button type=\"submit\" class=\"btn btn-primary m-b-0\" (click)=\"updateArea()\">Update</button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </form>\n  </div>\n  <div class=\"app-modal-footer\">\n    <button id=\"update-close-btn\" type=\"button\" class=\"btn btn-default waves-effect\" (click)=\"modalSmall.hide()\">Close</button>\n  </div>\n</app-modal-basic>"
 
 /***/ }),
 
@@ -58,7 +58,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".fetcher {\n  padding-left: 5%;\n  display: none; }\n", ""]);
+exports.push([module.i, ".fetcher {\n  padding-left: 5%;\n  display: none; }\n\n.text-danger {\n  display: none; }\n", ""]);
 
 // exports
 
@@ -106,8 +106,15 @@ var AreaComponent = (function () {
         this.loadingIndicator = true;
         this.reorderable = true;
         this.packaging = {};
+        this.AreaLatitude = 0;
+        this.AreaLongitude = 0;
+        this.UpdateAreaLatitude = 0;
+        this.UpdateAreaLongitude = 0;
         this.area = [];
         this.packaging2 = {};
+        this.CityName = "";
+        this.check_area = false;
+        this.update_check_area = false;
         this.columns = [
             { prop: 'name' },
             { name: 'Gender' },
@@ -126,6 +133,16 @@ var AreaComponent = (function () {
         this.getCities();
     }
     AreaComponent.prototype.ngOnInit = function () {
+        var self = this;
+        jQuery('#somecomponent').html("Loading Map");
+        navigator.geolocation.getCurrentPosition(showPosition);
+        function showPosition(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            $('.map-lat').val(lat);
+            $('.map-lon').val(lng);
+            self.buildMap(lat, lng);
+        }
     };
     AreaComponent.prototype.getCities = function () {
         var _this = this;
@@ -140,7 +157,24 @@ var AreaComponent = (function () {
     }; // Get cities End
     AreaComponent.prototype.getAreas = function () {
         var _this = this;
+        var self = this;
         $("#categories-fetcher").show();
+        var city_obj = this.cities_array.find(function (x) { return x.Id == _this.city_id; });
+        var gecoder_string = city_obj.Name + ", pk";
+        this.CityName = city_obj.Name;
+        var geocoder = new google.maps.Geocoder();
+        jQuery('#us7-address').val(this.CityName);
+        geocoder.geocode({ 'address': gecoder_string }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                console.log("location : " + results[0].geometry.location.lat() + " " + results[0].geometry.location.lng());
+                self.Lat = results[0].geometry.location.lat();
+                self.Long = results[0].geometry.location.lng();
+                self.buildMap(self.Lat, self.Long);
+            }
+            else {
+                console.log("Something got wrong " + status);
+            }
+        });
         this._addAreaService.getAreaName(this.city_id).subscribe(function (response) {
             if (response.code == 200) {
                 console.log(response.data);
@@ -157,6 +191,10 @@ var AreaComponent = (function () {
         console.log(Id);
         var obj = this.areas_array.find(function (x) { return x.Id == Id; });
         this.packaging2.name = obj.Name;
+        this.UpdateAreaLatitude = obj.Latitude;
+        this.UpdateAreaLongitude = obj.Longitude;
+        jQuery('#us7-address2').val(obj.Name);
+        this.buildMap2(this.UpdateAreaLatitude, this.UpdateAreaLongitude);
     };
     AreaComponent.prototype.updateFilter = function (event) {
         var val = event.target.value.toLowerCase();
@@ -182,73 +220,109 @@ var AreaComponent = (function () {
         var _this = this;
         console.log("packaging service");
         console.log(this.packaging.name);
-        //adding karachi areas
-        if (this.packaging.name == "Gulberg Town") {
-            this.Lat = 24.945129;
-            this.Long = 67.069649;
+        var lat = $('#area_latitude').val();
+        var lng = $('#area_longitude').val();
+        this.AreaLatitude = parseFloat(lat.toString());
+        this.AreaLongitude = parseFloat(lng.toString());
+        $('.text-danger').hide();
+        if (this.packaging.name === undefined || this.packaging.name == "" || this.packaging.name == null || this.packaging.name.trim() == "") {
+            $('#area-name-error').show();
+            return;
         }
-        //karachi areas
-        //adding Pindi areas
-        if (this.packaging.name == "Alama Iqbal Colony") {
-            this.Lat = 33.5884;
-            this.Long = 73.0184;
+        if (this.AreaLatitude == 0) {
+            $('#latitude_id_error').show();
+            return;
         }
-        else if (this.packaging.name == 'Afshan Colony') {
-            this.Lat = 33.5953;
-            this.Long = 73.0236;
+        if (this.AreaLongitude == 0) {
+            $('#longitude_id_error').show();
+            return;
         }
-        else if (this.packaging.name == 'Chishtiabad') {
-            this.Lat = 24.970720;
-            this.Long = 66.973484;
+        if (this.check_area == false) {
+            $('#check_area_error').show();
+            return;
         }
-        else if (this.packaging.name == 'Defence Colony') {
-            this.Lat = 28.572633;
-            this.Long = 77.232510;
-        }
-        else if (this.packaging.name == 'Dhoke Choudrian, Afshan Colony') {
-            this.Lat = 33.593131;
-            this.Long = 73.028777;
-        }
-        else if (this.packaging.name == 'Dhoke Gujran') {
-            this.Lat = 33.597839;
-            this.Long = 72.988868;
-        }
-        else if (this.packaging.name == 'Ellabad Westrige 3') {
-            this.Lat = 33.613917;
-            this.Long = 73.006582;
-        }
-        else if (this.packaging.name == 'GHQ Family Quattar, R.A Bazar') {
-            this.Lat = 33.613917;
-            this.Long = 73.006582;
-        }
-        else if (this.packaging.name == 'Harlay Street') {
-            this.Lat = 51.519970;
-            this.Long = -0.147406;
-        }
-        else if (this.packaging.name == 'Koinoor Colony') {
-            this.Lat = 18.488354;
-            this.Long = 73.845398;
-        }
-        else if (this.packaging.name == 'R.A Bazar') {
-            this.Lat = 31.503204;
-            this.Long = 74.382939;
-        }
-        else if (this.packaging.name == 'MCS Quatar') {
-            this.Lat = 25.277472;
-            this.Long = 51.552783;
-        }
-        //pindi areas
+        // Map Area
         var body = {
             AreaName: this.packaging.name,
-            Latitude: this.Lat,
-            Longitude: this.Long,
+            Latitude: this.AreaLatitude,
+            Longitude: this.AreaLongitude,
             CityId: this.city_id
         };
         this._addAreaService.addArea(body).subscribe(function (data) {
             _this.addArea = data.data;
             _this.areas_array.push(_this.addArea);
             _this.packaging = {};
+            _this.AreaLatitude = 0;
+            _this.AreaLongitude = 0;
         });
+    };
+    AreaComponent.prototype.buildMap = function (lat, lng) {
+        var self = this;
+        jQuery('#somecomponent').locationpicker({
+            location: {
+                latitude: +lat || 25.0700,
+                longitude: +lng || 67.2848
+            },
+            radius: 300,
+            inputBinding: {
+                latitudeInput: self.Lat,
+                longitudeInput: self.Long,
+                radiusInput: jQuery('#us7-radius'),
+                locationNameInput: jQuery('#us7-address'),
+            },
+            onchanged: function (currentLocation, radius, isMarkerDropped) {
+                console.log(currentLocation); //latlon  
+                console.log(jQuery('#us7-address').val());
+                var location_name = jQuery('#us7-address').val();
+                self.check_area = location_name.includes(self.CityName);
+                jQuery('#area_latitude').val(currentLocation.latitude);
+                jQuery('#area_longitude').val(currentLocation.longitude);
+                self.AreaLatitude = currentLocation.latitude;
+                self.AreaLongitude = currentLocation.longitude;
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            types: ['(cities)'],
+            componentRestrictions: { country: "pk" },
+            enableAutocomplete: true,
+            resize: true,
+            autosize: true
+        });
+        self.Lat = lat;
+        self.Long = lng;
+    };
+    AreaComponent.prototype.buildMap2 = function (lat, lng) {
+        var self = this;
+        jQuery('#somecomponent2').locationpicker({
+            location: {
+                latitude: +lat || 25.0700,
+                longitude: +lng || 67.2848
+            },
+            radius: 300,
+            inputBinding: {
+                latitudeInput: self.Lat2,
+                longitudeInput: self.Long2,
+                radiusInput: jQuery('#us7-radius2'),
+                locationNameInput: jQuery('#us7-address2'),
+            },
+            onchanged: function (currentLocation, radius, isMarkerDropped) {
+                console.log(currentLocation); //latlon  
+                console.log(jQuery('#us7-address2').val());
+                var location_name = jQuery('#us7-address2').val();
+                self.update_check_area = location_name.includes(self.CityName);
+                jQuery('#area_latitude2').val(currentLocation.latitude);
+                jQuery('#area_longitude2').val(currentLocation.longitude);
+                self.UpdateAreaLatitude = currentLocation.latitude;
+                self.UpdateAreaLongitude = currentLocation.longitude;
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            types: ['(cities)'],
+            componentRestrictions: { country: "pk" },
+            enableAutocomplete: true,
+            resize: true,
+            autosize: true
+        });
+        self.Lat2 = lat;
+        self.Long2 = lng;
     };
     //Delete Services
     //Delete Services
@@ -281,102 +355,43 @@ var AreaComponent = (function () {
         for (var i = 0; i < this.areas_array.length; i++) {
             if (this.areas_array[i].Id == this.AreaId) {
                 this.areas_array[i].Name = this.packaging2.name;
+                this.areas_array[i].Latitude = this.UpdateAreaLatitude;
+                this.areas_array[i].Longitude = this.UpdateAreaLongitude;
             }
         }
         this.tempFilter = this.areas_array;
         this.rowsFilter = this.areas_array;
+        var lat = $('#update_area_latitude2').val();
+        var lng = $('#update_area_longitude2').val();
+        this.AreaLatitude = parseFloat(lat.toString());
+        this.AreaLongitude = parseFloat(lng.toString());
+        $('.text-danger').hide();
+        if (this.packaging2.name === undefined || this.packaging2.name == "" || this.packaging2.name == null || this.packaging2.name.trim() == "") {
+            $('#update-area-name-error').show();
+            return;
+        }
+        if (this.UpdateAreaLatitude == 0) {
+            $('#update_latitude_id_error').show();
+            return;
+        }
+        if (this.UpdateAreaLongitude == 0) {
+            $('#update_longitude_id_error').show();
+            return;
+        }
+        if (this.update_check_area == false) {
+            $('#update_check_area_error').show();
+            return;
+        }
         //adding karachi areas
-        if (this.packaging2.name == "Gulberg Town") {
-            this.Lat = 24.945129;
-            this.Long = 67.069649;
-        }
-        else if (this.packaging2.name == "Teen Hatti") {
-            this.Lat = 24.892966;
-            this.Long = 67.043753;
-        }
-        else if (this.packaging2.name == "Liaquatabad") {
-            this.Lat = 24.905111;
-            this.Long = 67.043480;
-        }
-        else if (this.packaging2.name == "3 Talwaar") {
-            this.Lat = 40.757229;
-            this.Long = -73.706084;
-        }
-        else if (this.packaging2.name == "2 Talwaar") {
-            this.Lat = 39.008508;
-            this.Long = -76.700226;
-        }
-        else if (this.packaging2.name == "Buffer Zone") {
-            this.Lat = 24.959356;
-            this.Long = 67.067310;
-        }
-        else if (this.packaging2.name == "Kati Pahari") {
-            this.Lat = 24.944265;
-            this.Long = 67.031379;
-        }
-        else if (this.packaging2.name == "Nazimabad") {
-            this.Lat = 24.914380;
-            this.Long = 67.031566;
-        }
-        else if (this.packaging2.name == "Guru Mandir") {
-            this.Lat = 20.479486;
-            this.Long = 77.494904;
-        }
-        else if (this.packaging2.name == "New Karachi") {
-            this.Lat = 24.995264;
-            this.Long = 67.064331;
-        }
-        else if (this.packaging2.name == "People") {
-            this.Lat = 41.892235;
-            this.Long = -87.619834;
-        }
-        else if (this.packaging2.name == "Impress Market") {
-            this.Lat = 29.614138;
-            this.Long = -95.581757;
-        }
-        else if (this.packaging2.name == "Korangi") {
-            this.Lat = 16.810008;
-            this.Long = 82.239315;
-        }
-        else if (this.packaging2.name == "Orangi Town") {
-            this.Lat = 24.950375;
-            this.Long = 67.003269;
-        }
-        else if (this.packaging2.name == "Malir") {
-            this.Lat = 24.893733;
-            this.Long = 67.216262;
-        }
-        else if (this.packaging2.name == "Baloch Colony") {
-            this.Lat = 24.949993;
-            this.Long = 67.018162;
-        }
-        else if (this.packaging2.name == "Gulistan") {
-            this.Lat = 40.491509;
-            this.Long = 68.781077;
-        }
-        else if (this.packaging2.name == "North Nazimabad") {
-            this.Lat = 24.935421;
-            this.Long = 67.040502;
-        }
-        else if (this.packaging2.name == "Buns Road") {
-            this.Lat = 45.854923;
-            this.Long = -69.727040;
-        }
-        //karachi areas
-        //pindi areas
-        if (this.packaging2.name == 'Chaklala Scheme III') {
-            this.Lat = 33.5825;
-            this.Long = 73.0922;
-        }
-        //pindi areas
         var body = {
             Id: this.AreaId,
             Name: this.packaging2.name,
-            Latitude: this.Lat,
-            Longitude: this.Long
+            Latitude: this.UpdateAreaLatitude,
+            Longitude: this.UpdateAreaLongitude
         };
         this._addAreaService.updateArea(body).subscribe(function (response) {
             console.log(response);
+            $('#update-close-btn').click();
         });
     };
     __decorate([
@@ -416,12 +431,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__swimlane_ngx_datatable__ = __webpack_require__("../../../../@swimlane/ngx-datatable/release/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__swimlane_ngx_datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__swimlane_ngx_datatable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__assets_jquery_locationpicker_plugin_master_src_locationpicker_jquery_js__ = __webpack_require__("../../../../../src/assets/jquery-locationpicker-plugin-master/src/locationpicker.jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__assets_jquery_locationpicker_plugin_master_src_locationpicker_jquery_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__assets_jquery_locationpicker_plugin_master_src_locationpicker_jquery_js__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
