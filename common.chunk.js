@@ -435,14 +435,14 @@ var LoginService = (function () {
         this.urlService = new __WEBPACK_IMPORTED_MODULE_3__ServiceUrl__["a" /* ServiceUrl */]();
     }
     LoginService.prototype.login = function (userName, password) {
-        var body = JSON.stringify({ UserName: userName, Password: password });
+        var body = JSON.stringify({ UserName: userName, Password: password, UserRole: 1 });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
         return this.http.post(this.urlService.baseUrl + "User/login", body, options)
             .map(function (res) { return res.json(); });
     };
     LoginService.prototype.chemistloginService = function (Chemistusername, Chemistpassword) {
-        var body = JSON.stringify({ UserName: Chemistusername, Password: Chemistpassword });
+        var body = JSON.stringify({ UserName: Chemistusername, Password: Chemistpassword, UserRole: 2 });
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
         return this.http.post(this.urlService.baseUrl + "User/login", body, options)
