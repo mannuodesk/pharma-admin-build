@@ -28,6 +28,10 @@ var routes = [
                 loadChildren: './add-chemist/add-chemist.module#AddChemistModule'
             },
             {
+                path: 'addchemistmanually',
+                loadChildren: './add-chemist-manually/add-chemist-manually.module#AddChemistManuallyModule'
+            },
+            {
                 path: 'list',
                 loadChildren: './list-chemist/list-chemist.module#ListChemistModule'
             }

@@ -13,6 +13,11 @@ var map = {
 		"common",
 		"add-category.module"
 	],
+	"./add-chemist-manually/add-chemist-manually.module": [
+		"../../../../../src/app/theme/chemist/add-chemist-manually/add-chemist-manually.module.ts",
+		"common",
+		"add-chemist-manually.module"
+	],
 	"./add-chemist/add-chemist.module": [
 		"../../../../../src/app/theme/chemist/add-chemist/add-chemist.module.ts",
 		"common",
@@ -22,6 +27,11 @@ var map = {
 		"../../../../../src/app/theme/measurements/add-dosage/add-dosage.module.ts",
 		"common",
 		"add-dosage.module"
+	],
+	"./add-logistic/add-logistic.module": [
+		"../../../../../src/app/theme/logistic/add-logistic/add-logistic.module.ts",
+		"common",
+		"add-logistic.module"
 	],
 	"./add-manufacturing/add-manufacturing.module": [
 		"../../../../../src/app/theme/measurements/add-manufacturing/add-manufacturing.module.ts",
@@ -197,6 +207,11 @@ var map = {
 		"common",
 		"list-chemist.module"
 	],
+	"./list-logistic/list-logistic.module": [
+		"../../../../../src/app/theme/logistic/list-logistic/list-logistic.module.ts",
+		"common",
+		"list-logistic.module"
+	],
 	"./list-medicine/list-medicine.module": [
 		"../../../../../src/app/theme/medicine/list-medicine/list-medicine.module.ts",
 		"common",
@@ -206,6 +221,11 @@ var map = {
 		"../../../../../src/app/theme/orders/list-orders/list-orders.module.ts",
 		"common",
 		"list-orders.module"
+	],
+	"./list-user/list-user.module": [
+		"../../../../../src/app/theme/user/list-user/list-user.module.ts",
+		"common",
+		"list-user.module"
 	],
 	"./modal/modal.module": [
 		"../../../../../src/app/theme/ui-elements/advance/modal/modal.module.ts",
@@ -305,6 +325,11 @@ var map = {
 		"common",
 		"task-list.module"
 	],
+	"./theme/auth/activation/activation.module": [
+		"../../../../../src/app/theme/auth/activation/activation.module.ts",
+		"common",
+		"activation.module"
+	],
 	"./theme/auth/forgot/forgot.module": [
 		"../../../../../src/app/theme/auth/forgot/forgot.module.ts",
 		"common",
@@ -346,6 +371,11 @@ var map = {
 	"./theme/location/location.module": [
 		"../../../../../src/app/theme/location/location.module.ts",
 		"location.module"
+	],
+	"./theme/logistic/logistic.module": [
+		"../../../../../src/app/theme/logistic/logistic.module.ts",
+		"common",
+		"logistic.module"
 	],
 	"./theme/maintenance/coming-soon/coming-soon.module": [
 		"../../../../../src/app/theme/maintenance/coming-soon/coming-soon.module.ts",
@@ -553,6 +583,10 @@ var routes = [
                 loadChildren: './theme/task/task.module#TaskModule'
             },
             {
+                path: 'logistic',
+                loadChildren: './theme/logistic/logistic.module#LogisticModule'
+            },
+            {
                 path: 'invoice',
                 loadChildren: './theme/extension/invoice/invoice.module#InvoiceModule'
             },
@@ -583,6 +617,11 @@ var routes = [
         path: 'forgot',
         component: __WEBPACK_IMPORTED_MODULE_3__layout_auth_auth_component__["a" /* AuthComponent */],
         loadChildren: './theme/auth/forgot/forgot.module#ForgotModule'
+    },
+    {
+        path: 'activation',
+        component: __WEBPACK_IMPORTED_MODULE_3__layout_auth_auth_component__["a" /* AuthComponent */],
+        loadChildren: './theme/auth/activation/activation.module#ActivationModule'
     }
 ];
 var AppRoutingModule = (function () {
@@ -841,6 +880,9 @@ var AdminComponent = (function () {
                     if (this.custom_menu_items[i].main[j].name == 'Pharmacies') {
                         this.custom_menu_items[i].main[j].show = true;
                     }
+                    if (this.custom_menu_items[i].main[j].name == 'Users') {
+                        this.custom_menu_items[i].main[j].show = true;
+                    }
                     if (this.custom_menu_items[i].main[j].name == 'Medicine') {
                         this.custom_menu_items[i].main[j].show = true;
                     }
@@ -857,6 +899,9 @@ var AdminComponent = (function () {
                         this.custom_menu_items[i].main[j].show = true;
                     }
                     if (this.custom_menu_items[i].main[j].name == 'Area') {
+                        this.custom_menu_items[i].main[j].show = true;
+                    }
+                    if (this.custom_menu_items[i].main[j].name == 'Logistic') {
                         this.custom_menu_items[i].main[j].show = true;
                     }
                     if (this.custom_menu_items[i].main[j].name == 'Packaging') {
@@ -878,6 +923,9 @@ var AdminComponent = (function () {
             for (var i = 0; i < this.custom_menu_items.length; i++) {
                 for (var j = 0; j < this.custom_menu_items[i].main.length; j++) {
                     if (this.custom_menu_items[i].main[j].name == 'Dashboard') {
+                        this.custom_menu_items[i].main[j].show = true;
+                    }
+                    if (this.custom_menu_items[i].main[j].name == 'Users') {
                         this.custom_menu_items[i].main[j].show = true;
                     }
                     if (this.custom_menu_items[i].main[j].name == 'Pharmacies') {
@@ -1906,8 +1954,26 @@ var MENUITEMS = [
                         name: 'Add Pharmacy'
                     },
                     {
+                        state: 'addchemistmanually',
+                        name: 'Add Pharmacy Manually'
+                    },
+                    {
                         state: 'list',
                         name: 'Pharmacy List'
+                    }
+                ]
+            },
+            {
+                show: false,
+                state: 'user',
+                short_label: 'C',
+                name: 'Users',
+                type: 'sub',
+                icon: 'fa fa-medkit',
+                children: [
+                    {
+                        state: 'listuser',
+                        name: 'Users List'
                     }
                 ]
             },
@@ -2005,6 +2071,29 @@ var MENUITEMS = [
                 name: 'Area',
                 type: 'link',
                 icon: 'fa fa-map-marker',
+            }
+        ],
+    },
+    {
+        label: 'Main',
+        main: [
+            {
+                show: false,
+                state: 'logistic',
+                short_label: 'P',
+                name: 'Logistic',
+                type: 'sub',
+                icon: 'fa fa-arrows',
+                children: [
+                    {
+                        state: 'add-logistic',
+                        name: 'Add Logistic'
+                    },
+                    {
+                        state: 'list-logistic',
+                        name: 'List Logistic'
+                    }
+                ]
             }
         ],
     },

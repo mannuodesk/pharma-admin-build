@@ -30,6 +30,10 @@ var routes = [
             {
                 path: 'card',
                 loadChildren: './user-card/user-card.module#UserCardModule'
+            },
+            {
+                path: 'listuser',
+                loadChildren: './list-user/list-user.module#ListUserModule'
             }
         ]
     }
