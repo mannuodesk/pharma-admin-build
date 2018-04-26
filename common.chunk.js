@@ -239,6 +239,7 @@ var AddchemistService = (function () {
         this.urlService = new __WEBPACK_IMPORTED_MODULE_3__ServiceUrl__["a" /* ServiceUrl */]();
     }
     AddchemistService.prototype.addChemist = function (getArea_Id, ChemistEmail, PharmaCommission, CityId, ChemistName, Address, Longitude, latitide, ChemistId, PharmacyName) {
+        console.log("service is caling");
         var body = JSON.stringify({ PharmaCommission: PharmaCommission, Address: Address, AreaId: getArea_Id, Email: ChemistEmail, ContactPersonName: ChemistName, CityId: CityId, Longitude: Longitude, Latitude: latitide, ChemistId: ChemistId, CompanyName: PharmacyName });
         console.log(body);
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });

@@ -8,6 +8,11 @@ var map = {
 		"../../../../../src/app/theme/ui-elements/basic/accordion/accordion.module.ts",
 		"accordion.module"
 	],
+	"./activation/activation.module": [
+		"../../../../../src/app/theme/auth/activation/activation.module.ts",
+		"common",
+		"activation.module"
+	],
 	"./add-category/add-category.module": [
 		"../../../../../src/app/theme/category/add-category/add-category.module.ts",
 		"common",
@@ -94,6 +99,10 @@ var map = {
 		"../../../../../src/app/theme/ui-elements/basic/basic-other/basic-other.module.ts",
 		"basic-other.module"
 	],
+	"./basic-reg/basic-reg.module": [
+		"../../../../../src/app/theme/auth/registration/basic-reg/basic-reg.module.ts",
+		"basic-reg.module"
+	],
 	"./border/border.module": [
 		"../../../../../src/app/theme/table/bootstrap-table/border/border.module.ts",
 		"border.module"
@@ -155,6 +164,11 @@ var map = {
 		"common",
 		"ecommerce.module"
 	],
+	"./forgot/forgot.module": [
+		"../../../../../src/app/theme/auth/forgot/forgot.module.ts",
+		"common",
+		"forgot.module"
+	],
 	"./form-picker/form-picker.module": [
 		"../../../../../src/app/theme/forms/form-picker/form-picker.module.ts",
 		"common",
@@ -181,6 +195,10 @@ var map = {
 	"./google-map/google-map.module": [
 		"../../../../../src/app/theme/map/google-map/google-map.module.ts",
 		"google-map.module"
+	],
+	"./header-footer-reg/header-footer-reg.module": [
+		"../../../../../src/app/theme/auth/registration/header-footer-reg/header-footer-reg.module.ts",
+		"header-footer-reg.module"
 	],
 	"./invoice-list/invoice-list.module": [
 		"../../../../../src/app/theme/extension/invoice/invoice-list/invoice-list.module.ts",
@@ -227,6 +245,15 @@ var map = {
 		"common",
 		"list-user.module"
 	],
+	"./lock-screen/lock-screen.module": [
+		"../../../../../src/app/theme/auth/lock-screen/lock-screen.module.ts",
+		"lock-screen.module"
+	],
+	"./login/basic-login/basic-login.module": [
+		"../../../../../src/app/theme/auth/login/basic-login/basic-login.module.ts",
+		"common",
+		"basic-login.module"
+	],
 	"./modal/modal.module": [
 		"../../../../../src/app/theme/ui-elements/advance/modal/modal.module.ts",
 		"common",
@@ -263,6 +290,10 @@ var map = {
 		"../../../../../src/app/theme/ui-elements/advance/rating/rating.module.ts",
 		"rating.module"
 	],
+	"./registration/registration.module": [
+		"../../../../../src/app/theme/auth/registration/registration.module.ts",
+		"registration.module"
+	],
 	"./row-details/row-details.module": [
 		"../../../../../src/app/theme/table/data-table/row-details/row-details.module.ts",
 		"common",
@@ -276,6 +307,14 @@ var map = {
 	"./sizing/sizing.module": [
 		"../../../../../src/app/theme/table/bootstrap-table/sizing/sizing.module.ts",
 		"sizing.module"
+	],
+	"./social-header-footer-reg/social-header-footer-reg.module": [
+		"../../../../../src/app/theme/auth/registration/social-header-footer-reg/social-header-footer-reg.module.ts",
+		"social-header-footer-reg.module"
+	],
+	"./social-reg/social-reg.module": [
+		"../../../../../src/app/theme/auth/registration/social-reg/social-reg.module.ts",
+		"social-reg.module"
 	],
 	"./statistic/statistic.module": [
 		"../../../../../src/app/theme/widget/statistic/statistic.module.ts",
@@ -325,20 +364,9 @@ var map = {
 		"common",
 		"task-list.module"
 	],
-	"./theme/auth/activation/activation.module": [
-		"../../../../../src/app/theme/auth/activation/activation.module.ts",
-		"common",
-		"activation.module"
-	],
-	"./theme/auth/forgot/forgot.module": [
-		"../../../../../src/app/theme/auth/forgot/forgot.module.ts",
-		"common",
-		"forgot.module"
-	],
-	"./theme/auth/login/basic-login/basic-login.module": [
-		"../../../../../src/app/theme/auth/login/basic-login/basic-login.module.ts",
-		"common",
-		"basic-login.module"
+	"./theme/auth/auth.module": [
+		"../../../../../src/app/theme/auth/auth.module.ts",
+		"auth.module"
 	],
 	"./theme/category/category.module": [
 		"../../../../../src/app/theme/category/category.module.ts",
@@ -384,6 +412,10 @@ var map = {
 	"./theme/maintenance/error/error.module": [
 		"../../../../../src/app/theme/maintenance/error/error.module.ts",
 		"error.module"
+	],
+	"./theme/maintenance/offline-ui/offline-ui.module": [
+		"../../../../../src/app/theme/maintenance/offline-ui/offline-ui.module.ts",
+		"offline-ui.module"
 	],
 	"./theme/map/map.module": [
 		"../../../../../src/app/theme/map/map.module.ts",
@@ -499,6 +531,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var routes = [
     {
+        path: '',
+        component: __WEBPACK_IMPORTED_MODULE_3__layout_auth_auth_component__["a" /* AuthComponent */],
+        children: [
+            {
+                path: '',
+                redirectTo: 'auth/login',
+                pathMatch: 'full'
+            },
+            {
+                path: 'auth',
+                loadChildren: './theme/auth/auth.module#AuthModule'
+            },
+            {
+                path: 'maintenance/offline-ui',
+                loadChildren: './theme/maintenance/offline-ui/offline-ui.module#OfflineUiModule'
+            }
+        ]
+    },
+    {
         path: 'admin',
         component: __WEBPACK_IMPORTED_MODULE_2__layout_admin_admin_component__["a" /* AdminComponent */],
         children: [
@@ -608,21 +659,6 @@ var routes = [
             }
         ]
     },
-    {
-        path: '',
-        component: __WEBPACK_IMPORTED_MODULE_3__layout_auth_auth_component__["a" /* AuthComponent */],
-        loadChildren: './theme/auth/login/basic-login/basic-login.module#BasicLoginModule'
-    },
-    {
-        path: 'forgot',
-        component: __WEBPACK_IMPORTED_MODULE_3__layout_auth_auth_component__["a" /* AuthComponent */],
-        loadChildren: './theme/auth/forgot/forgot.module#ForgotModule'
-    },
-    {
-        path: 'activation',
-        component: __WEBPACK_IMPORTED_MODULE_3__layout_auth_auth_component__["a" /* AuthComponent */],
-        loadChildren: './theme/auth/activation/activation.module#ActivationModule'
-    }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
