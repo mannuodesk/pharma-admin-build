@@ -48,7 +48,7 @@ var AddChemistRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/chemist/add-chemist/add-chemist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-sm-6\">\n    <!-- Basic Inputs Validation start -->\n    <app-card [title]=\"'Add Chemist'\" [cardOptionBlock]=\"true\">\n\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Pharmacist ID</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"PharmacistId\" (change)=\"getChemists()\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let chemist of chemists_array\" value=\"{{chemist.Id}}\">{{chemist.PharmacyName}} ({{chemist.Address}})</option>\n          </select>\n          <div class=\"messages text-danger\" id=\"pharmacist_id_error\">Pharmacist ID can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Full Name</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"FullName\" id=\"name\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"full_name_id_error\">Name can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Address</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"Address\" id=\"address\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"address_id_error\">Address can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Email</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"Email\" id=\"email\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"email_id_error\">Email can't be blank</div>\n          <div class=\"messages text-danger\" id=\"email_invalid_id_error\">Invalid Email</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Pharma Commission</label>\n        <div class=\"col-sm-8\">\n          <input type=\"number\" class=\"form-control\" [(ngModel)]=\"PharmaCommission\" id=\"pharmaCommission\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"pharma_commission_id_error\">Commission can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">City</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"City\" (change)=\"getCityAreas()\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let city of cities_array\" value=\"{{city.Id}}\">{{city.Name}}</option>\n          </select>\n          <div class=\"messages text-danger\" id=\"city_id_error\">City can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Area</label>\n        <div class=\"col-sm-8\">\n          <select name=\"select\" [(ngModel)]=\"Area\" class=\"form-control form-control-default\">\n            <option *ngFor=\"let area of areas_array\" value=\"{{area.Id}}\">{{area.Name}}</option>\n          </select>\n          <div class=\"messages text-danger\" id=\"area_id_error\">Area can't be blank</div>\n        </div>\n      </div>\n      <!-- <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Username</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" [(ngModel)]=\"Username\" class=\"form-control\" id=\"username\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"username_id_error\">Username can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Password</label>\n        <div class=\"col-sm-8\">\n          <input type=\"password\" [(ngModel)]=\"Password\" class=\"form-control\" id=\"password\" placeholder=\"\">\n          <div class=\"messages text-danger error\" id=\"password_id_error\">Password can't be blank</div>\n        </div>\n      </div> -->\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Latitude</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" [(ngModel)]=\"Latitude\" class=\"form-control\" id=\"latitude\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"latitude_id_error\">Latitude can't be blank</div>\n        </div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4 col-form-label\">Longitude</label>\n        <div class=\"col-sm-8\">\n          <input type=\"text\" [(ngModel)]=\"Longitude\" class=\"form-control\" id=\"longitude\" placeholder=\"\">\n          <div class=\"messages text-danger\" id=\"longitude_id_error\">Longitude can't be blank</div>\n        </div>\n      </div>\n      <div class=\"preloader3 loader-block\" id=\"loader\">\n        <div class=\"circ1\"></div>\n        <div class=\"circ2\"></div>\n        <div class=\"circ3\"></div>\n        <div class=\"circ4\"></div>\n      </div>\n      <div class=\"form-group row\">\n        <label class=\"col-sm-4\"></label>\n        <div class=\"col-sm-8\">\n          <button type=\"submit\" class=\"btn btn-primary m-b-0\" (click)=\"addChemist()\">Submit</button>\n        </div>\n      </div>\n\n    </app-card>\n  </div>\n  <div class=\"col-sm-6\">\n    <div class=\"col-xs-12 col-md-12 col-lg-12\">\n      <div class=\"valuesAddress\">\n        <input class=\"form-control\" id=\"us7-radius\" name=\"Radius\" type=\"number\" placeholder=\"Enter Radius\">\n        <input class=\"form-control\" id=\"us7-address\" name=\"Address\" type=\"text\" placeholder=\"Enter Address\">\n      </div>\n      <div id=\"somecomponent\" style=\"margin-top:15px;width: 100%; height: 400px;\">\n\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-sm-6\">\r\n    <!-- Basic Inputs Validation start -->\r\n    <app-card [title]=\"'Add Chemist'\" [cardOptionBlock]=\"true\">\r\n\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Pharmacist ID</label>\r\n        <div class=\"col-sm-8\">\r\n          <select name=\"select\" [(ngModel)]=\"PharmacistId\" (change)=\"getChemists($event.target.value)\" class=\"form-control form-control-default\">\r\n            <option *ngFor=\"let chemist of chemists_array\" value=\"{{chemist.Id}}\">{{chemist.PharmacyName}} ({{chemist.Address}})</option>\r\n          </select>\r\n          <div class=\"messages text-danger\" id=\"pharmacist_id_error\">Pharmacist ID can't be blank</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Full Name</label>\r\n        <div class=\"col-sm-8\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"chemistData.Chemist.ContactPersonName\" id=\"name\" placeholder=\"\">\r\n          <div class=\"messages text-danger\" id=\"full_name_id_error\">Name can't be blank</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Address</label>\r\n        <div class=\"col-sm-8\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"chemistData.Chemist.Address\" id=\"address\" placeholder=\"\">\r\n          <div class=\"messages text-danger\" id=\"address_id_error\">Address can't be blank</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Phamrmacy Name</label>\r\n        <div class=\"col-sm-8\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"chemistData.Chemist.PharmacyName\" id=\"PharmacyName\" placeholder=\"\">\r\n          <div class=\"messages text-danger\" id=\"PharmacyName_error\">PharmacyName can't be blank</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Email</label>\r\n        <div class=\"col-sm-8\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"chemistData.Email\" id=\"email\" placeholder=\"\">\r\n          <div class=\"messages text-danger\" id=\"email_id_error\">Email can't be blank</div>\r\n          <div class=\"messages text-danger\" id=\"email_invalid_id_error\">Invalid Email</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Pharma Commission</label>\r\n        <div class=\"col-sm-8\">\r\n          <input type=\"number\" class=\"form-control\" [(ngModel)]=\"chemistData.Chemist.PharmaCommission\" id=\"pharmaCommission\" placeholder=\"\">\r\n          <div class=\"messages text-danger\" id=\"pharma_commission_id_error\">Commission can't be blank</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">City</label>\r\n        <div class=\"col-sm-8\">\r\n          <select name=\"select\" [(ngModel)]=\"City\" (change)=\"getCityAreas()\" class=\"form-control form-control-default\">\r\n            <option *ngFor=\"let city of cities_array\" value=\"{{city.Id}}\">{{city.Name}}</option>\r\n          </select>\r\n          <div class=\"messages text-danger\" id=\"city_id_error\">City can't be blank</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Area</label>\r\n        <div class=\"col-sm-8\">\r\n          <select name=\"select\" [(ngModel)]=\"Area\" class=\"form-control form-control-default\">\r\n            <option *ngFor=\"let area of areas_array\" value=\"{{area.Id}}\">{{area.Name}}</option>\r\n          </select>\r\n          <div class=\"messages text-danger\" id=\"area_id_error\">Area can't be blank</div>\r\n        </div>\r\n      </div>\r\n      <!-- <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Username</label>\r\n        <div class=\"col-sm-8\">\r\n          <input type=\"text\" [(ngModel)]=\"Username\" class=\"form-control\" id=\"username\" placeholder=\"\">\r\n          <div class=\"messages text-danger\" id=\"username_id_error\">Username can't be blank</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Password</label>\r\n        <div class=\"col-sm-8\">\r\n          <input type=\"password\" [(ngModel)]=\"Password\" class=\"form-control\" id=\"password\" placeholder=\"\">\r\n          <div class=\"messages text-danger error\" id=\"password_id_error\">Password can't be blank</div>\r\n        </div>\r\n      </div> -->\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Latitude</label>\r\n        <div class=\"col-sm-8\">\r\n          <input type=\"text\" [(ngModel)]=\"Latitude\" class=\"form-control\" id=\"latitude\" placeholder=\"\">\r\n          <div class=\"messages text-danger\" id=\"latitude_id_error\">Latitude can't be blank</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4 col-form-label\">Longitude</label>\r\n        <div class=\"col-sm-8\">\r\n          <input type=\"text\" [(ngModel)]=\"Longitude\" class=\"form-control\" id=\"longitude\" placeholder=\"\">\r\n          <div class=\"messages text-danger\" id=\"longitude_id_error\">Longitude can't be blank</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"preloader3 loader-block\" id=\"loader\">\r\n        <div class=\"circ1\"></div>\r\n        <div class=\"circ2\"></div>\r\n        <div class=\"circ3\"></div>\r\n        <div class=\"circ4\"></div>\r\n      </div>\r\n      <div class=\"form-group row\">\r\n        <label class=\"col-sm-4\"></label>\r\n        <div class=\"col-sm-8\">\r\n          <button type=\"submit\" class=\"btn btn-primary m-b-0\" (click)=\"addChemist()\">Submit</button>\r\n        </div>\r\n      </div>\r\n\r\n    </app-card>\r\n  </div>\r\n  <div class=\"col-sm-6\">\r\n    <div class=\"col-xs-12 col-md-12 col-lg-12\">\r\n      <div class=\"valuesAddress\">\r\n        <input class=\"form-control\" id=\"us7-radius\" name=\"Radius\" type=\"number\" placeholder=\"Enter Radius\">\r\n        <input class=\"form-control\" id=\"us7-address\" name=\"Address\" type=\"text\" placeholder=\"Enter Address\">\r\n      </div>\r\n      <div id=\"somecomponent\" style=\"margin-top:15px;width: 100%; height: 400px;\">\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -116,9 +116,28 @@ var AddChemistComponent = (function () {
         this.cities_array = [];
         this.areas_array = [];
         this.chemists_array = [];
+        this.chemistData = {
+            Email: '',
+            Chemist: {
+                PharmacyName: '',
+                Address: '',
+                ContactPersonName: '',
+                PharmaCommission: 0,
+                City: {
+                    Id: '',
+                    Name: ''
+                },
+                Area: {
+                    City: {
+                        Id: '',
+                        Name: ''
+                    }
+                }
+            }
+        };
         this.runner = false;
         this.getAllCities();
-        this.getChemists();
+        this.getChemists('');
     }
     AddChemistComponent.prototype.buildMap = function (lat, lng) {
         var self = this;
@@ -170,14 +189,20 @@ var AddChemistComponent = (function () {
             _this.areas_array = response.data;
         });
     }; // End of Get Areas of City
-    AddChemistComponent.prototype.getChemists = function () {
+    AddChemistComponent.prototype.getChemists = function (id) {
         var _this = this;
+        this.chemists_array = [];
         this._getChemistDataService.getChemistService().subscribe(function (response) {
-            console.log(response);
+            var abc = response.data.find(function (x) { return x.Chemist.Id == id; });
+            if (abc) {
+                _this.chemistData = abc;
+                console.log(_this.chemistData);
+            }
             for (var i = 0; i < response.data.length; i++) {
                 _this.chemists_array.push(response.data[i].Chemist);
             }
         });
+        console.log(this.chemistData);
     }; // End of Get Chemists
     AddChemistComponent.prototype.addChemist = function () {
         var _this = this;
@@ -185,37 +210,31 @@ var AddChemistComponent = (function () {
             $('#loader').show();
             $('.text-danger').hide();
             this.runner = true;
-            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateNumber(this.PharmacistId)) {
-                this.runner = false;
-                $('#loader').hide();
-                $('#pharmacist_id_error').show();
-                return;
-            }
-            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateString(this.FullName)) {
+            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateString(this.chemistData.Chemist.ContactPersonName)) {
                 this.runner = false;
                 $('#loader').hide();
                 $('#full_name_id_error').show();
                 return;
             }
-            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateString(this.Address)) {
+            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateString(this.chemistData.Chemist.Address)) {
                 this.runner = false;
                 $('#loader').hide();
                 $('#address_id_error').show();
                 return;
             }
-            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateEmail(this.Email)) {
+            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateEmail(this.chemistData.Email)) {
                 this.runner = false;
                 $('#loader').hide();
                 $('#email_invalid_id_error').show();
                 return;
             }
-            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateString(this.Email)) {
+            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateString(this.chemistData.Email)) {
                 this.runner = false;
                 $('#loader').hide();
                 $('#email_id_error').show();
                 return;
             }
-            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateNumber(this.PharmaCommission)) {
+            if (__WEBPACK_IMPORTED_MODULE_5__models_validation_class__["a" /* ValidationModel */].validateNumber(this.chemistData.Chemist.PharmaCommission)) {
                 this.runner = false;
                 $('#loader').hide();
                 $('#pharma_commission_id_error').show();
@@ -258,17 +277,17 @@ var AddChemistComponent = (function () {
                 return;
             }
             //after full this.password is passing in service
-            this._addChemistServiceService.addChemist(this.Area, this.Email, this.PharmaCommission, this.City, this.FullName, this.Longitude, this.Latitude, this.PharmacistId).subscribe(function (response) {
+            this._addChemistServiceService.addChemist(this.Area, this.chemistData.Email, this.chemistData.Chemist.PharmaCommission, this.City, this.chemistData.Chemist.ContactPersonName, this.chemistData.Chemist.Address, this.Longitude, this.Latitude, this.PharmacistId, this.chemistData.Chemist.PharmacyName).subscribe(function (response) {
                 $('#loader').hide();
                 _this.runner = false;
                 console.log(response);
-                _this.FullName = "";
-                _this.FullName = "";
-                _this.Address = "";
-                _this.Email = "";
-                _this.PharmaCommission = 0;
+                _this.chemistData.Chemist.ContactPersonName = "";
+                _this.chemistData.Chemist.Address = "";
+                _this.chemistData.Email = "";
+                _this.chemistData.Chemist.PharmaCommission = 0;
                 _this.City = 0;
                 _this.Area = 0;
+                _this.chemistData.Chemist.PharmacyName = "";
                 _this.PharmacistId = 0;
                 // this.Username = "";
                 // this.Password = "";

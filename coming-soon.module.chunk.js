@@ -48,7 +48,7 @@ var ComingSoonRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/maintenance/coming-soon/coming-soon.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-card [title]=\"'Select Your Layout'\" [headerContent]=\"'Lorem ipsum dolor sit amet, consectetur adipisicing elit'\">\n  <div class=\"row\">\n    <div class=\"col-sm-3 m-b-30\">\n      <a href=\"http://html.codedthemes.com/gradient-able/default/comming-soon/index1.html\" target=\"_blank\"><img src=\"assets/images/coming-soon/cs-1.jpg\" alt=\"Layout-1\" class=\"img-fluid img-thumbnail\"></a>\n    </div>\n    <div class=\"col-sm-3 m-b-30\">\n      <a href=\"http://html.codedthemes.com/gradient-able/default/comming-soon/index2.html\" target=\"_blank\"><img src=\"assets/images/coming-soon/cs-2.jpg\" alt=\"Layout-1\" class=\"img-fluid img-thumbnail\"></a>\n    </div>\n  </div>\n</app-card>\n"
+module.exports = "<app-card [title]=\"'Select Your Layout'\" [headerContent]=\"'Lorem ipsum dolor sit amet, consectetur adipisicing elit'\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-3 m-b-30\">\r\n      <a href=\"http://html.codedthemes.com/gradient-able/default/comming-soon/index1.html\" target=\"_blank\"><img src=\"assets/images/coming-soon/cs-1.jpg\" alt=\"Layout-1\" class=\"img-fluid img-thumbnail\"></a>\r\n    </div>\r\n    <div class=\"col-sm-3 m-b-30\">\r\n      <a href=\"http://html.codedthemes.com/gradient-able/default/comming-soon/index2.html\" target=\"_blank\"><img src=\"assets/images/coming-soon/cs-2.jpg\" alt=\"Layout-1\" class=\"img-fluid img-thumbnail\"></a>\r\n    </div>\r\n  </div>\r\n</app-card>\r\n"
 
 /***/ }),
 

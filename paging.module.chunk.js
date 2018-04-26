@@ -48,7 +48,7 @@ var PagingRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/table/data-table/paging/paging.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-sm-12\">\n    <app-card [title]=\"'Ng-X Pagination'\">\n      <span class=\"m-b-20\">use class <code>data-table</code> with ngx-datatable</span><br><br>\n      <ngx-datatable\n        class=\"data-table\"\n        [rows]=\"rowsClient\"\n        [columns]=\"[{name:'Name'},{name:'Gender'},{name:'Company'}]\"\n        [columnMode]=\"'force'\"\n        [headerHeight]=\"50\"\n        [footerHeight]=\"50\"\n        [rowHeight]=\"'auto'\"\n        [limit]=\"10\">\n      </ngx-datatable>\n    </app-card>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-sm-12\">\r\n    <app-card [title]=\"'Ng-X Pagination'\">\r\n      <span class=\"m-b-20\">use class <code>data-table</code> with ngx-datatable</span><br><br>\r\n      <ngx-datatable\r\n        class=\"data-table\"\r\n        [rows]=\"rowsClient\"\r\n        [columns]=\"[{name:'Name'},{name:'Gender'},{name:'Company'}]\"\r\n        [columnMode]=\"'force'\"\r\n        [headerHeight]=\"50\"\r\n        [footerHeight]=\"50\"\r\n        [rowHeight]=\"'auto'\"\r\n        [limit]=\"10\">\r\n      </ngx-datatable>\r\n    </app-card>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
