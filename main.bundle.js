@@ -2015,6 +2015,29 @@ var MENUITEMS = [
             },
             {
                 show: false,
+                state: 'logistic',
+                short_label: 'P',
+                name: 'Logistic',
+                type: 'sub',
+                icon: 'fa fa-medkit',
+                children: [
+                    {
+                        state: 'add-logistic',
+                        name: 'Add Logistic'
+                    },
+                    {
+                        state: 'list-logistic',
+                        name: 'List Logistic'
+                    }
+                ]
+            }
+        ],
+    },
+    {
+        label: 'Main',
+        main: [
+            {
+                show: false,
                 state: 'medicine',
                 short_label: 'C',
                 name: 'Medicine',
@@ -2067,7 +2090,7 @@ var MENUITEMS = [
                     }
                 ]
             }
-        ],
+        ]
     },
     {
         label: 'Main',
@@ -2107,29 +2130,6 @@ var MENUITEMS = [
                 name: 'Area',
                 type: 'link',
                 icon: 'fa fa-map-marker',
-            }
-        ],
-    },
-    {
-        label: 'Main',
-        main: [
-            {
-                show: false,
-                state: 'logistic',
-                short_label: 'P',
-                name: 'Logistic',
-                type: 'sub',
-                icon: 'fa fa-arrows',
-                children: [
-                    {
-                        state: 'add-logistic',
-                        name: 'Add Logistic'
-                    },
-                    {
-                        state: 'list-logistic',
-                        name: 'List Logistic'
-                    }
-                ]
             }
         ],
     },
