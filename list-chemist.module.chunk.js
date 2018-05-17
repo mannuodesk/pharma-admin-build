@@ -235,39 +235,40 @@ var ListChemistComponent = (function () {
         });
     };
     ListChemistComponent.prototype.view = function (Id) {
-        jQuery('#detail').show();
-        jQuery('#list').hide();
-        var pharmacist_obj = this.chemists_array.find(function (x) { return x.Id == Id; });
-        console.log(pharmacist_obj);
-        this.FullName = pharmacist_obj.PharmacyName;
-        this.Address = pharmacist_obj.Address;
-        this.Email = pharmacist_obj.Email;
-        this.PharmaCommission = pharmacist_obj.PharmaCommission;
-        this.City = pharmacist_obj.CityId;
-        this.getCityAreas();
-        var self = this;
-        this.Area = pharmacist_obj.AreaId;
-        this.PharmacistId = pharmacist_obj.Id;
-        this.Username = pharmacist_obj.Username;
-        this.Password = pharmacist_obj.Password;
-        this.Latitude = pharmacist_obj.Latitude;
-        this.Longitude = pharmacist_obj.Longitude;
-        jQuery('#somecomponent').locationpicker({
-            location: {
+        /*     jQuery('#detail').show();
+            jQuery('#list').hide();
+            var pharmacist_obj = this.chemists_array.find(x => x.Id == Id);
+            console.log(pharmacist_obj);
+            this.FullName = pharmacist_obj.PharmacyName;
+            this.Address = pharmacist_obj.Address;
+            this.Email = pharmacist_obj.Email;
+            this.PharmaCommission = pharmacist_obj.PharmaCommission;
+            this.City = pharmacist_obj.CityId;
+            this.getCityAreas();
+            var self = this;
+        
+            this.Area = pharmacist_obj.AreaId;
+            this.PharmacistId = pharmacist_obj.Id;
+            this.Username = pharmacist_obj.Username;
+            this.Password = pharmacist_obj.Password;
+            this.Latitude = pharmacist_obj.Latitude;
+            this.Longitude = pharmacist_obj.Longitude;
+            jQuery('#somecomponent').locationpicker({
+              location: {
                 latitude: self.Latitude,
                 longitude: self.Longitude
-            },
-            radius: 300,
-            inputBinding: {
+              },
+              radius: 300,
+              inputBinding: {
                 latitudeInput: self.Latitude,
                 longitudeInput: self.Latitude,
                 radiusInput: jQuery('#us7-radius'),
                 locationNameInput: jQuery('#us7-address'),
-            },
-            enableAutocomplete: true,
-            resize: true,
-            autosize: true
-        });
+              },
+              enableAutocomplete: true,
+              resize: true,
+              autosize: true
+            }); */
     };
     //Delete Services
     ListChemistComponent.prototype.blockUnBlock = function (i) {
@@ -282,10 +283,12 @@ var ListChemistComponent = (function () {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, Update it!'
         }).then(function (result) {
+            var _this = this;
             if (result.value == true) {
                 self._AddChemistService.blockUnBlockChemist(i).subscribe(function (response) {
                     console.log(response);
                     __WEBPACK_IMPORTED_MODULE_7_sweetalert2___default()('Deleted!', 'Pharmacy Status has been Updated.', 'success');
+                    _this.getChemists();
                 });
             }
             else {

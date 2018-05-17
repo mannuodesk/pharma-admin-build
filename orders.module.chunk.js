@@ -26,6 +26,10 @@ var routes = [
             {
                 path: 'list',
                 loadChildren: './list-orders/list-orders.module#ListOrdersModule'
+            },
+            {
+                path: 'edit-order',
+                loadChildren: './edit-order/edit-order.module#EditOrderModule'
             }
         ]
     }

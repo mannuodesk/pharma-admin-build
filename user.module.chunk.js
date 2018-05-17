@@ -34,6 +34,10 @@ var routes = [
             {
                 path: 'listuser',
                 loadChildren: './list-user/list-user.module#ListUserModule'
+            },
+            {
+                path: 'edit-user',
+                loadChildren: './edit-user/edit-user.module#EditUserModule'
             }
         ]
     }

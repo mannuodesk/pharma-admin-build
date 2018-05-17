@@ -164,6 +164,21 @@ var map = {
 		"common",
 		"ecommerce.module"
 	],
+	"./edit-logistic/edit-logistic.module": [
+		"../../../../../src/app/theme/logistic/edit-logistic/edit-logistic.module.ts",
+		"common",
+		"edit-logistic.module"
+	],
+	"./edit-order/edit-order.module": [
+		"../../../../../src/app/theme/orders/edit-order/edit-order.module.ts",
+		"common",
+		"edit-order.module"
+	],
+	"./edit-user/edit-user.module": [
+		"../../../../../src/app/theme/user/edit-user/edit-user.module.ts",
+		"common",
+		"edit-user.module"
+	],
 	"./forgot/forgot.module": [
 		"../../../../../src/app/theme/auth/forgot/forgot.module.ts",
 		"common",
@@ -907,7 +922,7 @@ var AdminComponent = (function () {
             window.location.href = '/';
         }
         this.custom_menu_items = this.menuItems.getAll();
-        if (this.session_obj.UserRole == 1) {
+        if (this.UserRole == 1) {
             for (var i = 0; i < this.custom_menu_items.length; i++) {
                 for (var j = 0; j < this.custom_menu_items[i].main.length; j++) {
                     if (this.custom_menu_items[i].main[j].name == 'Dashboard') {

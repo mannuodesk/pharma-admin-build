@@ -124,6 +124,7 @@ var BasicLoginComponent = (function () {
                 return;
             }
             this._loginService.login(this.Username, this.Password).subscribe(function (res) {
+                console.log(res);
                 __WEBPACK_IMPORTED_MODULE_4_jquery__('#loader').hide();
                 if (res.code == 200) {
                     __WEBPACK_IMPORTED_MODULE_4_jquery__('.error').hide();

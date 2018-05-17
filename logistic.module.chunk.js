@@ -30,6 +30,10 @@ var routes = [
             {
                 path: 'list-logistic',
                 loadChildren: './list-logistic/list-logistic.module#ListLogisticModule'
+            },
+            {
+                path: 'edit-logistic',
+                loadChildren: './edit-logistic/edit-logistic.module#EditLogisticModule'
             }
         ]
     }
