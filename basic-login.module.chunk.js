@@ -131,7 +131,8 @@ var BasicLoginComponent = (function () {
                     _this.runner = false;
                     console.log(res);
                     localStorage.setItem('session_obj', JSON.stringify(res.data));
-                    _this.router.navigateByUrl('/admin/dashboard/ecommerce');
+                    /*         this.router.navigateByUrl('/admin/dashboard/ecommerce'); */
+                    _this.router.navigateByUrl('/admin/dashboard/default');
                 }
                 else {
                     __WEBPACK_IMPORTED_MODULE_4_jquery__('.error').hide();

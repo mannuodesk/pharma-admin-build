@@ -922,7 +922,7 @@ var AdminComponent = (function () {
             window.location.href = '/';
         }
         this.custom_menu_items = this.menuItems.getAll();
-        if (this.UserRole == 1) {
+        if (this.session_obj.UserRole == 1) {
             for (var i = 0; i < this.custom_menu_items.length; i++) {
                 for (var j = 0; j < this.custom_menu_items[i].main.length; j++) {
                     if (this.custom_menu_items[i].main[j].name == 'Dashboard') {
