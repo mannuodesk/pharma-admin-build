@@ -46,7 +46,7 @@ var ListLogisticRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/logistic/list-logistic/list-logistic.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Logistic Listing -->\r\n<div id=\"list\" class=\"page-body\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12\">\r\n      <app-card [title]=\"'Logistics'\" [classHeader]=\"true\">\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-12\">\r\n            <label class=\"dt-cust-search f-right\">\r\n              <div class=\"form-group\">\r\n                <label>Search: </label>\r\n                <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter($event)' />\r\n              </div>\r\n            </label>\r\n          </div>\r\n        </div>\r\n        <ngx-datatable #logisticList class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\r\n          [footerHeight]=\"50\" [rowHeight]=\"50\" [limit]=\"10\" [rows]='rowsFilter' (activate)=\"onActivate($event)\" (select)='onSelect($event)'>\r\n          \r\n          <ngx-datatable-column name=\"Address\" sortable=\"false\" prop=\"Address\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n              {{value}}\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n          <ngx-datatable-column name=\"City\" sortable=\"false\" prop=\"Area.City\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n              {{value.Name}}\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n          <ngx-datatable-column name=\"Contact Person Name\" sortable=\"false\" prop=\"ContactPersonName\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n              {{value}}\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n          <ngx-datatable-column name=\"Logistic Name\" sortable=\"false\" prop=\"LogisticsName\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n              {{value}}\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n     \r\n          \r\n          <ngx-datatable-column name=\"Actions\" sortable=\"false\" prop=\"Id\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n\r\n              <button class=\"view-btn\" (click)=\"blockUnBlock(value)\">\r\n                <i class=\"fa fa-pencil\"></i>\r\n              </button>\r\n\r\n        \r\n\r\n              <button class=\"delete-btn\">\r\n               \r\n                  <i class=\"fa fa-trash-o\"></i>\r\n              \r\n                \r\n              </button>\r\n\r\n           \r\n\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n        </ngx-datatable>\r\n      </app-card>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div  class=\"overlay-loader\" style=\"display: block;\" *ngIf=\"gotData\">\r\n    <div class=\"preloader3 custom-preloader loader-block\">\r\n        <div  class=\"circ1\"></div>\r\n        <div  class=\"circ2\"></div>\r\n        <div  class=\"circ3\"></div>\r\n        <div  class=\"circ4\"></div>\r\n    </div>\r\n  </div>\r\n\r\n<!-- Logistic Listing -->\r\n<div id=\"list\" class=\"page-body\">\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12\">\r\n      <app-card [title]=\"'Logistics'\" [classHeader]=\"true\">\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-12\">\r\n            <label class=\"dt-cust-search f-right\">\r\n              <div class=\"form-group\">\r\n                <label>Search: </label>\r\n                <input type='text' class=\"form-control input-sm m-l-10\" placeholder='Search Name' (keyup)='updateFilter($event)' />\r\n              </div>\r\n            </label>\r\n          </div>\r\n        </div>\r\n        <ngx-datatable #logisticList class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\r\n          [footerHeight]=\"50\" [rowHeight]=\"50\" [limit]=\"10\" [rows]='rowsFilter' (activate)=\"onActivate($event)\" (select)='onSelect($event)'>\r\n          \r\n          <ngx-datatable-column name=\"Address\" sortable=\"false\" prop=\"Logistics.Address\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n              {{value}}\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n          <ngx-datatable-column name=\"City\" sortable=\"false\" prop=\"Logistics.City.Name\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n              {{value}}\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n          <ngx-datatable-column name=\"Contact Person Name\" sortable=\"false\" prop=\"Logistics.ContactPersonName\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n              {{value}}\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n          <ngx-datatable-column name=\"Logistic Name\" sortable=\"false\" prop=\"Logistics.LogisticsName\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n              {{value}}\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n     \r\n          \r\n          <ngx-datatable-column name=\"Actions\" sortable=\"false\" prop=\"Id\">\r\n            <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n\r\n              <button class=\"custom-action-btns\" (click)=\"editLogistic(value)\">\r\n                <i class=\"fa fa-pencil\"></i>\r\n              </button>\r\n\r\n        \r\n\r\n              <button *ngIf=\"row.IsBlocked == false \" class=\"custom-action-btns danger-bg\" (click)=\"inActivateThisUser(value)\">            \r\n                  <i class=\"fa fa-ban\"></i>\r\n              </button>\r\n\r\n              <button *ngIf=\"row.IsBlocked == true \" class=\"custom-action-btns green-bg\" (click)=\"inActivateThisUser(value)\">            \r\n                  <i class=\"fa fa-check\"></i>\r\n              </button>\r\n\r\n           \r\n\r\n            </ng-template>\r\n          </ngx-datatable-column>\r\n        </ngx-datatable>\r\n      </app-card>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -58,7 +58,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#seo-card1 canvas,\n#seo-card2 canvas {\n  height: 150px !important;\n  border-bottom-right-radius: 5px;\n  border-bottom-left-radius: 5px; }\n  @media only screen and (max-width: 768px) {\n    #seo-card1 canvas,\n    #seo-card2 canvas {\n      padding-bottom: 30px; } }\n\n.text-danger {\n  display: none; }\n\n.preloader3 {\n  height: 50px !important;\n  display: none; }\n", ""]);
+exports.push([module.i, "#seo-card1 canvas,\n#seo-card2 canvas {\n  height: 150px !important;\n  border-bottom-right-radius: 5px;\n  border-bottom-left-radius: 5px; }\n  @media only screen and (max-width: 768px) {\n    #seo-card1 canvas,\n    #seo-card2 canvas {\n      padding-bottom: 30px; } }\n\n.text-danger {\n  display: none; }\n", ""]);
 
 // exports
 
@@ -80,6 +80,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_MeasurementAndDosageSizesService__ = __webpack_require__("../../../../../src/app/theme/services/MeasurementAndDosageSizesService.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_GetChemistDataService__ = __webpack_require__("../../../../../src/app/theme/services/GetChemistDataService.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_userService__ = __webpack_require__("../../../../../src/app/theme/services/userService.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -95,10 +96,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ListLogisticComponent = (function () {
-    function ListLogisticComponent(route, _AddAreaNameService, _getChemistDataService, _measurementAndDosageSizesService) {
+    function ListLogisticComponent(route, _AddAreaNameService, _userService, _getChemistDataService, _measurementAndDosageSizesService) {
         this.route = route;
         this._AddAreaNameService = _AddAreaNameService;
+        this._userService = _userService;
         this._getChemistDataService = _getChemistDataService;
         this._measurementAndDosageSizesService = _measurementAndDosageSizesService;
         this.CompanyName = "";
@@ -114,6 +117,7 @@ var ListLogisticComponent = (function () {
         this.rowsFilter = [];
         this.tempFilter = [];
         this.runner = false;
+        this.gotData = false;
     }
     ListLogisticComponent.prototype.ngOnInit = function () {
         this.getAllLogistics();
@@ -135,10 +139,32 @@ var ListLogisticComponent = (function () {
         // Whenever the filter changes, always go back to the first page
         this.logisticList.offset = 0;
     };
-    ListLogisticComponent.prototype.blockUnBlock = function (value) {
+    ListLogisticComponent.prototype.editLogistic = function (value) {
         var obj = this.rowsFilter.find(function (x) { return x.Id == value; });
         localStorage.setItem('editLogistic', JSON.stringify(obj));
         this.route.navigateByUrl('/admin/logistic/edit-logistic?id=' + value);
+    };
+    ListLogisticComponent.prototype.updateChanges = function (editingId, value) {
+        for (var i = 0; i < this.rowsFilter.length; i++) {
+            if (this.rowsFilter[i].Id == editingId) {
+                this.rowsFilter[i].IsBlocked = value;
+            }
+        }
+    };
+    ListLogisticComponent.prototype.inActivateThisUser = function (value) {
+        var _this = this;
+        var EditingId = value;
+        this.gotData = true;
+        this._userService.activateInActivateUser(value).subscribe(function (a) {
+            console.log(a);
+            if (a.code == 200) {
+                _this.gotData = false;
+                _this.updateChanges(EditingId, a.data.IsBlocked);
+            }
+        }, function (err) {
+            console.log(err);
+            var obj = JSON.parse(err._body);
+        });
     };
     ListLogisticComponent.prototype.getAllLogistics = function () {
         var _this = this;
@@ -157,9 +183,10 @@ var ListLogisticComponent = (function () {
             selector: 'logistic',
             template: __webpack_require__("../../../../../src/app/theme/logistic/list-logistic/list-logistic.component.html"),
             styles: [__webpack_require__("../../../../../src/app/theme/logistic/list-logistic/list-logistic.component.scss"), __webpack_require__("../../../../../src/assets/icon/icofont/css/icofont.scss")],
-            providers: [__WEBPACK_IMPORTED_MODULE_0__services_AddAreaService__["a" /* AddAreaService */], __WEBPACK_IMPORTED_MODULE_4__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_3__services_MeasurementAndDosageSizesService__["a" /* MeasurementAndDosageSizesService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_6__services_userService__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_0__services_AddAreaService__["a" /* AddAreaService */], __WEBPACK_IMPORTED_MODULE_4__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_3__services_MeasurementAndDosageSizesService__["a" /* MeasurementAndDosageSizesService */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_router__["f" /* Router */], __WEBPACK_IMPORTED_MODULE_0__services_AddAreaService__["a" /* AddAreaService */],
+            __WEBPACK_IMPORTED_MODULE_6__services_userService__["a" /* UserService */],
             __WEBPACK_IMPORTED_MODULE_4__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_3__services_MeasurementAndDosageSizesService__["a" /* MeasurementAndDosageSizesService */]])
     ], ListLogisticComponent);
     return ListLogisticComponent;
