@@ -28,6 +28,10 @@ var routes = [
                 loadChildren: './add-logistic/add-logistic.module#AddLogisticModule'
             },
             {
+                path: 'add-logistic-manually',
+                loadChildren: './add-logistic-manually/add-logistic-manually.module#AddLogisticManuallyModule'
+            },
+            {
                 path: 'list-logistic',
                 loadChildren: './list-logistic/list-logistic.module#ListLogisticModule'
             },

@@ -267,17 +267,18 @@ var AddchemistService = (function () {
         this.http = http;
         this.urlService = new __WEBPACK_IMPORTED_MODULE_3__ServiceUrl__["a" /* ServiceUrl */]();
     }
-    AddchemistService.prototype.addChemist = function (getArea_Id, ChemistEmail, PharmaCommission, CityId, ChemistName, Address, Longitude, latitide, ChemistId, PharmacyName) {
+    AddchemistService.prototype.addChemist = function (getArea_Id, ChemistEmail, PharmaCommission, CityId, ChemistName, Address, Longitude, latitide, ChemistId, PharmacyName, LogoUrl) {
         console.log("service is caling");
-        var body = JSON.stringify({ PharmaCommission: PharmaCommission, Address: Address, AreaId: getArea_Id, Email: ChemistEmail, ContactPersonName: ChemistName, CityId: CityId, Longitude: Longitude, Latitude: latitide, ChemistId: ChemistId, CompanyName: PharmacyName });
+        var body = JSON.stringify({ PharmaCommission: PharmaCommission, Address: Address, AreaId: getArea_Id, Email: ChemistEmail, ContactPersonName: ChemistName, CityId: CityId, Longitude: Longitude, Latitude: latitide, ChemistId: ChemistId, CompanyName: PharmacyName, LogoURL: LogoUrl });
         console.log(body);
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
         return this.http.post(this.urlService.baseUrl + "Chemist/addPharmaicst", body, options)
             .map(function (res) { return res.json(); });
     };
-    AddchemistService.prototype.addChemistManually = function (PharmacyName, getArea_Id, ChemistEmail, PharmaCommission, Address, CityId, ChemistName, Longitude, latitide, PhoneNumber) {
-        var body = JSON.stringify({ PharmacyName: PharmacyName, PharmaCommission: PharmaCommission, Address: Address, AreaId: getArea_Id, Email: ChemistEmail, ContactPersonName: ChemistName, CityId: CityId, Longitude: Longitude, Latitude: latitide, PhoneNumber: PhoneNumber });
+    AddchemistService.prototype.addChemistManually = function (PharmacyName, getArea_Id, ChemistEmail, PharmaCommission, Address, CityId, ChemistName, Longitude, latitide, PhoneNumber, LogoUrl) {
+        console.log(LogoUrl);
+        var body = JSON.stringify({ PharmacyName: PharmacyName, PharmaCommission: PharmaCommission, Address: Address, AreaId: getArea_Id, Email: ChemistEmail, ContactPersonName: ChemistName, CityId: CityId, Longitude: Longitude, Latitude: latitide, PhoneNumber: PhoneNumber, LogoURL: LogoUrl });
         console.log(body);
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
@@ -293,6 +294,7 @@ var AddchemistService = (function () {
             .map(function (res) { return res.json(); });
     };
     AddchemistService.prototype.blockUnBlockChemist = function (userId) {
+        console.log(userId);
         return this.http.get(this.urlService.baseUrl + "User/changeBlockStatusByUserId?userId=" + userId)
             .map(function (res) { return res.json(); });
     };
@@ -877,16 +879,19 @@ var MeasurementAndDosageSizesService = (function () {
         return this.http.get(this.urlService.baseUrl + "admin/removeManufacturer?manufacturerId=" + Id)
             .map(function (res) { return res.json(); });
     };
-    MeasurementAndDosageSizesService.prototype.addLogistic = function (body) {
+    MeasurementAndDosageSizesService.prototype.addLogistic = function (companyName, ContactPersonName, MobileNumber, Email, City, Area, Address, LogoUrl, userRole) {
+        var data;
+        data = { CompanyName: companyName, ContactPersonName: ContactPersonName, MobileNumber: MobileNumber, Email: Email, CityId: City, AreaId: Area, Address: Address, LogoUrl: LogoUrl, UserRole: userRole };
+        console.log(data);
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
-        return this.http.post(this.urlService.baseUrl + "User/addPLUser", body, options)
+        return this.http.post(this.urlService.baseUrl + "User/addPLUser", data, options)
             .map(function (res) { return res.json(); });
     };
     MeasurementAndDosageSizesService.prototype.updateLogistic = function (body) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["f" /* RequestOptions */]({ method: 'post', headers: headers });
-        return this.http.post(this.urlService.baseUrl + "User/addPLUser", body, options)
+        return this.http.post(this.urlService.baseUrl + "Logistics/editLogisticUser", body, options)
             .map(function (res) { return res.json(); });
     };
     MeasurementAndDosageSizesService.prototype.AllLogistics = function () {
@@ -953,6 +958,12 @@ var UserService = (function () {
         this.urlService = new __WEBPACK_IMPORTED_MODULE_3__ServiceUrl__["a" /* ServiceUrl */]();
         this.thisUserObject = JSON.parse(localStorage.getItem('session_obj'));
     }
+    UserService.prototype.saveImageForPharmacy = function (file) {
+        var formData = new FormData();
+        formData.append("file", file);
+        return this.http.post(this.urlService.baseUrl + "Chemist/uploadChemistImage", formData)
+            .map(function (res) { return res.json(); });
+    };
     UserService.prototype.changePassword = function (oldPassword, newPassword) {
         var data;
         data = { UserId: this.thisUserObject.Id, OldPassword: oldPassword, NewPassword: newPassword };
@@ -972,6 +983,34 @@ var UserService = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], UserService);
     return UserService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/validations.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Validations; });
+var Validations = (function () {
+    function Validations() {
+    }
+    Validations.prototype.verifyNameInputs = function (name) {
+        name = $.trim(name);
+        if (name == undefined || name == "" || name.length == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    Validations.prototype.validateEmail = function (email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+    return Validations;
 }());
 
 

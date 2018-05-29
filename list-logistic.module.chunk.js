@@ -78,9 +78,11 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__swimlane_ngx_datatable__ = __webpack_require__("../../../../@swimlane/ngx-datatable/release/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__swimlane_ngx_datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__swimlane_ngx_datatable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_MeasurementAndDosageSizesService__ = __webpack_require__("../../../../../src/app/theme/services/MeasurementAndDosageSizesService.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_GetChemistDataService__ = __webpack_require__("../../../../../src/app/theme/services/GetChemistDataService.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_userService__ = __webpack_require__("../../../../../src/app/theme/services/userService.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_sweetalert2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_GetChemistDataService__ = __webpack_require__("../../../../../src/app/theme/services/GetChemistDataService.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_userService__ = __webpack_require__("../../../../../src/app/theme/services/userService.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -90,6 +92,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -111,13 +114,13 @@ var ListLogisticComponent = (function () {
         this.MobileNumber = 0;
         this.City = 0;
         this.Area = 0;
+        this.gotData = false;
         this.cities_array = [];
         this.areas_array = [];
         this.chemists_array = [];
         this.rowsFilter = [];
         this.tempFilter = [];
         this.runner = false;
-        this.gotData = false;
     }
     ListLogisticComponent.prototype.ngOnInit = function () {
         this.getAllLogistics();
@@ -159,11 +162,14 @@ var ListLogisticComponent = (function () {
             console.log(a);
             if (a.code == 200) {
                 _this.gotData = false;
+                __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default()(a.message, "", "success");
                 _this.updateChanges(EditingId, a.data.IsBlocked);
             }
         }, function (err) {
             console.log(err);
             var obj = JSON.parse(err._body);
+            __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default()(obj.message, "", "error");
+            _this.gotData = false;
         });
     };
     ListLogisticComponent.prototype.getAllLogistics = function () {
@@ -183,11 +189,11 @@ var ListLogisticComponent = (function () {
             selector: 'logistic',
             template: __webpack_require__("../../../../../src/app/theme/logistic/list-logistic/list-logistic.component.html"),
             styles: [__webpack_require__("../../../../../src/app/theme/logistic/list-logistic/list-logistic.component.scss"), __webpack_require__("../../../../../src/assets/icon/icofont/css/icofont.scss")],
-            providers: [__WEBPACK_IMPORTED_MODULE_6__services_userService__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_0__services_AddAreaService__["a" /* AddAreaService */], __WEBPACK_IMPORTED_MODULE_4__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_3__services_MeasurementAndDosageSizesService__["a" /* MeasurementAndDosageSizesService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_7__services_userService__["a" /* UserService */], __WEBPACK_IMPORTED_MODULE_0__services_AddAreaService__["a" /* AddAreaService */], __WEBPACK_IMPORTED_MODULE_5__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_3__services_MeasurementAndDosageSizesService__["a" /* MeasurementAndDosageSizesService */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_router__["f" /* Router */], __WEBPACK_IMPORTED_MODULE_0__services_AddAreaService__["a" /* AddAreaService */],
-            __WEBPACK_IMPORTED_MODULE_6__services_userService__["a" /* UserService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_3__services_MeasurementAndDosageSizesService__["a" /* MeasurementAndDosageSizesService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_router__["f" /* Router */], __WEBPACK_IMPORTED_MODULE_0__services_AddAreaService__["a" /* AddAreaService */],
+            __WEBPACK_IMPORTED_MODULE_7__services_userService__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_GetChemistDataService__["a" /* GetChemistDataService */], __WEBPACK_IMPORTED_MODULE_3__services_MeasurementAndDosageSizesService__["a" /* MeasurementAndDosageSizesService */]])
     ], ListLogisticComponent);
     return ListLogisticComponent;
 }());
