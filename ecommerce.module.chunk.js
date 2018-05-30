@@ -46,7 +46,7 @@ var EcommerceRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/dashboard/ecommerce/ecommerce.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div  class=\"overlay-loader\" style=\"display: block;\" *ngIf=\"!gotData\">\r\n  <div _ngcontent-c11=\"\" class=\"preloader3 custom-preloader loader-block\">\r\n    <div _ngcontent-c11=\"\" class=\"circ1 loader-primary loader-lg\"></div>\r\n    <div _ngcontent-c11=\"\" class=\"circ2 loader-primary loader-lg\"></div>\r\n    <div _ngcontent-c11=\"\" class=\"circ3 loader-primary loader-lg\"></div>\r\n    <div _ngcontent-c11=\"\" class=\"circ4 loader-primary loader-lg\"></div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"page-body\" *ngIf=\"gotData\">\r\n  <div class=\"row\">\r\n\r\n    <div class=\"col-md-12 col-xl-3\">\r\n      <div class=\"card widget-statstic-card borderless-card\">\r\n        <div class=\"card-header\">\r\n          <div class=\"card-header-left\">\r\n            <h5>Orders This Week</h5>\r\n          <!--   <p class=\"p-t-10 m-b-0 text-muted\">Compared to last week</p> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-block\">\r\n          <i class=\"fa fa-calendar st-icon bg-primary\"></i>\r\n          <div class=\"text-left\">\r\n            <h3 class=\"d-inline-block\">{{DashboadData.TotalOrdersPlacedThisWeek}}</h3>\r\n            <i class=\"fa fa-long-arrow-up f-24 text-success m-l-15\"></i>\r\n         <!--    <span class=\"f-right bg-success\">23%</span> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-6 col-xl-3\">\r\n      <div class=\"card widget-statstic-card borderless-card\">\r\n        <div class=\"card-header\">\r\n          <div class=\"card-header-left\">\r\n            <h5>Total Customers</h5>\r\n           <!--  <p class=\"p-t-10 m-b-0 text-muted\">Compare to yesterday</p> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-block\">\r\n          <i class=\"fa fa-users st-icon bg-warning txt-lite-color\"></i>\r\n          <div class=\"text-left\">\r\n            <h3 class=\"d-inline-block\">{{DashboadData.TotalNumberOfCustomers}}</h3>\r\n            <i class=\"fa fa-long-arrow-down text-danger f-24 m-l-15\"></i>\r\n           <!--  <span class=\"f-right bg-danger\">-5%</span> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-6 col-xl-3\">\r\n      <div class=\"card widget-statstic-card borderless-card\">\r\n        <div class=\"card-header\">\r\n          <div class=\"card-header-left\">\r\n            <h5>Pharmacies Registered</h5>\r\n       <!--      <p class=\"p-t-10 m-b-0 text-muted\">This year revenue</p> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-block\">\r\n          <i class=\"fa fa-line-chart st-icon bg-success\"></i>\r\n          <div class=\"text-left\">\r\n            <h3 class=\"d-inline-block\">{{DashboadData.TotalRegisteredPharmacies}}</h3>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-md-6 col-xl-3\">\r\n      <div class=\"card widget-statstic-card borderless-card\">\r\n        <div class=\"card-header\">\r\n          <div class=\"card-header-left\">\r\n            <h5>Logitics Registered</h5>\r\n       <!--      <p class=\"p-t-10 m-b-0 text-muted\">This year revenue</p> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-block\">\r\n          <i class=\"fa \tfa fa-motorcycle st-icon bg-success\"></i>\r\n          <div class=\"text-left\">\r\n            <h3 class=\"d-inline-block\">{{DashboadData.TotalRegisteredLogistics}}</h3>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!---->\r\n    <div class=\"col-xl-7 col-md-12\">\r\n      <div class=\"card\">\r\n        <div class=\"card-header\">\r\n          <h5>Analytics</h5>\r\n        </div>\r\n        <div class=\"card-block\">\r\n           <!--  <div>\r\n                <div style=\"display: block\">\r\n                  <canvas  baseChart\r\n                  attr.data=\"{{barChartData}}\"\r\n                  attr.labels={{barChartLabels}}\r\n                  attr.options=\"{{barChartOptions}}\"\r\n                          attr.legend=\"{{barChartLegend}}\"\r\n                          attr.chartType=\"{{barChartType}}\"\r\n                          (chartHover)=\"chartHovered($event)\"\r\n                          (chartClick)=\"chartClicked($event)\"></canvas>\r\n                </div>\r\n                <button (click)=\"randomize()\">Update</button> \r\n                \r\n              </div> --> \r\n              <div #statisticsChart><div id=\"statistics_chart\" style=\"height: 350px\"></div></div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-xl-5 col-md-12\">\r\n      <app-card [title]=\"'Top 5 chemist for this week'\" [cardClass]=\"'review-task'\">\r\n        <div class=\"table-responsive\">\r\n          <table class=\"table table-hover\">\r\n            <tbody>\r\n            <tr *ngFor=\"let chemist of DashboadData.Top5Chemists\">\r\n            <td><a href=\"javascript:\"><img class=\"img-rounded\" src=\"assets/images/widget/user-3.png\" alt=\"chat-user\"></a></td>\r\n            <td>\r\n                <h6>{{chemist.Chemist.PharmacyName}}</h6>\r\n                <p class=\"text-muted\">{{chemist.Chemist.ContactPersonName}}</p>\r\n            </td>\r\n            <td>\r\n                <h6 class='text-muted'>{{chemist.Chemist.Area.City.Name}}, {{chemist.Chemist.Area.Name}}</h6>\r\n             \r\n              </td>\r\n\r\n              <td>\r\n                  <h6 class='text-muted'>Rs {{chemist.OrderTotal}}/-</h6>\r\n               \r\n                </td>\r\n            </tr>\r\n           \r\n          \r\n           \r\n            <!-- <tr>\r\n              <td><a href=\"javascript:\"><img class=\"img-rounded\" src=\"assets/images/widget/user-3.png\" alt=\"chat-user\"></a>\r\n              </td>\r\n              <td>\r\n                <h6>Viral Dhimmar</h6>\r\n                <p class=\"text-muted\">Lorem ipsum do</p>\r\n              </td>\r\n              <td>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star  f-18 text-c-blue\"></i></a>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star f-18 text-c-blue\"></i></a>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star f-18 text-default\"></i></a>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star f-18 text-default\"></i></a>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star f-18 text-default\"></i></a>\r\n              </td>\r\n            </tr> -->\r\n            </tbody>\r\n          </table>\r\n        </div>\r\n      </app-card>\r\n    </div>\r\n  \r\n    <!-- Recent Orders start -->\r\n    <div class=\"col-xl-8 col-md-12\">\r\n      <app-card [title]=\"'Recent Orders'\" [blockClass]=\"'p-0'\">\r\n        <div class=\"table-responsive\">\r\n          <table class=\"table\">\r\n            <tr>\r\n              <th>Image</th>\r\n              <th>Product Code</th>\r\n              <th>Customer</th>\r\n              <th>Purchased On</th>\r\n              <th>Status</th>\r\n              <th>Transaction</th>\r\n            </tr>\r\n\r\n            <tr *ngFor=\"let order of DashboadData.LatestOrdersList\">\r\n                <td><img src=\"assets/images/product/prod1.jpg\" alt=\"prod img\" class=\"img-fluid\"></td>\r\n                <td>\r\n                  <p style=\"margin-bottom:0\" *ngFor=\"let product of order.OrderItem\">{{product.Product.Name}}</p>\r\n                </td>\r\n                <td>{{order.UserId}}</td>\r\n                <td>{{order.ReceivedTime}}</td>\r\n                <td><span class=\"label label-primary\">{{order.OrderStatus}}</span></td>\r\n                <td>#{{order.Id}}</td>\r\n            </tr>\r\n    \r\n            \r\n           \r\n            \r\n            <!-- <tr>\r\n              <td><img src=\"assets/images/product/prod2.jpg\" alt=\"prod img\" class=\"img-fluid\"></td>\r\n              <td>PNG002344</td>\r\n              <td>John Deo</td>\r\n              <td>05-01-2017</td>\r\n              <td><span class=\"label label-primary\">Shipping</span></td>\r\n              <td>#7234489</td>\r\n            </tr> -->\r\n          </table>\r\n        </div>\r\n      </app-card>\r\n    </div>\r\n    <div class=\"col-xl-4 col-md-12\">\r\n      <div class=\"row\">\r\n        <div class=\"col-xl-12 col-md-6\">\r\n          <div class=\"card statustic-card\">\r\n            <div class=\"card-header\">\r\n              <h5>Orders Completed</h5>\r\n            </div>\r\n            <div class=\"card-block text-center\">\r\n              <span class=\"d-block text-c-green f-36\">{{DashboadData.completedOrdersCount}}</span>\r\n              <p class=\"m-b-0\">Total</p>\r\n              <div class=\"progress\">\r\n                <div class=\"progress-bar bg-c-green\" style=\"width:14%\"></div>\r\n              </div>\r\n            </div>\r\n            <div class=\"card-footer bg-c-green\">\r\n              <h6 class=\"text-white m-b-0\">this week Orders: {{DashboadData.weeklyOrderCount}}</h6>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-xl-12 col-md-6\">\r\n          <div class=\"card statustic-card\">\r\n            <div class=\"card-header\">\r\n              <h5>Orders Pending</h5>\r\n            </div>\r\n            <div class=\"card-block text-center\">\r\n              <span class=\"d-block text-c-pink f-36\">{{DashboadData.pendingOrdersCount}}</span>\r\n              <p class=\"m-b-0\">Total</p>\r\n              <div class=\"progress\">\r\n                <div class=\"progress-bar bg-c-pink\" style=\"width:85%\"></div>\r\n              </div>\r\n            </div>\r\n           <!--  <div class=\"card-footer bg-c-pink\">\r\n              <h6 class=\"text-white m-b-0\">this month cancel order: 85</h6>\r\n            </div> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- Recent Orders end -->\r\n\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div  class=\"overlay-loader\" style=\"display: block;\" *ngIf=\"gotDataLoader\">\r\n  <div _ngcontent-c11=\"\" class=\"preloader3 custom-preloader loader-block\">\r\n    <div _ngcontent-c11=\"\" class=\"circ1 loader-primary loader-lg\"></div>\r\n    <div _ngcontent-c11=\"\" class=\"circ2 loader-primary loader-lg\"></div>\r\n    <div _ngcontent-c11=\"\" class=\"circ3 loader-primary loader-lg\"></div>\r\n    <div _ngcontent-c11=\"\" class=\"circ4 loader-primary loader-lg\"></div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<div class=\"page-body\" *ngIf=\"gotData\">\r\n  <div class=\"row\">\r\n\r\n    <div class=\"col-md-12 col-xl-3\">\r\n      <div class=\"card widget-statstic-card borderless-card\">\r\n        <div class=\"card-header\">\r\n          <div class=\"card-header-left\">\r\n            <h5>Orders This Week</h5>\r\n          <!--   <p class=\"p-t-10 m-b-0 text-muted\">Compared to last week</p> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-block\">\r\n          <i class=\"fa fa-calendar st-icon bg-primary\"></i>\r\n          <div class=\"text-left\">\r\n            <h3 class=\"d-inline-block\">{{DashboadData.TotalOrdersPlacedThisWeek}}</h3>\r\n            <i class=\"fa fa-long-arrow-up f-24 text-success m-l-15\"></i>\r\n         <!--    <span class=\"f-right bg-success\">23%</span> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-6 col-xl-3\">\r\n      <div class=\"card widget-statstic-card borderless-card\">\r\n        <div class=\"card-header\">\r\n          <div class=\"card-header-left\">\r\n            <h5>Total Customers</h5>\r\n           <!--  <p class=\"p-t-10 m-b-0 text-muted\">Compare to yesterday</p> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-block\">\r\n          <i class=\"fa fa-users st-icon bg-warning txt-lite-color\"></i>\r\n          <div class=\"text-left\">\r\n            <h3 class=\"d-inline-block\">{{DashboadData.TotalNumberOfCustomers}}</h3>\r\n            <i class=\"fa fa-long-arrow-down text-danger f-24 m-l-15\"></i>\r\n           <!--  <span class=\"f-right bg-danger\">-5%</span> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-6 col-xl-3\">\r\n      <div class=\"card widget-statstic-card borderless-card\">\r\n        <div class=\"card-header\">\r\n          <div class=\"card-header-left\">\r\n            <h5>Pharmacies Registered</h5>\r\n       <!--      <p class=\"p-t-10 m-b-0 text-muted\">This year revenue</p> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-block\">\r\n          <i class=\"fa fa-line-chart st-icon bg-success\"></i>\r\n          <div class=\"text-left\">\r\n            <h3 class=\"d-inline-block\">{{DashboadData.TotalRegisteredPharmacies}}</h3>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-md-6 col-xl-3\">\r\n      <div class=\"card widget-statstic-card borderless-card\">\r\n        <div class=\"card-header\">\r\n          <div class=\"card-header-left\">\r\n            <h5>Logitics Registered</h5>\r\n       <!--      <p class=\"p-t-10 m-b-0 text-muted\">This year revenue</p> -->\r\n          </div>\r\n        </div>\r\n        <div class=\"card-block\">\r\n          <i class=\"fa \tfa fa-motorcycle st-icon bg-success\"></i>\r\n          <div class=\"text-left\">\r\n            <h3 class=\"d-inline-block\">{{DashboadData.TotalRegisteredLogistics}}</h3>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!---->\r\n    <div class=\"col-xl-7 col-md-12\">\r\n      <div class=\"card\">\r\n        <div class=\"card-header\">\r\n          <h5>Analytics</h5>\r\n        </div>\r\n        <div class=\"card-block\">\r\n           <!--  <div>\r\n                <div style=\"display: block\">\r\n                  <canvas  baseChart\r\n                  attr.data=\"{{barChartData}}\"\r\n                  attr.labels={{barChartLabels}}\r\n                  attr.options=\"{{barChartOptions}}\"\r\n                          attr.legend=\"{{barChartLegend}}\"\r\n                          attr.chartType=\"{{barChartType}}\"\r\n                          (chartHover)=\"chartHovered($event)\"\r\n                          (chartClick)=\"chartClicked($event)\"></canvas>\r\n                </div>\r\n                <button (click)=\"randomize()\">Update</button> \r\n                \r\n              </div> --> \r\n              <div #statisticsChart><div id=\"statistics_chart\" style=\"height: 350px\"></div></div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-xl-5 col-md-12\">\r\n      <app-card [title]=\"'Top 5 chemist for this week'\" [cardClass]=\"'review-task'\">\r\n        <div class=\"table-responsive\">\r\n          <table class=\"table table-hover\">\r\n            <tbody>\r\n            <tr *ngFor=\"let chemist of DashboadData.Top5Chemists\">\r\n            <td><a href=\"javascript:\"><img class=\"img-rounded\" src=\"assets/images/widget/user-3.png\" alt=\"chat-user\"></a></td>\r\n            <td>\r\n                <h6>{{chemist.Chemist.PharmacyName}}</h6>\r\n                <p class=\"text-muted\">{{chemist.Chemist.ContactPersonName}}</p>\r\n            </td>\r\n            <td>\r\n                <h6 class='text-muted'>{{chemist.Chemist.Area.City.Name}}, {{chemist.Chemist.Area.Name}}</h6>\r\n             \r\n              </td>\r\n\r\n              <td>\r\n                  <h6 class='text-muted'>Rs {{chemist.OrderTotal}}/-</h6>\r\n               \r\n                </td>\r\n            </tr>\r\n           \r\n          \r\n           \r\n            <!-- <tr>\r\n              <td><a href=\"javascript:\"><img class=\"img-rounded\" src=\"assets/images/widget/user-3.png\" alt=\"chat-user\"></a>\r\n              </td>\r\n              <td>\r\n                <h6>Viral Dhimmar</h6>\r\n                <p class=\"text-muted\">Lorem ipsum do</p>\r\n              </td>\r\n              <td>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star  f-18 text-c-blue\"></i></a>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star f-18 text-c-blue\"></i></a>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star f-18 text-default\"></i></a>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star f-18 text-default\"></i></a>\r\n                <a href=\"javascript:\"><i class=\"fa fa-star f-18 text-default\"></i></a>\r\n              </td>\r\n            </tr> -->\r\n            </tbody>\r\n          </table>\r\n        </div>\r\n      </app-card>\r\n    </div>\r\n  \r\n    <!-- Recent Orders start -->\r\n    <div class=\"col-xl-8 col-md-12\">\r\n      <app-card [title]=\"'Recent Orders'\" [blockClass]=\"'p-0'\">\r\n        <div class=\"table-responsive\">\r\n          <table class=\"table\">\r\n            <tr>\r\n              <th>Image</th>\r\n              <th>Product Code</th>\r\n              <th>Customer</th>\r\n              <th>Purchased On</th>\r\n              <th>Status</th>\r\n              <th>Transaction</th>\r\n            </tr>\r\n\r\n            <tr *ngFor=\"let order of DashboadData.LatestOrdersList\">\r\n                <td><img src=\"assets/images/product/prod1.jpg\" alt=\"prod img\" class=\"img-fluid\"></td>\r\n                <td>\r\n                  <p style=\"margin-bottom:0\" *ngFor=\"let product of order.OrderItem\">{{product.Product.Name}}</p>\r\n                </td>\r\n                <td>{{order.UserId}}</td>\r\n                <td>{{order.ReceivedTime}}</td>\r\n                <td><span class=\"label label-primary\">{{order.OrderStatus}}</span></td>\r\n                <td>#{{order.Id}}</td>\r\n            </tr>\r\n    \r\n            \r\n           \r\n            \r\n            <!-- <tr>\r\n              <td><img src=\"assets/images/product/prod2.jpg\" alt=\"prod img\" class=\"img-fluid\"></td>\r\n              <td>PNG002344</td>\r\n              <td>John Deo</td>\r\n              <td>05-01-2017</td>\r\n              <td><span class=\"label label-primary\">Shipping</span></td>\r\n              <td>#7234489</td>\r\n            </tr> -->\r\n          </table>\r\n        </div>\r\n      </app-card>\r\n    </div>\r\n    <div class=\"col-xl-4 col-md-12\">\r\n      <div class=\"row\">\r\n        <div class=\"col-xl-12 col-md-6\">\r\n          <div class=\"card statustic-card\">\r\n            <div class=\"card-header\">\r\n              <h5>Orders Completed</h5>\r\n            </div>\r\n            <div class=\"card-block text-center\">\r\n              <span class=\"d-block text-c-green f-36\">{{DashboadData.completedOrdersCount}}</span>\r\n              <p class=\"m-b-0\">Total</p>\r\n              <div class=\"progress\">\r\n                <div class=\"progress-bar bg-c-green\" style=\"width:14%\"></div>\r\n              </div>\r\n            </div>\r\n            <div class=\"card-footer bg-c-green\">\r\n              <h6 class=\"text-white m-b-0\">this week Orders: {{DashboadData.weeklyOrderCount}}</h6>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-xl-12 col-md-6\">\r\n          <div class=\"card statustic-card\">\r\n            <div class=\"card-header\">\r\n              <h5>Orders Pending</h5>\r\n            </div>\r\n            <div class=\"card-block text-center\">\r\n              <span class=\"d-block text-c-pink f-36\">{{DashboadData.pendingOrdersCount}}</span>\r\n              <p class=\"m-b-0\">Total</p>\r\n              <div class=\"progress\">\r\n                <div class=\"progress-bar bg-c-pink\" style=\"width:85%\"></div>\r\n              </div>\r\n            </div>\r\n           <!--  <div class=\"card-footer bg-c-pink\">\r\n              <h6 class=\"text-white m-b-0\">this month cancel order: 85</h6>\r\n            </div> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <!-- Recent Orders end -->\r\n\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!--  Logistic Data -->\r\n\r\n\r\n<div class=\"page-body\" *ngIf=\"GotLogisticData\">\r\n    <div class=\"row\">\r\n  \r\n      <div class=\"col-md-12 col-xl-3\">\r\n        <div class=\"card widget-statstic-card borderless-card\">\r\n          <div class=\"card-header\">\r\n            <div class=\"card-header-left\">\r\n              <h5>Orders Delivered</h5>\r\n            <!--   <p class=\"p-t-10 m-b-0 text-muted\">Compared to last week</p> -->\r\n            </div>\r\n          </div>\r\n          <div class=\"card-block\">\r\n            <i class=\"fa fa-calendar st-icon bg-primary\"></i>\r\n            <div class=\"text-left\">\r\n              <h3 class=\"d-inline-block\">{{LogisticsDashboardData.TotalNumberDeliveredOrders}}</h3>\r\n              <i class=\"fa fa-long-arrow-up f-24 text-success m-l-15\"></i>\r\n           <!--    <span class=\"f-right bg-success\">23%</span> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-6 col-xl-3\">\r\n        <div class=\"card widget-statstic-card borderless-card\">\r\n          <div class=\"card-header\">\r\n            <div class=\"card-header-left\">\r\n              <h5>Latest Orders</h5>\r\n             <!--  <p class=\"p-t-10 m-b-0 text-muted\">Compare to yesterday</p> -->\r\n            </div>\r\n          </div>\r\n          <div class=\"card-block\">\r\n            <i class=\"fa fa-users st-icon bg-warning txt-lite-color\"></i>\r\n            <div class=\"text-left\">\r\n              <h3 class=\"d-inline-block\">{{LogisticsDashboardData.TotalNumberOfLatestOrders}}</h3>\r\n              <i class=\"fa fa-long-arrow-down text-danger f-24 m-l-15\"></i>\r\n             <!--  <span class=\"f-right bg-danger\">-5%</span> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-md-6 col-xl-3\">\r\n        <div class=\"card widget-statstic-card borderless-card\">\r\n          <div class=\"card-header\">\r\n            <div class=\"card-header-left\">\r\n              <h5>Associated Pharmacies</h5>\r\n         <!--      <p class=\"p-t-10 m-b-0 text-muted\">This year revenue</p> -->\r\n            </div>\r\n          </div>\r\n          <div class=\"card-block\">\r\n            <i class=\"fa fa-line-chart st-icon bg-success\"></i>\r\n            <div class=\"text-left\">\r\n              <h3 class=\"d-inline-block\">{{LogisticsDashboardData.TotalNumberOfAssociatedPharmacies}}</h3>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n  \r\n      <div class=\"col-md-6 col-xl-3\">\r\n        <div class=\"card widget-statstic-card borderless-card\">\r\n          <div class=\"card-header\">\r\n            <div class=\"card-header-left\">\r\n              <h5>Pending Orders </h5>\r\n         <!--      <p class=\"p-t-10 m-b-0 text-muted\">This year revenue</p> -->\r\n            </div>\r\n          </div>\r\n          <div class=\"card-block\">\r\n            <i class=\"fa \tfa fa-clock st-icon bg-success\"></i>\r\n            <div class=\"text-left\">\r\n              <h3 class=\"d-inline-block\">{{LogisticsDashboardData.TotalNumberPendingOrders}}</h3>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <!---->\r\n      <div class=\"col-xl-10 col-md-8 offset-md-2 offset-xl-1\">\r\n        <div class=\"card\">\r\n          <div class=\"card-header\">\r\n            <h5>Analytics</h5>\r\n          </div>\r\n          <div class=\"card-block\">\r\n             <!--  <div>\r\n                  <div style=\"display: block\">\r\n                    <canvas  baseChart\r\n                    attr.data=\"{{barChartData}}\"\r\n                    attr.labels={{barChartLabels}}\r\n                    attr.options=\"{{barChartOptions}}\"\r\n                            attr.legend=\"{{barChartLegend}}\"\r\n                            attr.chartType=\"{{barChartType}}\"\r\n                            (chartHover)=\"chartHovered($event)\"\r\n                            (chartClick)=\"chartClicked($event)\"></canvas>\r\n                  </div>\r\n                  <button (click)=\"randomize()\">Update</button> \r\n                  \r\n                </div> --> \r\n                <div #statisticsChart><div id=\"statistics_chart\" style=\"height: 350px\"></div></div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n \r\n    \r\n      <!-- Recent Orders start -->\r\n      <div class=\"col-xl-8 col-md-12\">\r\n        <app-card [title]=\"'Recent Orders'\" [blockClass]=\"'p-0'\">\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table\">\r\n              <tr>\r\n                <th>Image</th>\r\n                <th>Product Code</th>\r\n                <th>Customer</th>\r\n                <th>Purchased On</th>\r\n                <th>Status</th>\r\n                <th>Transaction</th>\r\n              </tr>\r\n  \r\n              <tr *ngFor=\"let order of DashboadData.LatestOrdersList\">\r\n                  <td><img src=\"assets/images/product/prod1.jpg\" alt=\"prod img\" class=\"img-fluid\"></td>\r\n                  <td>\r\n                    <p style=\"margin-bottom:0\" *ngFor=\"let product of order.OrderItem\">{{product.Product.Name}}</p>\r\n                  </td>\r\n                  <td>{{order.UserId}}</td>\r\n                  <td>{{order.ReceivedTime}}</td>\r\n                  <td><span class=\"label label-primary\">{{order.OrderStatus}}</span></td>\r\n                  <td>#{{order.Id}}</td>\r\n              </tr>\r\n      \r\n              \r\n             \r\n              \r\n              <!-- <tr>\r\n                <td><img src=\"assets/images/product/prod2.jpg\" alt=\"prod img\" class=\"img-fluid\"></td>\r\n                <td>PNG002344</td>\r\n                <td>John Deo</td>\r\n                <td>05-01-2017</td>\r\n                <td><span class=\"label label-primary\">Shipping</span></td>\r\n                <td>#7234489</td>\r\n              </tr> -->\r\n            </table>\r\n          </div>\r\n        </app-card>\r\n      </div>\r\n      <div class=\"col-xl-4 col-md-12\">\r\n        <div class=\"row\">\r\n          <div class=\"col-xl-12 col-md-6\">\r\n            <div class=\"card statustic-card\">\r\n              <div class=\"card-header\">\r\n                <h5>Orders Completed</h5>\r\n              </div>\r\n              <div class=\"card-block text-center\">\r\n                <span class=\"d-block text-c-green f-36\">{{DashboadData.completedOrdersCount}}</span>\r\n                <p class=\"m-b-0\">Total</p>\r\n                <div class=\"progress\">\r\n                  <div class=\"progress-bar bg-c-green\" style=\"width:14%\"></div>\r\n                </div>\r\n              </div>\r\n              <div class=\"card-footer bg-c-green\">\r\n                <h6 class=\"text-white m-b-0\">this week Orders: {{DashboadData.weeklyOrderCount}}</h6>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-xl-12 col-md-6\">\r\n            <div class=\"card statustic-card\">\r\n              <div class=\"card-header\">\r\n                <h5>Orders Pending</h5>\r\n              </div>\r\n              <div class=\"card-block text-center\">\r\n                <span class=\"d-block text-c-pink f-36\">{{DashboadData.pendingOrdersCount}}</span>\r\n                <p class=\"m-b-0\">Total</p>\r\n                <div class=\"progress\">\r\n                  <div class=\"progress-bar bg-c-pink\" style=\"width:85%\"></div>\r\n                </div>\r\n              </div>\r\n             <!--  <div class=\"card-footer bg-c-pink\">\r\n                <h6 class=\"text-white m-b-0\">this month cancel order: 85</h6>\r\n              </div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <!-- Recent Orders end -->\r\n  \r\n    </div>\r\n  </div>\r\n\r\n\r\n  <!--  Logistic Data -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  <!--  Pharmacy Data -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n  <div class=\"page-body\" *ngIf=\"GotPharmacyData\">\r\n      <div class=\"row\">\r\n    \r\n        <div class=\"col-md-12 col-xl-3\">\r\n          <div class=\"card widget-statstic-card borderless-card\">\r\n            <div class=\"card-header\">\r\n              <div class=\"card-header-left\">\r\n                <h5>Orders This Week</h5>\r\n              <!--   <p class=\"p-t-10 m-b-0 text-muted\">Compared to last week</p> -->\r\n              </div>\r\n            </div>\r\n            <div class=\"card-block\">\r\n              <i class=\"fa fa-calendar st-icon bg-primary\"></i>\r\n              <div class=\"text-left\">\r\n                <h3 class=\"d-inline-block\">{{PharmacyDashboardData.TotalNumberOfOrdersPlaced}}</h3>\r\n                <i class=\"fa fa-long-arrow-up f-24 text-success m-l-15\"></i>\r\n             <!--    <span class=\"f-right bg-success\">23%</span> -->\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-md-6 col-xl-3\">\r\n          <div class=\"card widget-statstic-card borderless-card\">\r\n            <div class=\"card-header\">\r\n              <div class=\"card-header-left\">\r\n                <h5>Total Customers</h5>\r\n               <!--  <p class=\"p-t-10 m-b-0 text-muted\">Compare to yesterday</p> -->\r\n              </div>\r\n            </div>\r\n            <div class=\"card-block\">\r\n              <i class=\"fa fa-users st-icon bg-warning txt-lite-color\"></i>\r\n              <div class=\"text-left\">\r\n                <h3 class=\"d-inline-block\">{{PharmacyDashboardData.TotalNumberOfCustomers}}</h3>\r\n                <i class=\"fa fa-long-arrow-down text-danger f-24 m-l-15\"></i>\r\n               <!--  <span class=\"f-right bg-danger\">-5%</span> -->\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-md-6 col-xl-3\">\r\n          <div class=\"card widget-statstic-card borderless-card\">\r\n            <div class=\"card-header\">\r\n              <div class=\"card-header-left\">\r\n                <h5>Total Medicines</h5>\r\n           <!--      <p class=\"p-t-10 m-b-0 text-muted\">This year revenue</p> -->\r\n              </div>\r\n            </div>\r\n            <div class=\"card-block\">\r\n              <i class=\"fa fa-medkit st-icon bg-success\"></i>\r\n              <div class=\"text-left\">\r\n                <h3 class=\"d-inline-block\">{{PharmacyDashboardData.TotalNumberofMedicines}}</h3>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n    \r\n        <div class=\"col-md-6 col-xl-3\">\r\n          <div class=\"card widget-statstic-card borderless-card\">\r\n            <div class=\"card-header\">\r\n              <div class=\"card-header-left\">\r\n                <h5>Revenue Generated</h5>\r\n           <!--      <p class=\"p-t-10 m-b-0 text-muted\">This year revenue</p> -->\r\n              </div>\r\n            </div>\r\n            <div class=\"card-block\">\r\n              <i class=\"fa \tfa fa-money st-icon bg-success\"></i>\r\n              <div class=\"text-left\">\r\n                <h3 class=\"d-inline-block\">{{PharmacyDashboardData.TotalRevenueGenerated}}</h3>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!---->\r\n        <div class=\"col-xl-6 col-md-6\">\r\n          <div class=\"card\">\r\n            <div class=\"card-header\">\r\n              <h5>Analytics</h5>\r\n            </div>\r\n            <div class=\"card-block\">\r\n               <!--  <div>\r\n                    <div style=\"display: block\">\r\n                      <canvas  baseChart\r\n                      attr.data=\"{{barChartData}}\"\r\n                      attr.labels={{barChartLabels}}\r\n                      attr.options=\"{{barChartOptions}}\"\r\n                              attr.legend=\"{{barChartLegend}}\"\r\n                              attr.chartType=\"{{barChartType}}\"\r\n                              (chartHover)=\"chartHovered($event)\"\r\n                              (chartClick)=\"chartClicked($event)\"></canvas>\r\n                    </div>\r\n                    <button (click)=\"randomize()\">Update</button> \r\n                    \r\n                  </div> --> \r\n                  <div #statisticsChart><div id=\"statistics_chart\" style=\"height: 350px\"></div></div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n\r\n        <div class=\"col-xl-6 col-md-6\">\r\n            <app-card [title]=\"'Recent Orders'\" [blockClass]=\"'p-0'\">\r\n              <div class=\"table-responsive\">\r\n                <table class=\"table\">\r\n                  <tr>\r\n                    <th>Image</th>\r\n                    <th>Product Code</th>\r\n                    <th>Customer</th>\r\n                    <th>Purchased On</th>\r\n                    <th>Status</th>\r\n                    <th>Transaction</th>\r\n                  </tr>\r\n      \r\n                  <tr *ngFor=\"let order of DashboadData.LatestOrdersList\">\r\n                      <td><img src=\"assets/images/product/prod1.jpg\" alt=\"prod img\" class=\"img-fluid\"></td>\r\n                      <td>\r\n                        <p style=\"margin-bottom:0\" *ngFor=\"let product of order.OrderItem\">{{product.Product.Name}}</p>\r\n                      </td>\r\n                      <td>{{order.UserId}}</td>\r\n                      <td>{{order.ReceivedTime}}</td>\r\n                      <td><span class=\"label label-primary\">{{order.OrderStatus}}</span></td>\r\n                      <td>#{{order.Id}}</td>\r\n                  </tr>\r\n          \r\n                  \r\n                 \r\n                  \r\n                  <!-- <tr>\r\n                    <td><img src=\"assets/images/product/prod2.jpg\" alt=\"prod img\" class=\"img-fluid\"></td>\r\n                    <td>PNG002344</td>\r\n                    <td>John Deo</td>\r\n                    <td>05-01-2017</td>\r\n                    <td><span class=\"label label-primary\">Shipping</span></td>\r\n                    <td>#7234489</td>\r\n                  </tr> -->\r\n                </table>\r\n              </div>\r\n            </app-card>\r\n          </div>\r\n       \r\n      \r\n        <!-- Recent Orders start -->\r\n       \r\n\r\n        <!-- Recent Orders end -->\r\n    \r\n      </div>\r\n    </div>\r\n\r\n\r\n\r\n    <!--  Pharmacy Data -->"
 
 /***/ }),
 
@@ -92,7 +92,9 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__assets_charts_amchart_continentsLow_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__assets_charts_amchart_continentsLow_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_dashboardService__ = __webpack_require__("../../../../../src/app/theme/services/dashboardService.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__models_dashboard_Model_js__ = __webpack_require__("../../../../../src/app/theme/models/dashboard.Model.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__amcharts_amcharts3_angular__ = __webpack_require__("../../../../@amcharts/amcharts3-angular/es2015/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__models_logisticsDashboardModel__ = __webpack_require__("../../../../../src/app/theme/models/logisticsDashboardModel.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__amcharts_amcharts3_angular__ = __webpack_require__("../../../../@amcharts/amcharts3-angular/es2015/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__models_pharmacyDashboardModel_js__ = __webpack_require__("../../../../../src/app/theme/models/pharmacyDashboardModel.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -115,11 +117,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var EcommerceComponent = (function () {
     function EcommerceComponent(_dashboardService, AmCharts) {
         this._dashboardService = _dashboardService;
         this.AmCharts = AmCharts;
         this.gotData = false;
+        this.GotLogisticData = false;
+        this.GotPharmacyData = false;
+        this.gotDataLoader = true;
         this.top5Chemists = [];
         this.OrderStatuses = {
             pending: 100,
@@ -148,11 +155,92 @@ var EcommerceComponent = (function () {
             { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
         ];
         this.DashboadData = new __WEBPACK_IMPORTED_MODULE_10__models_dashboard_Model_js__["a" /* DashboadData */]();
+        this.LogisticsDashboardData = new __WEBPACK_IMPORTED_MODULE_11__models_logisticsDashboardModel__["a" /* LogisticsDashboardModel */]();
+        this.PharmacyDashboardData = new __WEBPACK_IMPORTED_MODULE_13__models_pharmacyDashboardModel_js__["a" /* PharmacyDashboardModel */]();
+        this.session_obj = JSON.parse(localStorage.getItem('session_obj'));
     }
+    EcommerceComponent.prototype.createStockChart = function () {
+        this.chart = this.AmCharts.makeChart("statistics_chart", {
+            "type": "serial",
+            "theme": "light",
+            "dataProvider": [{
+                    "country": "USA",
+                    "visits": 2025
+                }, {
+                    "country": "China",
+                    "visits": 1882
+                }, {
+                    "country": "Japan",
+                    "visits": 1809
+                }, {
+                    "country": "Germany",
+                    "visits": 1322
+                }, {
+                    "country": "UK",
+                    "visits": 1122
+                }, {
+                    "country": "France",
+                    "visits": 1114
+                }, {
+                    "country": "India",
+                    "visits": 984
+                }, {
+                    "country": "Spain",
+                    "visits": 711
+                }, {
+                    "country": "Netherlands",
+                    "visits": 665
+                }, {
+                    "country": "Russia",
+                    "visits": 580
+                }, {
+                    "country": "South Korea",
+                    "visits": 443
+                }, {
+                    "country": "Canada",
+                    "visits": 441
+                }, {
+                    "country": "Brazil",
+                    "visits": 395
+                }],
+            "valueAxes": [{
+                    "gridColor": "#FFFFFF",
+                    "gridAlpha": 0.2,
+                    "dashLength": 0
+                }],
+            "gridAboveGraphs": true,
+            "startDuration": 1,
+            "graphs": [{
+                    "balloonText": "[[category]]: <b>[[value]]</b>",
+                    "fillAlphas": 0.8,
+                    "lineAlpha": 0.2,
+                    "type": "column",
+                    "valueField": "visits"
+                }],
+            "chartCursor": {
+                "categoryBalloonEnabled": false,
+                "cursorAlpha": 0,
+                "zoomable": false
+            },
+            "categoryField": "country",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "gridAlpha": 0,
+                "tickPosition": "start",
+                "tickLength": 20
+            }
+        });
+    };
     EcommerceComponent.prototype.ngOnInit = function () {
         this.checkOut();
-        setTimeout(function () {
-        });
+        /* if (AmCharts.isReady) {
+          this.createStockChart();
+      
+      } else {
+          AmCharts.ready(function () {
+              this.createStockChart();
+          });
+      } */
     };
     // events
     EcommerceComponent.prototype.chartClicked = function (e) {
@@ -182,153 +270,81 @@ var EcommerceComponent = (function () {
          * assign it;
          */
     };
+    EcommerceComponent.prototype.HidingAllDataFor = function () {
+        this.GotLogisticData = false;
+        this.gotData = false;
+        this.GotPharmacyData = false;
+    };
     EcommerceComponent.prototype.checkOut = function () {
         var _this = this;
-        this.DashboadData = new __WEBPACK_IMPORTED_MODULE_10__models_dashboard_Model_js__["a" /* DashboadData */]();
-        this._dashboardService.getDashboardData().subscribe(function (response) {
-            console.log(response.data);
-            _this.DashboadData = response.data;
-            _this.gotData = true;
-            for (var i = 0; i < _this.DashboadData.LatestOrdersList.length; i++) {
-                var myDate = new Date(parseFloat(_this.DashboadData.LatestOrdersList[i].ReceivedTime) * 1000);
-                _this.DashboadData.LatestOrdersList[i].ReceivedTime = myDate.toLocaleString();
-                for (var prop in _this.OrderStatuses) {
-                    if (_this.DashboadData.LatestOrdersList[i].OrderStatus == _this.OrderStatuses[prop]) {
-                        _this.DashboadData.LatestOrdersList[i].OrderStatus = prop;
+        this.HidingAllDataFor();
+        if (this.session_obj.UserRole == 1) {
+            this._dashboardService.getDashboardDataForAdmin().subscribe(function (a) {
+                if (a.code == 200) {
+                    _this.gotDataLoader = false;
+                    _this.DashboadData = new __WEBPACK_IMPORTED_MODULE_10__models_dashboard_Model_js__["a" /* DashboadData */]();
+                    _this.DashboadData = a.data;
+                    _this.gotData = true;
+                    for (var i = 0; i < _this.DashboadData.LatestOrdersList.length; i++) {
+                        var myDate = new Date(parseFloat(_this.DashboadData.LatestOrdersList[i].ReceivedTime) * 1000);
+                        _this.DashboadData.LatestOrdersList[i].ReceivedTime = myDate.toLocaleString();
+                        for (var prop in _this.OrderStatuses) {
+                            if (_this.DashboadData.LatestOrdersList[i].OrderStatus == _this.OrderStatuses[prop]) {
+                                _this.DashboadData.LatestOrdersList[i].OrderStatus = prop;
+                            }
+                        }
                     }
                 }
-            }
-        });
-    };
-    EcommerceComponent.prototype.ngAfterViewInit = function () {
-        var _this = this;
-        setTimeout(function () {
-            _this.options = {
-                position: ['bottom', 'right'],
-                maxStack: 8,
-                timeOut: 5000,
-                showProgressBar: true,
-                pauseOnHover: true,
-                lastOnBottom: true,
-                clickToClose: true,
-                preventDuplicates: false,
-                preventLastDuplicates: false,
-                theClass: 'bg-c-pink no-icon',
-                rtl: false,
-                animate: 'rotate'
-            };
-            AmCharts.makeChart('statistics_chart', {
-                'type': 'serial',
-                'theme': 'light',
-                // 'hideCredits': true,
-                'dataDateFormat': 'YYYY-MM-DD',
-                'precision': 2,
-                'valueAxes': [{
-                        'id': 'v1',
-                        'title': 'Sales',
-                        'position': 'left',
-                        'autoGridCount': false,
-                        'labelFunction': function (value) {
-                            return '$' + Math.round(value) + 'M';
-                        }
-                    }, {
-                        'id': 'v2',
-                        'gridAlpha': 0.1,
-                        'autoGridCount': false
-                    }],
-                'graphs': [{
-                        'id': 'g1',
-                        'valueAxis': 'v2',
-                        'lineThickness': 0,
-                        'fillAlphas': 0.2,
-                        'lineColor': '#4099ff',
-                        'type': 'line',
-                        'title': 'Laptop',
-                        'useLineColorForBulletBorder': true,
-                        'valueField': 'market1',
-                        'balloonText': '[[title]]<br /><b style="font-size: 130%">[[value]]</b>'
-                    }, {
-                        'id': 'g2',
-                        'valueAxis': 'v2',
-                        'fillAlphas': 0.6,
-                        'lineThickness': 0,
-                        'lineColor': '#4099ff',
-                        'type': 'line',
-                        'title': 'TV',
-                        'useLineColorForBulletBorder': true,
-                        'valueField': 'market2',
-                        'balloonText': '[[title]]<br /><b style="font-size: 130%">[[value]]</b>'
-                    }],
-                'chartCursor': {
-                    'pan': true,
-                    'valueLineEnabled': true,
-                    'valueLineBalloonEnabled': true,
-                    'cursorAlpha': 0,
-                    'valueLineAlpha': 0.2
-                },
-                'categoryField': 'date',
-                'categoryAxis': {
-                    'parseDates': true,
-                    'gridAlpha': 0,
-                    'minorGridEnabled': true
-                },
-                'legend': {
-                    'position': 'top',
-                },
-                'balloon': {
-                    'borderThickness': 1,
-                    'shadowAlpha': 0
-                },
-                'export': {
-                    'enabled': true
-                },
-                'dataProvider': [{
-                        'date': '2013-01-01',
-                        'market1': 0,
-                        'market2': 0,
-                        'sales1': 0
-                    }, {
-                        'date': '2013-02-01',
-                        'market1': 130,
-                        'market2': 110,
-                        'sales1': 0
-                    }, {
-                        'date': '2013-03-01',
-                        'market1': 80,
-                        'market2': 60,
-                        'sales1': 0
-                    }, {
-                        'date': '2013-04-01',
-                        'market1': 70,
-                        'market2': 200,
-                        'sales1': 0
-                    }, {
-                        'date': '2013-05-01',
-                        'market1': 180,
-                        'market2': 150,
-                        'sales1': 0
-                    }, {
-                        'date': '2013-06-01',
-                        'market1': 105,
-                        'market2': 90,
-                        'sales1': 0
-                    }, {
-                        'date': '2013-07-01',
-                        'market1': 250,
-                        'market2': 150,
-                        'sales1': 0
-                    }]
             });
-        }, 75);
+        }
+        else if (this.session_obj.UserRole == 2) {
+            this._dashboardService.getDashboardDataForPharmacy(this.session_obj.ChemistId).subscribe(function (a) {
+                console.log(a);
+                if (a.code == 200) {
+                    _this.gotDataLoader = false;
+                    _this.GotPharmacyData = true;
+                    _this.PharmacyDashboardData = a.data;
+                    for (var i = 0; i < _this.PharmacyDashboardData.ListOfLatestOrdersPlaced.length; i++) {
+                        var myDate = new Date(parseFloat(_this.PharmacyDashboardData.ListOfLatestOrdersPlaced[i].ReceivedTime) * 1000);
+                        _this.PharmacyDashboardData.ListOfLatestOrdersPlaced[i].ReceivedTime = myDate.toLocaleString();
+                        for (var prop in _this.OrderStatuses) {
+                            if (_this.PharmacyDashboardData.ListOfLatestOrdersPlaced[i].OrderStatus == _this.OrderStatuses[prop]) {
+                                _this.PharmacyDashboardData.ListOfLatestOrdersPlaced[i].OrderStatus = prop;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        else if (this.session_obj.UserRole == 5) {
+            this._dashboardService.getDashboardDataForLogistics(this.session_obj.UserRole).subscribe(function (a) {
+                console.log(a);
+                if (a.code == 200) {
+                    _this.gotDataLoader = false;
+                    _this.LogisticsDashboardData = new __WEBPACK_IMPORTED_MODULE_11__models_logisticsDashboardModel__["a" /* LogisticsDashboardModel */]();
+                    _this.LogisticsDashboardData = a.data;
+                    _this.GotLogisticData = true;
+                    for (var i = 0; i < _this.LogisticsDashboardData.ListOfLatestIncomingOrders.length; i++) {
+                        var myDate = new Date(parseFloat(_this.LogisticsDashboardData.ListOfLatestIncomingOrders[i].ReceivedTime) * 1000);
+                        _this.LogisticsDashboardData.ListOfLatestIncomingOrders[i].ReceivedTime = myDate.toLocaleString();
+                        for (var prop in _this.OrderStatuses) {
+                            if (_this.LogisticsDashboardData.ListOfLatestIncomingOrders[i].OrderStatus == _this.OrderStatuses[prop]) {
+                                _this.LogisticsDashboardData.ListOfLatestIncomingOrders[i].OrderStatus = prop;
+                            }
+                        }
+                    }
+                }
+            });
+        }
     };
     EcommerceComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-ecommerce',
             template: __webpack_require__("../../../../../src/app/theme/dashboard/ecommerce/ecommerce.component.html"),
             styles: [__webpack_require__("../../../../../src/app/theme/dashboard/ecommerce/ecommerce.component.scss"), __webpack_require__("../../../../../src/assets/icon/icofont/css/icofont.scss")],
-            providers: [__WEBPACK_IMPORTED_MODULE_9__services_dashboardService__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_11__amcharts_amcharts3_angular__["b" /* AmChartsService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_9__services_dashboardService__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_12__amcharts_amcharts3_angular__["b" /* AmChartsService */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_9__services_dashboardService__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_11__amcharts_amcharts3_angular__["b" /* AmChartsService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_9__services_dashboardService__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_12__amcharts_amcharts3_angular__["b" /* AmChartsService */]])
     ], EcommerceComponent);
     return EcommerceComponent;
 }());
@@ -408,6 +424,36 @@ var DashboadData = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/theme/models/logisticsDashboardModel.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogisticsDashboardModel; });
+var LogisticsDashboardModel = (function () {
+    function LogisticsDashboardModel() {
+    }
+    return LogisticsDashboardModel;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/theme/models/pharmacyDashboardModel.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PharmacyDashboardModel; });
+var PharmacyDashboardModel = (function () {
+    function PharmacyDashboardModel() {
+    }
+    return PharmacyDashboardModel;
+}());
+
+//# sourceMappingURL=pharmacyDashboardModel.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/theme/services/dashboardService.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -436,15 +482,17 @@ var DashboardService = (function () {
         this.urlService = new __WEBPACK_IMPORTED_MODULE_3__ServiceUrl__["a" /* ServiceUrl */]();
         this.session_obj = JSON.parse(localStorage.getItem('session_obj'));
     }
-    DashboardService.prototype.getDashboardData = function () {
-        if (this.session_obj.UserRole == 1) {
-            return this.http.get(this.urlService.baseUrl + "Admin/getDashboardData")
-                .map(function (res) { return res.json(); });
-        }
-        else if (this.session_obj.UserRole == 2) {
-            return this.http.get(this.urlService.baseUrl + "Admin/getDashboardData")
-                .map(function (res) { return res.json(); });
-        }
+    DashboardService.prototype.getDashboardDataForAdmin = function () {
+        return this.http.get(this.urlService.baseUrl + "Admin/getDashboardData")
+            .map(function (res) { return res.json(); });
+    };
+    DashboardService.prototype.getDashboardDataForLogistics = function (logisticsId) {
+        return this.http.get(this.urlService.baseUrl + "Logistics/getDashboardData?logisticsId=" + logisticsId)
+            .map(function (res) { return res.json(); });
+    };
+    DashboardService.prototype.getDashboardDataForPharmacy = function (chemistId) {
+        return this.http.get(this.urlService.baseUrl + "Chemist/getDashboardData?chemistId=" + chemistId)
+            .map(function (res) { return res.json(); });
     };
     DashboardService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),

@@ -135,6 +135,10 @@ var ListOrdersComponent = (function () {
             this.showAttr = false;
             this.getOrdersOfChemists();
         }
+        else if (session_obj.UserRole == 5) {
+            this.showAttr = true;
+            this.getOrderOfLogistics();
+        }
         // if(orderstatus == this.OrderStatusEnum.)
     }
     ListOrdersComponent.prototype.viewSubCategories = function (Id) {
@@ -151,6 +155,8 @@ var ListOrdersComponent = (function () {
             }
         });
     }; // End of Get SubCategories
+    ListOrdersComponent.prototype.getOrderOfLogistics = function () {
+    };
     ListOrdersComponent.prototype.getCategoriesOfChemists = function () {
         var _this = this;
         $('#categories-fetcher').show();
