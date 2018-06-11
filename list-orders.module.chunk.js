@@ -111,6 +111,7 @@ var ListOrdersComponent = (function () {
         this.fullScreenRow = [];
         this.loadingIndicator = true;
         this.reorderable = true;
+        this.gotData = false;
         this.rows = [];
         this.expanded = {};
         this.rowsFilter = [];
@@ -184,61 +185,64 @@ var ListOrdersComponent = (function () {
         var _this = this;
         $('#categories-fetcher').show();
         $('#sub-cateories-list').hide();
+        this.gotData = true;
         this._ordersService.getOrdersByChemistId(this.chemist_id).subscribe(function (response) {
-            $('#categories-fetcher').hide();
-            console.log(response.data);
-            $('#list').show();
-            if (response.data == null) {
-                _this.chemists_orders = [];
+            if (response.code == 200) {
+                _this.gotData = false;
+                $('#categories-fetcher').hide();
+                $('#list').show();
+                if (response.data == null) {
+                    _this.chemists_orders = [];
+                }
+                else {
+                    _this.chemists_orders = response.data;
+                    for (var i = 0; i < _this.chemists_orders.length; i++) {
+                        if (_this.chemists_orders[i].OrderStatus == 100) {
+                            _this.chemists_orders[i].OrderStatus = "Pending";
+                        }
+                        else if (_this.chemists_orders[i].OrderStatus == 200) {
+                            _this.chemists_orders[i].OrderStatus = "Confirmed";
+                        }
+                        else if (_this.chemists_orders[i].OrderStatus == 300) {
+                            _this.chemists_orders[i].OrderStatus = "On The Way";
+                        }
+                        else if (_this.chemists_orders[i].OrderStatus == 400) {
+                            _this.chemists_orders[i].OrderStatus = "Not Shipped";
+                        }
+                        else if (_this.chemists_orders[i].OrderStatus == 500) {
+                            _this.chemists_orders[i].OrderStatus = "Shipped";
+                        }
+                        else if (_this.chemists_orders[i].OrderStatus == 600) {
+                            _this.chemists_orders[i].OrderStatus = "To Be Delivered";
+                        }
+                        else if (_this.chemists_orders[i].OrderStatus == 700) {
+                            _this.chemists_orders[i].OrderStatus = "Canceled";
+                        }
+                        else if (_this.chemists_orders[i].OrderStatus == 800) {
+                            _this.chemists_orders[i].OrderStatus = "Completed";
+                        }
+                        else if (_this.chemists_orders[i].OrderStatus == 900) {
+                            _this.chemists_orders[i].OrderStatus = "Returned";
+                        }
+                        else if (_this.chemists_orders[i].OrderStatus == 1000) {
+                            _this.chemists_orders[i].OrderStatus = "Delivered";
+                        }
+                    }
+                    for (var i = 0; i < _this.chemists_orders.length; i++) {
+                        _this.chemists_orders[i].CreatedOnUTC = _this.chemists_orders[i].CreatedOnUTC * 1000;
+                    }
+                    _this.rowsFilter = _this.chemists_orders;
+                }
             }
             else {
-                _this.chemists_orders = response.data;
-                // this.chemists_orders.forEach(element => {
-                //   if(element.OrderStatus == 100){
-                //     element.OrderStatus = this.OrderStatusEnum.PENDING;
-                //   }
-                // });
-                for (var i = 0; i < _this.chemists_orders.length; i++) {
-                    if (_this.chemists_orders[i].OrderStatus == 100) {
-                        _this.chemists_orders[i].OrderStatus = "Pending";
-                    }
-                    else if (_this.chemists_orders[i].OrderStatus == 200) {
-                        _this.chemists_orders[i].OrderStatus = "Confirmed";
-                    }
-                    else if (_this.chemists_orders[i].OrderStatus == 300) {
-                        _this.chemists_orders[i].OrderStatus = "On The Way";
-                    }
-                    else if (_this.chemists_orders[i].OrderStatus == 400) {
-                        _this.chemists_orders[i].OrderStatus = "Not Shipped";
-                    }
-                    else if (_this.chemists_orders[i].OrderStatus == 500) {
-                        _this.chemists_orders[i].OrderStatus = "Shipped";
-                    }
-                    else if (_this.chemists_orders[i].OrderStatus == 600) {
-                        _this.chemists_orders[i].OrderStatus = "To Be Delivered";
-                    }
-                    else if (_this.chemists_orders[i].OrderStatus == 700) {
-                        _this.chemists_orders[i].OrderStatus = "Canceled";
-                    }
-                    else if (_this.chemists_orders[i].OrderStatus == 800) {
-                        _this.chemists_orders[i].OrderStatus = "Completed";
-                    }
-                    else if (_this.chemists_orders[i].OrderStatus == 900) {
-                        _this.chemists_orders[i].OrderStatus = "Returned";
-                    }
-                    else if (_this.chemists_orders[i].OrderStatus == 1000) {
-                        _this.chemists_orders[i].OrderStatus = "Delivered";
-                    }
-                }
-                for (var i = 0; i < _this.chemists_orders.length; i++) {
-                    _this.chemists_orders[i].CreatedOnUTC = _this.chemists_orders[i].CreatedOnUTC * 1000;
-                }
-                _this.rowsFilter = _this.chemists_orders;
-                console.log("Orders are showing");
-                console.log(_this.chemists_orders);
+                _this.gotData = true;
             }
             _this.tempFilter = _this.chemists_orders;
             _this.rowsFilter = _this.chemists_orders;
+        }, function (err) {
+            var obj = JSON.parse(err._body);
+            _this.gotData = false;
+            __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default()(obj.message);
         });
     };
     ListOrdersComponent.prototype.viewOrderDetail = function (id) {

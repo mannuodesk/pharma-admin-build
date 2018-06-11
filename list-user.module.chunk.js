@@ -46,7 +46,7 @@ var ListUserRoutingModule = (function () {
 /***/ "../../../../../src/app/theme/user/list-user/list-user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-card [title]=\"'User Role'\" [cardOptionBlock]=\"true\">\r\n  <div class=\"form-group row\">\r\n  <div class=\"col-sm-12\">\r\n    <select id=\"userRoles\" name=\"userRole\" (change)=\"getUsers($event.target.value)\" class=\"form-control form-control-default\">\r\n      <option value=\"\">Please select</option>\r\n      <option value=\"1\">Admin</option>\r\n      <option value=\"2\">Chemist</option>\r\n      <option value=\"3\">EndUser</option>\r\n      <option value=\"4\">VendorAdminManager</option>\r\n      <option value=\"5\">Rider</option>\r\n    </select>\r\n  </div>\r\n</div>\r\n</app-card>\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-sm-12\">\r\n\r\n    <app-card [title]=\"'Users List'\" [cardOptionBlock]=\"true\">\r\n      <ngx-datatable #variationstable class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\r\n        [footerHeight]=\"50\" [rowHeight]=\"50\" [limit]=\"10\" [rows]='rowsFilter' (select)='onSelect($event)'>\r\n        <ngx-datatable-column name=\"Email\" sortable=\"false\" prop=\"Email\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"Mobile Number\" sortable=\"false\" prop=\"MobileNumber\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"User Name\" sortable=\"false\" prop=\"UserName\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"Address\" sortable=\"false\" prop=\"Chemist.Address\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"City\" sortable=\"false\" prop=\"Chemist.Area.City.Name\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"Status\" sortable=\"false\" prop=\"IsBlocked\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            <!-- {{value}} -->\r\n            <div *ngIf=\"value == false\">\r\n              Not Blocked\r\n            </div>\r\n            <div *ngIf=\"value == true\">\r\n              Blocked\r\n            </div>\r\n\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"Action\" sortable=\"false\" prop=\"Id\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            <button class=\"delete-btn\" (click)=\"isUserBlocked(value)\">\r\n                <i class=\"fa fa-ban\"></i>\r\n            </button>\r\n\r\n            <button class=\"edit-btn\" (click)=\"editThisUser(value)\">\r\n                <i class=\"fa fa-edit\"></i>\r\n            </button>\r\n\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n      </ngx-datatable>\r\n    </app-card>\r\n  </div>\r\n</div>"
+module.exports = "<app-card [title]=\"'User Role'\" [cardOptionBlock]=\"true\">\r\n  <div class=\"form-group row\">\r\n  <div class=\"col-sm-12\">\r\n    <select id=\"userRoles\" name=\"userRole\" (change)=\"getUsers($event.target.value)\" class=\"form-control form-control-default\">\r\n      <option value=\"\">Please select</option>\r\n      <option value=\"1\">Admin</option>\r\n      <option value=\"2\">Chemist</option>\r\n      <option value=\"3\">Customers</option>\r\n      <option value=\"4\">Vendor Admin Manager</option>\r\n      <option value=\"5\">Rider</option>\r\n    </select>\r\n  </div>\r\n</div>\r\n</app-card>\r\n\r\n<div  class=\"overlay-loader\" style=\"display: block;\" *ngIf=\"gotDataLoader\">\r\n  <div class=\"preloader3 custom-preloader loader-block\">\r\n    <div class=\"circ1 loader-primary loader-lg\"></div>\r\n    <div  class=\"circ2 loader-primary loader-lg\"></div>\r\n    <div class=\"circ3 loader-primary loader-lg\"></div>\r\n    <div class=\"circ4 loader-primary loader-lg\"></div>\r\n  </div>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-sm-12\">\r\n\r\n    <app-card [title]=\"'Users List'\" [cardOptionBlock]=\"true\">\r\n      <ngx-datatable #variationstable class='data-table' [scrollbarH]=\"true\" [columns]=\"columns\" [columnMode]=\"'force'\" [headerHeight]=\"50\"\r\n        [footerHeight]=\"50\" [rowHeight]=\"50\" [limit]=\"10\" [rows]='rowsFilter' (select)='onSelect($event)'>\r\n        <ngx-datatable-column name=\"Email\" sortable=\"false\" prop=\"Email\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"Mobile Number\" sortable=\"false\" prop=\"MobileNumber\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"User Name\" sortable=\"false\" prop=\"UserName\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"Address\" sortable=\"false\" prop=\"Chemist.Address\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"City\" sortable=\"false\" prop=\"Chemist.Area.City.Name\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            {{value}}\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"Status\" sortable=\"false\" prop=\"IsBlocked\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            <!-- {{value}} -->\r\n            <div *ngIf=\"value == false\">\r\n              Not Blocked\r\n            </div>\r\n            <div *ngIf=\"value == true\">\r\n              Blocked\r\n            </div>\r\n\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n        <ngx-datatable-column name=\"Action\" sortable=\"false\" prop=\"Id\">\r\n          <ng-template let-row=\"row\" let-value=\"value\" ngx-datatable-cell-template>\r\n            <button class=\"delete-btn\" (click)=\"isUserBlocked(value)\">\r\n                <i class=\"fa fa-ban\"></i>\r\n            </button>\r\n\r\n            <button class=\"edit-btn\" (click)=\"editThisUser(value)\">\r\n                <i class=\"fa fa-edit\"></i>\r\n            </button>\r\n\r\n          </ng-template>\r\n        </ngx-datatable-column>\r\n      </ngx-datatable>\r\n    </app-card>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -77,6 +77,8 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__("../../../animations/esm5/animations.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_GetAllUserService__ = __webpack_require__("../../../../../src/app/theme/services/GetAllUserService.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2__ = __webpack_require__("../../../../sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_sweetalert2__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -90,21 +92,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var UserListComponent = (function () {
     function UserListComponent(_getAllUserService, route) {
         this._getAllUserService = _getAllUserService;
         this.route = route;
         this.rowsFilter = [];
         this.tempFilter = [];
+        this.gotDataLoader = false;
     }
     UserListComponent.prototype.ngOnInit = function () {
     };
     //Managing User List
     UserListComponent.prototype.getUsers = function (id) {
         var _this = this;
+        this.gotDataLoader = true;
         this._getAllUserService.getAllUsers(id).subscribe(function (response) {
-            _this.rowsFilter = response.data;
-            console.log(response.data);
+            if (response.code == 200) {
+                _this.rowsFilter = response.data;
+                console.log(response.data);
+                _this.gotDataLoader = false;
+            }
+        }, function (err) {
+            _this.gotDataLoader = true;
+            var obj = JSON.parse(err._body);
+            __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default()(obj.message);
         });
     };
     UserListComponent.prototype.editThisUser = function (value) {
